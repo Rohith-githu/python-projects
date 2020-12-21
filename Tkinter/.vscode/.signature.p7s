@@ -1,0 +1,120 @@
+ember>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.TryGetType(System.String,System.String,System.Boolean,System.Data.Entity.Core.Metadata.Edm.EdmType@)">
+            <summary>
+            Returns an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EdmType" /> object by using the specified type name and the namespace name from this item collection.
+            </summary>
+            <returns>true if there is a type that matches the search criteria; otherwise, false. </returns>
+            <param name="name">The name of the type.</param>
+            <param name="namespaceName">The namespace of the type.</param>
+            <param name="ignoreCase">true to perform the case-insensitive search; otherwise, false.</param>
+            <param name="type">
+            When this method returns, this output parameter contains an
+            <see
+                cref="T:System.Data.Entity.Core.Metadata.Edm.EdmType" />
+            object. If there is no type with the specified name and namespace name in this item collection, this output parameter contains null.
+            </param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.GetFunctions(System.String)">
+            <summary>Returns all the overloads of the functions by using the specified name from this item collection.</summary>
+            <returns>
+            A collection of type <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> that contains all the functions that have the specified name.
+            </returns>
+            <param name="functionName">The full name of the function.</param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.GetFunctions(System.String,System.Boolean)">
+            <summary>Returns all the overloads of the functions by using the specified name from this item collection.</summary>
+            <returns>
+            A collection of type <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> that contains all the functions that have the specified name.
+            </returns>
+            <param name="functionName">The full name of the function.</param>
+            <param name="ignoreCase">true to perform the case-insensitive search; otherwise, false.</param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.GetFunctions(System.Collections.Generic.Dictionary{System.String,System.Collections.ObjectModel.ReadOnlyCollection{System.Data.Entity.Core.Metadata.Edm.EdmFunction}},System.String,System.Boolean)">
+            <summary>Returns all the overloads of the functions by using the specified name from this item collection.</summary>
+            <returns>A collection of type ReadOnlyCollection that contains all the functions that have the specified name.</returns>
+            <param name="functionCollection">A dictionary of functions.</param>
+            <param name="functionName">The full name of the function.</param>
+            <param name="ignoreCase">true to perform the case-insensitive search; otherwise, false.</param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.GetEntityContainer(System.String)">
+            <summary>
+            Returns an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object by using the specified entity container name.
+            </summary>
+            <returns>If there is no entity container, this method returns null; otherwise, it returns the first one.</returns>
+            <param name="name">The name of the entity container.</param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.TryGetEntityContainer(System.String,System.Data.Entity.Core.Metadata.Edm.EntityContainer@)">
+            <summary>
+            Returns an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object by using the specified entity container name. If there is no entity container, the output parameter contains null; otherwise, it contains the first entity container.
+            </summary>
+            <returns>true if there is an entity container that matches the search criteria; otherwise, false.</returns>
+            <param name="name">The name of the entity container.</param>
+            <param name="entityContainer">
+            When this method returns, it contains an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object. If there is no entity container, this output parameter contains null; otherwise, it contains the first entity container.
+            </param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.GetEntityContainer(System.String,System.Boolean)">
+            <summary>
+            Returns an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object by using the specified entity container name.
+            </summary>
+            <returns>If there is no entity container, this method returns null; otherwise, it returns the first entity container.</returns>
+            <param name="name">The name of the entity container.</param>
+            <param name="ignoreCase">true to perform the case-insensitive search; otherwise, false.</param>
+        </member>
+        <member name="M:System.Data.Entity.Core.Metadata.Edm.ItemCollection.TryGetEntityContainer(System.String,System.Boolean,System.Data.Entity.Core.Metadata.Edm.EntityContainer@)">
+            <summary>
+            Returns an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object by using the specified entity container name. If there is no entity container, this output parameter contains null; otherwise, it contains the first entity container.
+            </summary>
+            <returns>true if there is an entity container that matches the search criteria; otherwise, false.</returns>
+            <param name="name">The name of the entity container.</param>
+            <param name="ignoreCase">true to perform the case-insensitive search; otherwise, false.</param>
+            <param name="entityContainer">
+            When this method returns, it contains an <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityContainer" /> object. If there is no entity container, this output parameter contains null; otherwise, it contains the first entity container.
+            </param>
+        </member>
+        <member name="P:System.Data.Entity.Core.Metadata.Edm.ItemCollection.DataSpace">
+            <summary>Gets the data model associated with this item collection. </summary>
+            <returns>The data model associated with this item collection. </returns>
+        </member>
+        <member name="T:System.Data.Entity.Core.Common.EntityRecordInfo">
+            <summary>
+            EntityRecordInfo class providing a simple way to access both the type information and the column information.
+            </summary>
+        </member>
+        <member name="M:System.Data.Entity.Core.Common.EntityRecordInfo.#ctor(System.Data.Entity.Core.Metadata.Edm.EntityType,System.Collections.Generic.IEnumerable{System.Data.Entity.Core.Metadata.Edm.EdmMember},System.Data.Entity.Core.EntityKey,System.Data.Entity.Core.Metadata.Edm.EntitySet)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Data.Entity.Core.Common.EntityRecordInfo" /> class of a specific entity type with an enumerable collection of data fields and with specific key and entity set information.
+            </summary>
+            <param name="metadata">
+            The <see cref="T:System.Data.Entity.Core.Metadata.Edm.EntityType" /> of the entity represented by the
+            <see
+                cref="T:System.Data.Common.DbDataRecord" />
+            described by this
+            <see
+                cref="T:System.Data.Entity.Core.Common.EntityRecordInfo" />
+            object.
+            </param>
+            <param name="memberInfo">
+            An enumerable collection of <see cref="T:System.Data.Entity.Core.Metadata.Edm.EdmMember" /> objects that represent column information.
+            </param>
+            <param name="entityKey">The key for the entity.</param>
+            <param name="entitySet">The entity set to which the entity belongs.</param>
+        </member>
+        <member name="P:System.Data.Entity.Core.Common.EntityRecordInfo.EntityKey">
+            <summary>
+            Gets the <see cref="T:System.Data.Entity.Core.EntityKey" /> for the entity.
+            </summary>
+            <returns>The key for the entity.</returns>
+        </member>
+        <member name="T:System.Data.Entity.Core.Common.EntitySql.EntitySqlParser">
+            <summary>
+            Public Entity SQL Parser class.
+            </summary>
+        </member>
+        <member name="M:System.Data.Entity.Core.Common.EntitySql.EntitySqlParser.Parse(System.String,System.Data.Entity.Core.Common.CommandTrees.DbParameterReferenceExpression[])">
+            <summary>Parse the specified query with the specified parameters.</summary>
+            <returns>
+            The <see cref="T:System.Data.Entity.Core.Common.EntitySql.ParseResult" /> containing
+            <see
+                cref="T:System.Data.Entity.Core.Common.CommandTrees.DbCommandTree" />
+            and in

@@ -1,0 +1,2822 @@
+obj">
+                Un <see cref="T:System.Object" /> que representa el elemento analizado.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.CreateChildControls">
+      <summary>
+              Crea un control secundario mediante el estado de vista.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.CreateControlHierarchy(System.Boolean)">
+      <summary>
+              Cuando se invalida en una clase derivada, crea la jerarquía de controles para el control con o sin el origen de datos especificado de la lista de datos.
+            </summary>
+      <param name="useDataSource">
+                <see langword="true" /> Para utilizar el origen de datos del control. de lo contrario, <see langword="false" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.CreateDataSourceSelectArguments">
+      <summary>
+              Crea un valor predeterminado <see cref="T:System.Web.UI.DataSourceSelectArguments" /> objeto utilizado por el control enlazado a datos si no se especifica ningún argumento.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.DataSourceSelectArguments" /> inicializado en <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.DataBind">
+      <summary>
+              Enlaza el control y todos sus controles secundarios al origen de datos especificado.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.EnsureDataBound">
+      <summary>
+              Comprueba que el control de lista de datos requieren enlace de datos y que se ha especificado un control de origen de datos válido antes de llamar a la <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" /> (método).
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.GetData">
+      <summary>
+              Devuelve un <see cref="T:System.Collections.IEnumerable" />-implementa el objeto que representa el origen de datos.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Collections.IEnumerable" />-implementa el objeto que representa el origen de datos.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.IsBindableType(System.Type)">
+      <summary>
+              Determina si el tipo de datos especificado se puede enlazar a un control de lista se deriva de la <see cref="T:System.Web.UI.WebControls.BaseDataList" /> clase.
+            </summary>
+      <param name="type">
+                Un <see cref="T:System.Type" /> que contiene el tipo de datos de prueba.
+              </param>
+      <returns>
+              <see langword="true" /> Si el tipo de datos especificado se puede enlazar a un control de lista se deriva de la <see cref="T:System.Web.UI.WebControls.BaseDataList" /> clase; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnDataBinding(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.Control.DataBinding" /> eventos de un <see cref="T:System.Web.UI.WebControls.BaseDataList" /> control.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnDataPropertyChanged">
+      <summary>
+              Se llama cuando se cambia una de las propiedades de identificación del origen de datos base, para volver a enlazar el control enlazado a datos a sus datos.
+            </summary>
+      <exception cref="T:System.Web.HttpException">
+                  Se ha intentado cambiar el valor de propiedad durante la fase de enlace de datos del control.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />.
+            </summary>
+      <param name="sender">
+                Origen del evento.
+              </param>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnInit(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.Init" /> para el control <see cref="T:System.Web.UI.WebControls.BaseDataList" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnLoad(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.Load" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnPreRender(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.PreRender" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.OnSelectedIndexChanged(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" /> eventos de un <see cref="T:System.Web.UI.WebControls.BaseDataList" /> control.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.PrepareControlHierarchy">
+      <summary>
+              Establece la jerarquía de controles para el control enlazado a datos.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseDataList.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Representa el control en el sistema de escritura HTML especificado.
+            </summary>
+      <param name="writer">
+                Un <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida para representar en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.BaseValidator" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega los atributos y estilos HTML que se deben representar para el control especificado <see cref="T:System.Web.UI.HtmlTextWriter" /> objeto.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.CheckControlValidationProperty(System.String,System.String)">
+      <summary>
+              Comprueba si el control especificado en la página y contiene propiedades de validación.
+            </summary>
+      <param name="name">
+                Control que se va a comprobar.
+              </param>
+      <param name="propertyName">
+                Texto adicional para describir el origen de la excepción, si se produce una excepción del uso de este método.
+              </param>
+      <exception cref="T:System.Web.HttpException">
+                  No se encuentra el control especificado.
+                
+                  o bien
+                
+                  El control especificado no tiene un <see cref="T:System.Web.UI.ValidationPropertyAttribute" /> atributo asociados; por lo tanto, no se puede validar con un control de validación.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.ControlPropertiesValid">
+      <summary>
+              Determina si el control especificado por la <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> propiedad es un control válido.
+            </summary>
+      <returns>
+              <see langword="true" /> Si el control especificado por <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> es un control válido; en caso contrario, <see langword="false" />.
+            </returns>
+      <exception cref="T:System.Web.HttpException">
+                  No se especifica ningún valor para el <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> propiedad.
+                
+                  o bien
+                
+                  El control de entrada especificado por la <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> no se encuentra la propiedad en la página.
+                
+                  o bien
+                
+                  El control de entrada especificado por la <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> propiedad no tiene un <see cref="T:System.Web.UI.ValidationPropertyAttribute" /> atributo asociados; por lo tanto, no se puede validar con un control de validación.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.DetermineRenderUplevel">
+      <summary>
+              Determina si el control de validación puede realizar la validación del lado cliente.
+            </summary>
+      <returns>
+              <see langword="true" /> Si el control de validación puede realizar la validación del lado cliente; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.EvaluateIsValid">
+      <summary>
+              Cuando se reemplaza en una clase derivada, este método contiene el código para determinar si el valor del control de entrada es válido.
+            </summary>
+      <returns>
+              <see langword="true" /> si el valor del control de entrada es válido; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.GetControlRenderID(System.String)">
+      <summary>
+              Obtiene el identificador de cliente del control especificado.
+            </summary>
+      <param name="name">
+                El nombre del control para obtener el identificador de cliente.
+              </param>
+      <returns>
+              El identificador de cliente del control especificado.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.GetControlValidationValue(System.String)">
+      <summary>
+              Obtiene el valor asociado con el control de entrada especificado.
+    �,E� � �        </summary>
+      <param name="name">
+                El nombre del control para obtener el valor de entrada.
+              </param>
+      <returns>
+              El valor asociado al control de entrada especificado.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.GetValidationProperty(System.Object)">
+      <summary>
+              Determina la propiedad de un control de validación (si existe).
+            </summary>
+      <param name="component">
+                Un <see cref="T:System.Object" /> que representa el control que se va a obtener la propiedad de validación.
+              </param>
+      <returns>
+              Un <see cref="T:System.ComponentModel.PropertyDescriptor" /> que contiene la propiedad de validación del control.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.OnInit(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.Init" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.OnPreRender(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.PreRender" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.OnUnload(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.Unload" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorCommonScript">
+      <summary>
+              Registra código en la página de validación del lado cliente.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.RegisterValidatorDeclaration">
+      <summary>
+              Registra una declaración de matriz de ECMAScript mediante el nombre de la matriz <see langword="Page_Validators" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Muestra el control en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida que se representará en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BaseValidator.Validate">
+      <summary>
+              Realiza la validación en el control de entrada asociado y actualizaciones del <see cref="P:System.Web.UI.WebControls.BaseValidator.IsValid" /> propiedad.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundColumn.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.BoundColumn" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundColumn.FormatDataValue(System.Object)">
+      <summary>
+              Convierte el valor especificado al formato indicado por la <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" /> propiedad.
+            </summary>
+      <param name="dataValue">
+                El valor de formato.
+              </param>
+      <returns>
+              Convierte el valor especificado al formato indicado por la <see cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" /> propiedad.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundColumn.Initialize">
+      <summary>
+              Restablece el <see cref="T:System.Web.UI.WebControls.BoundColumn" /> a su estado inicial.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+      <summary>
+              Restablece la celda especificada en el <see cref="T:System.Web.UI.WebControls.BoundColumn" /> a su estado inicial.
+            </summary>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.TableCell" /> objeto que representa la celda situada a restablecer.
+              </param>
+      <param name="columnIndex">
+                El número de columna donde se encuentra la celda.
+              </param>
+      <param name="itemType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.BoundField" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del objeto <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> para copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.BoundField" /> a.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.CreateField">
+      <summary>
+              Crea un objeto <see cref="T:System.Web.UI.WebControls.BoundField" /> vacío.
+            </summary>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.BoundField" /> vacío.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)">
+      <summary>
+              Rellena especificado <see cref="T:System.Collections.IDictionary" /> objeto con los valores de los especificados <see cref="T:System.Web.UI.WebControls.TableCell" /> objeto.
+            </summary>
+      <param name="dictionary">
+                Un <see cref="T:System.Collections.IDictionary" /> utilizada para almacenar los valores de la celda especificada.
+              </param>
+      <param name="cell">
+                El <see cref="T:System.Web.UI.WebControls.TableCell" /> que contiene los valores que se va a recuperar.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="includeReadOnly">
+                <see langword="true" /> para incluir los valores de campos de solo lectura; de lo contrario, <see langword="false" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.FormatDataValue(System.Object,System.Boolean)">
+      <summary>
+              Da formato al valor del campo especificado para una celda de la <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto.
+            </summary>
+      <param name="dataValue">
+                El valor del campo para dar formato.
+              </param>
+      <param name="encode">
+                <see langword="true" /> para codificar el valor; de lo contrario, <see langword="false" />.
+              </param>
+      <returns>
+              El valor del campo se convierte en el formato especificado por <see cref="P:System.Web.UI.WebControls.BoundField.DataFormatString" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.GetDesignTimeValue">
+      <summary>
+              Recupera el valor utilizado para el valor de un campo al representar el <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto en un diseñador.
+            </summary>
+      <returns>
+              El valor para mostrar en el diseñador como el valor del campo.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.GetValue(System.Web.UI.Control)">
+      <summary>
+              Recupera el valor del campo enlazado a la <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto.
+            </summary>
+      <param name="controlContainer">
+                Contenedor para el valor del campo.
+              </param>
+      <returns>
+              El valor del campo enlazado a la <see cref="T:System.Web.UI.WebControls.BoundField" />.
+            </returns>
+      <exception cref="T:System.Web.HttpException">
+                  El contenedor especificado por el <paramref name="controlContainer" /> parámetro es <see langword="null" />.
+                
+                  o bien 
+                
+                  El contenedor especificado por el <paramref name="controlContainer" /> parámetro no tiene un elemento de datos.
+                
+                  o bien 
+                
+                  No se encontró el campo de datos.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.Initialize(System.Boolean,System.Web.UI.Control)">
+      <summary>
+              Inicializa el <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto.
+            </summary>
+      <param name="enableSorting">
+                <see langword="true" /> Si se admite la ordenación; de lo contrario, <see langword="false" />.
+              </param>
+      <param name="control">
+                El control de datos que posee el <see cref="T:System.Web.UI.WebControls.BoundField" />.
+              </param>
+      <returns>
+              <see langword="false" /> en todos los casos.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.TableCell" /> objeto en el estado de la fila especificada.
+            </summary>
+      <param name="cell">
+                <see cref="T:System.Web.UI.WebControls.TableCell" /> que se va a inicializar.
+              </param>
+      <param name="cellType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlCellType" />.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="rowIndex">
+                Índice de base cero de la fila.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.InitializeDataCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState)">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.TableCell" /> objeto en el estado de la fila especificada.
+            </summary>
+      <param name="cell">
+                <see cref="T:System.Web.UI.WebControls.TableCell" /> que se va a inicializar.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.LoadViewState(System.Object)">
+      <summary>
+              Restaura la información de estado de vista almacenada previamente para este campo.
+            </summary>
+      <param name="state">
+                Representa el estado del control que se restaure.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.OnDataBindField(System.Object,System.EventArgs)">
+      <summary>
+              Enlaza el valor de un campo a la <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto.
+            </summary>
+      <param name="sender">
+                Origen del evento.
+              </param>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+      <exception cref="T:System.Web.HttpException">
+                  El control al que está enlazado el valor del campo no es un <see cref="T:System.Web.UI.WebControls.TextBox" /> o un <see cref="T:System.Web.UI.WebControls.TableCell" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BoundField.ValidateSupportsCallback">
+      <summary>
+              Determina si los controles contenidos en un <see cref="T:System.Web.UI.WebControls.BoundField" /> objeto admiten devoluciones de llamada.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.BulletedList" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega los atributos y estilos HTML de un control <see cref="T:System.Web.UI.WebControls.BulletedList" /> para representarlo en el objeto <see cref="T:System.Web.UI.HtmlTextWriter" /> especificado.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.OnClick(System.Web.UI.WebControls.BulletedListEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.BulletedList.Click" /> para el control <see cref="T:System.Web.UI.WebControls.BulletedList" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.Web.UI.WebControls.BulletedListEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.RaisePostBackEvent(System.String)">
+      <summary>
+              Genera eventos del control <see cref="T:System.Web.UI.WebControls.BulletedList" /> cuando se devuelve un formulario al servidor.
+            </summary>
+      <param name="eventArgument">
+                Representación de la cadena del índice del elemento de lista que generó el evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Escribe el contenido del control <see cref="T:System.Web.UI.WebControls.BulletedList" /> en el objeto <see cref="T:System.Web.UI.HtmlTextWriter" /> especificado para su presentación en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.RenderBulletText(System.Web.UI.WebControls.ListItem,System.Int32,System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Representa el texto con viñetas para cada elemento de lista en un control <see cref="T:System.Web.UI.WebControls.BulletedList" />.
+            </summary>
+      <param name="item">
+                Colección de objetos <see cref="T:System.Web.UI.WebControls.ListItem" /> en un control <see cref="T:System.Web.UI.WebControls.BulletedList" />.
+              </param>
+      <param name="index">
+                Índice de base cero del elemento <see cref="T:System.Web.UI.WebControls.ListItem" /> que se va a recuperar de la colección.
+              </param>
+      <param name="writer">
+                Flujo de salida que representa el contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.RenderContents(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Representa los elementos de lista de un control <see cref="T:System.Web.UI.WebControls.BulletedList" /> como viñetas en el <see cref="T:System.Web.UI.HtmlTextWriter" /> especificado.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedList.System#Web#UI#IPostBackEventHandler#RaisePostBackEvent(System.String)">
+      <summary>
+              Para obtener una descripción de este método, consulte <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />.
+            </summary>
+      <param name="eventArgument">
+                Cadena que representa un argumento de evento opcional que se pasará al controlador de eventos.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.BulletedListEventArgs.#ctor(System.Int32)">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.BulletedListEventArgs" />.
+            </summary>
+      <param name="index">
+                Índice de base cero del elemento de lista en un <see cref="T:System.Web.UI.WebControls.BulletedList" /> que provocó el evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.Button" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega los atributos de la <see cref="T:System.Web.UI.WebControls.Button" /> control en el flujo de salida para representar en el cliente.
+            </summary>
+      <param name="writer">
+                Un <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida para representar en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.GetPostBackOptions">
+      <summary>
+              Crea un <see cref="T:System.Web.UI.PostBackOptions" /> objeto que representa la <see cref="T:System.Web.UI.WebControls.Button" /> comportamiento de postback del control.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.PostBackOptions" /> que representa la <see cref="T:System.Web.UI.WebControls.Button" /> comportamiento de postback del control.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.OnClick(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.Button.Click" /> eventos de la <see cref="T:System.Web.UI.WebControls.Button" /> control.
+            </summary>
+      <param name="e">
+                Datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.OnCommand(System.Web.UI.WebControls.CommandEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.Button.Command" /> eventos de la <see cref="T:System.Web.UI.WebControls.Button" /> control.
+            </summary>
+      <param name="e">
+                Datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.OnPreRender(System.EventArgs)">
+      <summary>
+              Determina si se ha presionado el botón antes de representarlo en el cliente.
+            </summary>
+      <param name="e">
+                Datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.RaisePostBackEvent(System.String)">
+      <summary>
+              Genera eventos para el control <see cref="T:System.Web.UI.WebControls.Button" /> cuando devuelve datos al servidor.
+            </summary>
+      <param name="eventArgument">
+                El argumento para el evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.RenderContents(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Representa el contenido del control en el escritor especificado.
+            </summary>
+      <param name="writer">
+                Un <see cref="T:System.Web.UI.HtmlTextWriter" /> objeto que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Button.System#Web#UI#IPostBackEventHandler#RaisePostBackEvent(System.String)">
+      <summary>
+              Genera eventos para el control <see cref="T:System.Web.UI.WebControls.Button" /> cuando devuelve datos al servidor.
+            </summary>
+      <param name="eventArgument">
+                El argumento para el evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonColumn.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ButtonColumn" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonColumn.FormatDataTextValue(System.Object)">
+      <summary>
+              Convierte el valor especificado al formato indicado por la <see cref="P:System.Web.UI.WebControls.ButtonColumn.DataTextFormatString" /> propiedad.
+            </summary>
+      <param name="dataTextValue">
+                El valor de formato.
+              </param>
+      <returns>
+              El <paramref name="dataTextValue" /> convertido al formato indicado por la <see cref="P:System.Web.UI.WebControls.ButtonColumn.DataTextFormatString" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonColumn.Initialize">
+      <summary>
+              Restablece el <see cref="T:System.Web.UI.WebControls.ButtonColumn" /> objeto a su estado inicial.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+      <summary>
+              Restablece una celda de la <see cref="T:System.Web.UI.WebControls.ButtonColumn" /> objeto a su estado inicial.
+            </summary>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.TableCell" /> que representa la celda para restablecer.
+              </param>
+      <param name="columnIndex">
+                El número de columna donde se encuentra la celda.
+              </param>
+      <param name="itemType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del objeto <see cref="T:System.Web.UI.WebControls.ButtonField" /> objeto especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.CreateField">
+      <summary>
+              Crea y devuelve una nueva instancia de la <see cref="T:System.Web.UI.WebControls.ButtonField" /> clase.
+            </summary>
+      <returns>
+              Una nueva instancia de la  <see cref="T:System.Web.UI.WebControls.ButtonField" /> clase.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.FormatDataTextValue(System.Object)">
+      <summary>
+              Da formato al valor del campo especificado para una celda de la <see cref="T:System.Web.UI.WebControls.ButtonField" /> objeto.
+            </summary>
+      <param name="dataTextValue">
+                El valor del campo para dar formato.
+              </param>
+      <returns>
+              El valor del campo se convierte en el formato especificado por el <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" /> propiedad.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)">
+      <summary>
+              Inicializa el objeto <see cref="T:System.Web.UI.WebControls.ButtonField" /> actual.
+            </summary>
+      <param name="sortingEnabled">
+                <see langword="true" /> Para habilitar la ordenación; de lo contrario, <see langword="false" />.
+              </param>
+      <param name="control">
+                El control de datos que posee el <see cref="T:System.Web.UI.WebControls.ButtonField" />.
+              </param>
+      <returns>
+              <see langword="false" />, lo que indica que el control no es necesario volver a enlazar a los datos.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> objeto en el estado de la fila especificada.
+            </summary>
+      <param name="cell">
+                <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que se va a inicializar.
+              </param>
+      <param name="cellType">
+                Un <see cref="T:System.Web.UI.WebControls.DataControlCellType" /> valor que indica el tipo de fila (encabezado, pie de página o datos).
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="rowIndex">
+                Índice de base cero de la fila.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonField.ValidateSupportsCallback">
+      <summary>
+              Determina si los controles que están contenidos en un <see cref="T:System.Web.UI.WebControls.ButtonField" /> objeto admiten devoluciones de llamada.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonFieldBase.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ButtonFieldBase.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del actual objeto que se deriva la <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" /> clase especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.Calendar" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.CreateControlCollection">
+      <summary>
+              Crea una colección para almacenar controles secundarios.
+            </summary>
+      <returns>
+              Siempre devuelve un <see langword="InternalControlCollection" /> objeto.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.HasWeekSelectors(System.Web.UI.WebControls.CalendarSelectionMode)">
+      <summary>
+              Determina si un <see cref="T:System.Web.UI.WebControls.CalendarSelectionMode" /> objeto contiene selectores de la semana.
+            </summary>
+      <param name="selectionMode">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.CalendarSelectionMode" />.
+              </param>
+      <returns>
+              <see langword="true" /> Si el <see cref="T:System.Web.UI.WebControls.CalendarSelectionMode" /> contiene selectores de semana; en caso contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.LoadViewState(System.Object)">
+      <summary>
+              Carga el estado guardado de la <see cref="T:System.Web.UI.WebControls.Calendar" /> control.
+            </summary>
+      <param name="savedState">
+                Un <see cref="T:System.Object" /> que contiene el estado guardado de la <see cref="T:System.Web.UI.WebControls.Calendar" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.OnDayRender(System.Web.UI.WebControls.TableCell,System.Web.UI.WebControls.CalendarDay)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" /> eventos de la <see cref="T:System.Web.UI.WebControls.Calendar" /> control y le permite proporcionar un controlador personalizado para el <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" /> eventos.
+            </summary>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.TableCell" /> que contiene información sobre la celda para representar.
+              </param>
+      <param name="day">
+                Un <see cref="T:System.Web.UI.WebControls.CalendarDay" /> que contiene información acerca del día para procesar.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.OnPreRender(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.PreRender" />.
+            </summary>
+      <param name="e">
+                <see cref="T:System.EventArgs" /> que contiene datos de eventos.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.OnSelectionChanged">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.Calendar.SelectionChanged" /> eventos de la <see cref="T:System.Web.UI.WebControls.Calendar" /> control y le permite proporcionar un controlador personalizado para el <see cref="E:System.Web.UI.WebControls.Calendar.SelectionChanged" /> eventos.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.OnVisibleMonthChanged(System.DateTime,System.DateTime)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" /> eventos de la <see cref="T:System.Web.UI.WebControls.Calendar" /> control y le permite proporcionar un controlador personalizado para el <see cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" /> eventos.
+            </summary>
+      <param name="newDate">
+                Un <see cref="T:System.DateTime" /> que representa el mes que se muestra actualmente en el <see cref="T:System.Web.UI.WebControls.Calendar" />.
+              </param>
+      <param name="previousDate">
+                Un <see cref="T:System.DateTime" /> que representa el me��f � �s anterior muestra la <see cref="T:System.Web.UI.WebControls.Calendar" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.RaisePostBackEvent(System.String)">
+      <summary>
+              Genera un evento para el <see cref="T:System.Web.UI.WebControls.Calendar" /> control cuando realiza devoluciones al servidor.
+            </summary>
+      <param name="eventArgument">
+                <see cref="T:System.String" /> que representa el argumento de evento que se pasa al controlador de eventos.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Muestra el control <see cref="T:System.Web.UI.WebControls.Calendar" /> en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida que se representará en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.SaveViewState">
+      <summary>
+              Almacena el estado de la <see cref="T:System.Web.UI.WebControls.Calendar" /> control.
+            </summary>
+      <returns>
+              Un objeto que contiene el estado guardado de la <see cref="T:System.Web.UI.WebControls.Calendar" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.System#Web#UI#IPostBackEventHandler#RaisePostBackEvent(System.String)">
+      <summary>
+              Provoca eventos en la devolución de datos para el <see cref="T:System.Web.UI.WebControls.Calendar" /> control.
+            </summary>
+      <param name="eventArgument">
+                El argumento para el evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Calendar.TrackViewState">
+      <summary>
+              Marca el punto de partida para comenzar el seguimiento y guardar cambios en el control como parte del estado de vista del control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CalendarDay.#ctor(System.DateTime,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CalendarDay" />.
+            </summary>
+      <param name="date">
+                Un <see cref="T:System.DateTime" /> objeto que contiene la fecha representada por una instancia de esta clase.
+              </param>
+      <param name="isWeekend">
+                <see langword="true" /> para indicar que la fecha representada por una instancia de esta clase es un sábado o domingo; de lo contrario, <see langword="false" />.
+              </param>
+      <param name="isToday">
+                <see langword="true" /> para indicar que la fecha representada por una instancia de esta clase es la fecha actual; de lo contrario, <see langword="false" />.
+              </param>
+      <param name="isSelected">
+                <see langword="true" /> para indicar que la fecha representada por una instancia de esta clase está seleccionada en el <see cref="T:System.Web.UI.WebControls.Calendar" /> control; en caso contrario, <see langword="false" />.
+              </param>
+      <param name="isOtherMonth">
+                <see langword="true" /> para indicar que la fecha representada por una instancia de esta clase está en un mes distinto del mes que se muestra en el <see cref="T:System.Web.UI.WebControls.Calendar" /> control; en caso contrario, <see langword="false" />.
+              </param>
+      <param name="dayNumberText">
+                El número de día de la fecha representada por esta clase.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CallingDataMethodsEventArgs.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CallingDataMethodsEventArgs" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ChangePassword" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.CreateChildControls">
+      <summary>
+              Crea los controles individuales que componen el <see cref="T:System.Web.UI.WebControls.ChangePassword" /> control en preparación para la devolución o representación.
+            </summary>
+      <exception cref="T:System.Web.HttpException">
+                  El <see cref="P:System.Web.UI.WebControls.ChangePassword.DisplayUserName" /> propiedad se establece en <see langword="false" />, la <see cref="P:System.Web.UI.WebControls.ChangePassword.ChangePasswordTemplate" /> contiene un control que implementa el <see cref="T:System.Web.UI.IEditableTextControl" /> interfaz y el <see cref="P:System.Web.UI.Control.ID" /> propiedad del control se establece en "UserName".
+                
+                  O bien
+                
+                  El <see cref="P:System.Web.UI.WebControls.ChangePassword.DisplayUserName" /> propiedad se establece en <see langword="true" />, el <see cref="P:System.Web.UI.WebControls.ChangePassword.ChangePasswordTemplate" /> no contiene un control que implementa el <see cref="T:System.Web.UI.IEditableTextControl" /> interfaz y el <see cref="P:System.Web.UI.Control.ID" /> propiedad del control se establece en "UserName".
+                
+                  O bien
+                
+                  El <see cref="P:System.Web.UI.WebControls.ChangePassword.ChangePasswordTemplate" /> no contiene un control que implementa el <see cref="T:System.Web.UI.IEditableTextControl" /> interfaz y el <see cref="P:System.Web.UI.Control.ID" /> propiedad del control se establece en "CurrentPassword".
+                
+                  O bien
+                
+                  El <see cref="P:System.Web.UI.WebControls.ChangePassword.ChangePasswordTemplate" /> no contiene un control que implementa el <see cref="T:System.Web.UI.IEditableTextControl" /> interfaz y el <see cref="P:System.Web.UI.Control.ID" /> propiedad del control se establece en "NewPassword".
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.LoadControlState(System.Object)">
+      <summary>
+              Restaura la información de estado de una solicitud de página anterior guardada por control del <see cref="M:System.Web.UI.WebControls.ChangePassword.SaveControlState" /> (método).
+            </summary>
+      <param name="savedState">
+                Un <see cref="T:System.Object" /> que representa el estado de control para restaurar.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.LoadViewState(System.Object)">
+      <summary>
+              Restauraciones de ver información de estado de una solicitud de página anterior guardada por el <see cref="M:System.Web.UI.WebControls.ChangePassword.SaveViewState" /> (método).
+            </summary>
+      <param name="savedState">
+                Un <see cref="T:System.Object" /> que representa el estado de control para restaurar.
+              </param>
+      <exception cref="T:System.ArgumentException">
+                  El <paramref name="savedState" /> parámetro no se puede resolver en un <see cref="P:System.Web.UI.Control.ViewState" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnBubbleEvent(System.Object,System.EventArgs)">
+      <summary>
+              Determina si el evento para el <see cref="T:System.Web.UI.WebControls.ChangePassword" /> control se pasa a la jerarquía de controles de servidor Web para la página.
+            </summary>
+      <param name="source">
+                Origen del evento.
+              </param>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+      <returns>
+              <see langword="true" /> si se ha cancelado el evento; de lo contrario, <see langword="false" />.
+               De manera predeterminada, es <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnCancelButtonClick(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.CancelButtonClick" /> eventos cuando un usuario hace clic en el botón Cancelar.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnChangedPassword(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.ChangedPassword" /> evento después de cambiar la contraseña.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnChangePasswordError(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.ChangePasswordError" /> eventos cuando no se cambia la contraseña del usuario.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnChangingPassword(System.Web.UI.WebControls.LoginCancelEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.ChangingPassword" /> evento antes de que la contraseña del usuario se cambia por el proveedor de pertenencia.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.ComponentModel.CancelEventArgs" /> objeto que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnContinueButtonClick(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.ContinueButtonClick" /> eventos cuando un usuario hace clic en el botón Continuar.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnInit(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.Control.Init" /> eventos para el <see cref="T:System.Web.UI.WebControls.ChangePassword" /> control para permitir que el control se registre con la página.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.EventArgs" /> objeto que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnPreRender(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.PreRender" />.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.EventArgs" /> objeto que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnSendingMail(System.Web.UI.WebControls.MailMessageEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.SendingMail" /> evento antes de que se envía un mensaje de correo electrónico al servidor SMTP para su procesamiento.
+               El servidor SMTP, a continuación, envía el mensaje de correo electrónico al usuario.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> objeto que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.ChangePassword.SendMailError" /> evento cuando no se puede enviar un mensaje de correo electrónico al usuario.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" /> objeto que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Escribe el <see cref="T:System.Web.UI.WebControls.ChangePassword" /> contenido especificado del control <see cref="T:System.Web.UI.HtmlTextWriter" /> objeto para su presentación en el cliente.
+            </summary>
+      <param name="writer">
+                La <see cref="T:System.Web.UI.HtmlTextWriter" /> objeto que representa el flujo de salida utilizado para escribir contenido en una página Web.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.SaveControlState">
+      <summary>
+              Guarda los cambios de estado del control de servidor que se produjeron desde la hora en que la página volvió a publicarse en el servidor.
+            </summary>
+      <returns>
+              Estado actual de la del control de servidor; de lo contrario, <see langword="null" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.SaveViewState">
+      <summary>
+              Guarda los cambios de estado de vista que se han producido desde la hora en que se devolvió la página al servidor de cualquier control de servidor.
+            </summary>
+      <returns>
+              Estado de vista actual del control de servidor; de lo contrario, <see langword="null" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.SetDesignModeState(System.Collections.IDictionary)">
+      <summary>
+              Establece los datos en tiempo de diseño para un control.
+            </summary>
+      <param name="data">
+                Un <see cref="T:System.Collections.IDictionary" /> que contiene los datos de tiempo de diseño para el control.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ChangePassword.TrackViewState">
+      <summary>
+              Hace el seguimiento de cambios de estado de vista para el control de servidor, por lo que pueden almacenarse en el control de servidor <see cref="T:System.Web.UI.StateBag" /> objeto.
+               Este objeto es accesible a través de la propiedad <see cref="P:System.Web.UI.Control.ViewState" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CheckBox" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega los atributos y estilos HTML de un <see cref="T:System.Web.UI.WebControls.CheckBox" /> control va a representar en el flujo de salida especificado.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+              Procesa los datos de devolución para el <see cref="T:System.Web.UI.WebControls.CheckBox" /> control.
+            </summary>
+      <param name="postDataKey">
+                Índice de la colección expuesta que hace referencia al contenido que se va a cargar.
+              </param>
+      <param name="postCollection">
+                Colección expuesta en el servidor.
+              </param>
+      <returns>
+              <see langword="true" /> si el contenido expuesto es diferente al del último registro; de lo contrario, es <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.LoadViewState(System.Object)">
+      <summary>
+              Carga el estado de vista guardado previamente del control <see cref="T:System.Web.UI.WebControls.CheckBox" />.
+            </summary>
+      <param name="savedState">
+                Objeto que contiene los valores de estado de vista guardados del control.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.OnCheckedChanged(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CheckBox.CheckedChanged" /> eventos de la <see cref="T:System.Web.UI.WebControls.CheckBox" /> control.
+               Esto permite controlar directamente el evento.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.OnPreRender(System.EventArgs)">
+      <summary>
+              Registra el script de cliente para generar la devolución de datos antes de la representación en el cliente si <see cref="P:System.Web.UI.WebControls.CheckBox.AutoPostBack" /> es <see langword="true" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.RaisePostDataChangedEvent">
+      <summary>
+              Se invoca el <see cref="M:System.Web.UI.WebControls.CheckBox.OnCheckedChanged(System.EventArgs)" /> método cuando los datos expuestos para el <see cref="T:System.Web.UI.WebControls.CheckBox" /> control ha cambiado.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Muestra el control <see cref="T:System.Web.UI.WebControls.CheckBox" /> en el cliente.
+            </summary>
+      <param name="writer">
+                Un <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida para representar en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.SaveViewState">
+      <summary>
+              Guarda los cambios a la <see cref="T:System.Web.UI.WebControls.CheckBox" /> vista estado desde el momento en que se devolvió la página al servidor.
+            </summary>
+      <returns>
+              El objeto que contiene los cambios realizados en el <see cref="T:System.Web.UI.WebControls.CheckBox" /> Ver estado; en caso contrario, si ningún estado de vista asociado con el objeto <see langword="null" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.System#Web#UI#IPostBackDataHandler#LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+              Procesa los datos expuestos para el control <see cref="T:System.Web.UI.WebControls.CheckBox" />.
+            </summary>
+      <param name="postDataKey">
+                Valor de clave usado para indizar una entrada de la colección.
+              </param>
+      <param name="postCollection">
+                <see cref="T:System.Collections.Specialized.NameValueCollection" /> que contiene información de envío.
+              </param>
+      <returns>
+              <see langword="true" /> Si el estado de la <see cref="T:System.Web.UI.WebControls.CheckBox" /> ha cambiado; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.System#Web#UI#IPostBackDataHandler#RaisePostDataChangedEvent">
+      <summary>
+              Se produce cuando cambian los datos expuestos para un control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBox.TrackViewState">
+      <summary>
+              Realiza el seguimiento de cambios de estado de vista en el <see cref="T:System.Web.UI.WebControls.CheckBox" /> control de modo que pueden almacenarse en el control <see cref="T:System.Web.UI.StateBag" /> objeto.
+               Este objeto es accesible a través de la propiedad <see cref="P:System.Web.UI.Control.ViewState" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CheckBoxField" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del objeto <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> objeto especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> para copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> a.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.CreateField">
+      <summary>
+              Crea un objeto <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> vacío.
+            </summary>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> vacío.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)">
+      <summary>
+              Rellena especificado <see cref="T:System.Collections.IDictionary" /> objeto con los valores de los especificados <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> objeto.
+            </summary>
+      <param name="dictionary">
+                Un <see cref="T:System.Collections.IDictionary" /> utilizada para almacenar los valores de la celda especificada.
+              </param>
+      <param name="cell">
+                El <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que contiene los valores que se va a recuperar.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="includeReadOnly">
+                <see langword="true" /> para incluir los valores de campos de solo lectura; de lo contrario, <see langword="false" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.GetDesignTimeValue">
+      <summary>
+              Recupera el valor utilizado para el valor del campo al representar el <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> objeto en un diseñador.
+            </summary>
+      <returns>
+              Siempre devuelve <see langword="true" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.InitializeDataCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState)">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> objeto en el estado de la fila especificada.
+            </summary>
+      <param name="cell">
+                <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que se va a inicializar.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.OnDataBindField(System.Object,System.EventArgs)">
+      <summary>
+              Enlaza el valor de un campo a una casilla de verificación en la <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> objeto.
+            </summary>
+      <param name="sender">
+                Origen del evento.
+              </param>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+      <exception cref="T:System.Web.HttpException">
+                  El control al que está enlazado el valor del campo no es un <see cref="T:System.Web.UI.WebControls.CheckBox" /> control.
+                
+                  o bien
+                
+                  No se puede convertir el valor del campo como un valor booleano.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxField.ValidateSupportsCallback">
+      <summary>
+              Determina si los controles contenidos en un <see cref="T:System.Web.UI.WebControls.CheckBoxField" /> objeto admiten devoluciones de llamada.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.CreateControlStyle">
+      <summary>
+              Crea un objeto de estilo que usa el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> de forma interna para implementar todas las propiedades relacionadas con el estilo.
+            </summary>
+      <returns>
+              <see cref="T:System.Web.UI.WebControls.Style" /> que contiene las propiedades de estilo del control.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)">
+      <summary>
+              Busca en el contenedor de nomenclatura actual un control de servidor con el identificador y el desplazamiento de ruta especificados.
+               El método <see cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" /> siempre devuelve el objeto <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </summary>
+      <param name="id">
+                Identificador del control que se va a buscar.
+              </param>
+      <param name="pathOffset">
+                Número de controles situados más arriba en la jerarquía de controles de la página necesario para llegar a un contenedor de nomenclatura.
+              </param>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> actual.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)">
+      <summary>
+              Recupera el estilo del tipo de elemento especificado en el índice indicado del control de lista.
+            </summary>
+      <param name="itemType">
+                Uno de los valores de enumeración de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+      <param name="repeatIndex">
+                Índice ordinal que especifica la ubicación del elemento en el control de lista.
+              </param>
+      <returns>
+              <see langword="null" />, lo que indica que los atributos de estilo no se establecen en  elementos individuales de lista en un control <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+              Procesa los datos expuestos para el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </summary>
+      <param name="postDataKey">
+                Identificador clave del control que se usa para indizar el <see cref="T:System.Collections.Specialized.NameValueCollection" /> especificado en el parámetro <paramref name="postCollection" />.
+              </param>
+      <param name="postCollection">
+                <see cref="T:System.Collections.Specialized.NameValueCollection" /> que contiene información de valores indizada mediante identificadores de control.
+              </param>
+      <returns>
+              <see langword="true" /> si el estado de <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> es diferente al último contenido expuesto; de lo contrario, es <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.OnInit(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.Init" />.
+            </summary>
+      <param name="e">
+                Objeto que contiene los datos de evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)">
+      <summary>
+              Configura el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> antes de representarlo en el cliente.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent">
+      <summary>
+              Notifica a la aplicación de ASP.NET que el estado del control <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> cambió.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Muestra el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" /> en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida que se representará en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Representa un elemento de lista en el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </summary>
+      <param name="itemType">
+                Uno de los valores de enumeración de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+      <param name="repeatIndex">
+                Índice ordinal que especifica la ubicación del elemento en el control de lista.
+              </param>
+      <param name="repeatInfo">
+                Objeto <see cref="T:System.Web.UI.WebControls.RepeatInfo" /> que incluye la información que se usa para representar el elemento en la lista.
+              </param>
+      <param name="writer">
+                Objeto <see cref="T:System.Web.UI.HtmlTextWriter" /> que incluye el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>
+              Procesa los datos expuestos para el control <see cref="T:System.Web.UI.WebControls.CheckBoxList" />.
+            </summary>
+      <param name="postDataKey">
+                Identificador clave del control, que se usa para indizar <paramref name="postCollection" />.
+              </param>
+      <param name="postCollection">
+                Objeto <see cref="T:System.Collections.Specialized.NameValueCollection" /> que contiene información de vS
+�� � �alores indizada mediante identificadores de control.
+              </param>
+      <returns>
+              <see langword="true" /> si el estado del control del servidor cambió a consecuencia del postback; en caso contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#RaisePostDataChangedEvent">
+      <summary>
+              Se genera cuando los datos expuestos para un control cambian.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)">
+      <summary>
+              Para una descripción de este miembro, vea <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />.
+            </summary>
+      <param name="itemType">
+                Uno de los valores de enumeración de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+      <param name="repeatIndex">
+                Índice ordinal que especifica la ubicación del elemento en el control de lista.
+              </param>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.Style" /> que representa el estilo del tipo de elemento especificado en el índice indicado en el control de lista.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Para una descripción de este miembro, vea <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />.
+            </summary>
+      <param name="itemType">
+                Uno de los valores de enumeración de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+      <param name="repeatIndex">
+                Índice ordinal que especifica la ubicación del elemento en el control de lista.
+              </param>
+      <param name="repeatInfo">
+                Objeto <see cref="T:System.Web.UI.WebControls.RepeatInfo" /> que incluye la información que se usa para representar el elemento en la lista.
+              </param>
+      <param name="writer">
+                Objeto <see cref="T:System.Web.UI.HtmlTextWriter" /> que incluye el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CircleHotSpot.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CircleHotSpot" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CircleHotSpot.GetCoordinates">
+      <summary>
+              Devuelve una cadena que representa las coordenadas x e y de un <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> Centro del objeto y la longitud del radio.
+            </summary>
+      <returns>
+              Una cadena que representa las coordenadas x e y de un <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> Centro del objeto y la longitud del radio.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandEventArgs.#ctor(System.String,System.Object)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> clase con el nombre especificado y el argumento.
+            </summary>
+      <param name="commandName">
+                Nombre del comando.
+              </param>
+      <param name="argument">
+                Un <see cref="T:System.Object" /> que contiene los argumentos para el comando.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandEventArgs.#ctor(System.Web.UI.WebControls.CommandEventArgs)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> clase Sí <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> objeto.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandField.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CommandField" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandField.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del objeto <see cref="T:System.Web.UI.WebControls.CommandField" /> objeto especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> para copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.CommandField" /> a.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandField.CreateField">
+      <summary>
+              Crea un objeto <see cref="T:System.Web.UI.WebControls.CommandField" /> vacío.
+            </summary>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.CommandField" /> vacío.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> objeto en el estado de la fila especificada.
+            </summary>
+      <param name="cell">
+                <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que se va a inicializar.
+              </param>
+      <param name="cellType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlCellType" />.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="rowIndex">
+                Índice de base cero de la fila que contiene la celda.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CommandField.ValidateSupportsCallback">
+      <summary>
+              Determina si los controles contenidos en un <see cref="T:System.Web.UI.WebControls.CommandField" /> objeto admiten devoluciones de llamada.
+            </summary>
+      <exception cref="T:System.NotSupportedException">
+                  El botón de selección se muestra en el <see cref="T:System.Web.UI.WebControls.CommandField" /> objeto.
+                   La <see cref="T:System.Web.UI.WebControls.CommandField" />  clase es compatible con las devoluciones de llamada cuando se muestra el botón de selección.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompareValidator.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CompareValidator" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompareValidator.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega los atributos de este control a la secuencia de salida para representar en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida que se representará en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompareValidator.ControlPropertiesValid">
+      <summary>
+              Comprueba las propiedades del control para valores válidos.
+            </summary>
+      <returns>
+              <see langword="true" /> si las propiedades del control son válidas; de lo contrario, <see langword="false" />.
+            </returns>
+      <exception cref="T:System.Web.HttpException">
+                  <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" /> y <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" /> tienen el mismo <see cref="P:System.Web.UI.Control.ID" />.
+                </exception>
+      <exception cref="T:System.Web.HttpException">
+                  El valor de una propiedad de destino no se puede convertir al <see cref="T:System.Type" /> previsto.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompareValidator.EvaluateIsValid">
+      <summary>
+              Cuando se reemplaza en una clase derivada, este método contiene el código para determinar si el valor del control de entrada es válido.
+            </summary>
+      <returns>
+              <see langword="true" /> si el valor del control de entrada es válido; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompleteWizardStep.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CompleteWizardStep" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeControl.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CompositeControl" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeControl.DataBind">
+      <summary>
+              Enlaza el origen de datos a la <see cref="T:System.Web.UI.WebControls.CompositeControl" /> y todos sus controles secundarios.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeControl.RecreateChildControls">
+      <summary>
+              Vuelve a crear los controles secundarios de un control derivado de <see cref="T:System.Web.UI.WebControls.CompositeControl" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeControl.Render(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Escribe el <see cref="T:System.Web.UI.WebControls.CompositeControl" /> contenido especificado <see cref="T:System.Web.UI.HtmlTextWriter" /> objeto para su presentación en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida para representar contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeControl.System#Web#UI#WebControls#ICompositeControlDesignerAccessor#RecreateChildControls">
+      <summary>
+              Habilita un diseñador para volver a crear la colección del control compuesto de los controles secundarios en el entorno de tiempo de diseño.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeDataBoundControl.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls">
+      <summary>
+              Crea la jerarquía de controles que se usa para representar un control enlazado a datos compuesto basándose en los valores que se almacenan en estado de vista.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)">
+      <summary>
+              Cuando se invalida en una clase abstracta, crea la jerarquía de controles que se usa para representar el control enlazado a datos compuesto basándose en los valores del origen de datos especificado.
+            </summary>
+      <param name="dataSource">
+                Un <see cref="T:System.Collections.IEnumerable" /> que contiene los valores que se va a enlazar al control.
+              </param>
+      <param name="dataBinding">
+                <see langword="true" /> para indicar que el <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" /> llamada durante el enlace de datos; en caso contrario, <see langword="false" />.
+              </param>
+      <returns>
+              El número de elementos creados por el <see cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CompositeDataBoundControl.PerformDataBinding(System.Collections.IEnumerable)">
+      <summary>
+              Enlaza los datos del origen de datos al control enlazado a datos compuesto.
+            </summary>
+      <param name="data">
+                Un <see cref="T:System.Collections.IEnumerable" /> que contiene los valores que se va a enlazar al control enlazado a datos compuesto.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.Content.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ContentPlaceHolder.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlIDConverter.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ControlIDConverter" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlIDConverter.FilterControl(System.Web.UI.Control)">
+      <summary>
+              Devuelve un valor que indica si el identificador del control del control especificado se agrega a la <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> devuelta por la <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> (método).
+            </summary>
+      <param name="control">
+                La instancia del control para probar para su inclusión en el <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />.
+              </param>
+      <returns>
+              <see langword="true" /> en todos los casos.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve una colección de ID del contenedor dentro de la <see cref="T:System.ComponentModel.Design.IDesignerHost" /> cuando se proporciona un contexto de formato.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato que puede usarse para extraer información adicional sobre el entorno desde el que se invoca este convertidor de tipos.
+                 Este parámetro o las propiedades de este parámetro pueden ser <see langword="null" />.
+              </param>
+      <returns>
+              Un <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> que contiene un conjunto de cadenas que representan los ID de los controles en el contenedor actual.
+               Si no hay controles se encuentran actualmente, se devuelve una colección vacía.
+               Si el contexto es <see langword="null" /> o no hay ningún contenedor actual, a continuación, <see langword="null" /> se devuelve.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve un valor que indica si la colección de valores estándar devueltos por el <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> (método) es una lista exclusiva de posibles valores, utilizando el contexto especificado.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato.
+              </param>
+      <returns>
+              <see langword="false" /> en todos los casos.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve un valor que indica si este objeto admite un conjunto estándar de valores de identificador de control que se pueden seleccionar de una lista, utilizando el contexto especificado.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato.
+              </param>
+      <returns>
+              <see langword="true" /> Si <see cref="M:System.Web.UI.WebControls.ControlIDConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> debe ser llamado para buscar un conjunto común de control de valores de identificador que sea compatible con el objeto; en caso contrario, <see langword="false" />.
+               Esta implementación devuelve <see langword="true" /> Si el contexto no está <see langword="null" />; en caso contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor">
+      <summary>
+              Inicializa una nueva instancia sin nombre de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.Data.DbType,System.String,System.String)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase utilizando el nombre de parámetro especificado, el tipo de base de datos, el Id. de control y el nombre de propiedad.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="dbType">
+                Tipo de datos del parámetro.
+              </param>
+      <param name="controlID">
+                El nombre del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+      <param name="propertyName">
+                El nombre de la propiedad del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String)">
+      <summary>
+              Inicializa una nueva instancia con nombre de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase, utilizando el nombre de control especificado para identificar qué control se debe enlazar.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="controlID">
+                El nombre del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String,System.String)">
+      <summary>
+              Inicializa una nueva instancia con nombre de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase, utilizando el nombre de propiedad especificado y el nombre del control para identificar qué control se debe enlazar.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="controlID">
+                El nombre del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+      <param name="propertyName">
+                El nombre de la propiedad en el control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.TypeCode,System.String,System.String)">
+      <summary>
+              Inicializa una nueva instancia con nombre y fuertemente tipada de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase, utilizando el nombre de propiedad especificado y el nombre del control para identificar qué control se debe enlazar.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="type">
+                El tipo que representa el parámetro.
+                 De manera predeterminada, es <see cref="F:System.TypeCode.Object" />.
+              </param>
+      <param name="controlID">
+                El nombre del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+      <param name="propertyName">
+                El nombre de la propiedad del control que está enlazado el parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> clase con los valores de la instancia especificada.
+            </summary>
+      <param name="original">
+                Un <see cref="T:System.Web.UI.WebControls.ControlParameter" /> instancia desde la cual se inicializa la instancia actual.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.Clone">
+      <summary>
+              Devuelve un duplicado del actual <see cref="T:System.Web.UI.WebControls.ControlParameter" /> instancia.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.WebControls.ControlParameter" /> que es un duplicado exacto del actual.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)">
+      <summary>
+              Actualiza y devuelve el valor de la <see cref="T:System.Web.UI.WebControls.ControlParameter" /> objeto.
+            </summary>
+      <param name="context">
+                Actual <see cref="T:System.Web.HttpContext" /> de la solicitud.
+              </param>
+      <param name="control">
+                El <see cref="T:System.Web.UI.Control" /> que está enlazado el parámetro.
+              </param>
+      <returns>
+              Un <see cref="T:System.Object" /> que representa el valor actualizado y actual del parámetro.
+            </returns>
+      <exception cref="T:System.ArgumentException">
+                  La propiedad <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" /> no se ha establecido.
+                
+                  o bien
+                
+                  El <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" /> no se establece la propiedad y el <see cref="T:System.Web.UI.Control" /> identificado por la <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" /> propiedad no está decorada con un <see cref="T:System.Web.UI.ControlValuePropertyAttribute" /> atributo.
+                </exception>
+      <exception cref="T:System.InvalidOperationException">
+                  <see cref="M:System.Web.UI.Control.FindControl(System.String)" /> no devuelve el control especificado.
+                
+                  o bien
+                
+                  El control identificado por la <see cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" /> propiedad no admite la propiedad denominada por <see cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlPropertyNameConverter.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve una colección de nombres de propiedad para el control en un diseñador que implementa <see cref="T:System.ComponentModel.Design.IDesignerHost" /> cuando se proporciona un contexto de formato.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato que puede usarse para extraer información adicional sobre el entorno desde el que se invoca este convertidor de tipos.
+                 Este parámetro o las propiedades de este parámetro pueden ser <see langword="null" />.
+              </param>
+      <returns>
+              Un <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> que contiene un conjunto de cadenas que representan nombres de propiedad para el control actual.
+               Si el control actual es <see langword="null" />, se devuelve una colección vacía.
+               Si el <paramref name="context" /> parámetro es <see langword="null" />, <see langword="null" /> se devuelve.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve un valor que indica si la colección de valores estándar devueltos por el <see cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" /> (método) es una lista exclusiva de posibles valores, utilizando el contexto especificado.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato que puede usarse para extraer información adicional sobre el entorno desde el que se invoca este convertidor de tipos.
+                 Este parámetro o las propiedades de este parámetro pueden ser <see langword="null" />.
+              </param>
+      <returns>
+              <see langword="false" /> en todos los casos, lo que indica que la lista no es exclusiva.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)">
+      <summary>
+              Devuelve un valor que indica si este objeto admite un conjunto estándar de valores que se pueden elegir de una lista, utilizando el contexto especificado.
+            </summary>
+      <param name="context">
+                <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> que proporciona un contexto de formato que puede usarse para extraer información adicional sobre el entorno desde el que se invoca este convertidor de tipos.
+                 Este parámetro o las propiedades de este parámetro pueden ser <see langword="null" />.
+              </param>
+      <returns>
+              <see langword="true" /> Si el <paramref name="context" /> parámetro no es <see langword="null" />; en caso contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.#ctor">
+      <summary>
+              Inicializa una nueva instancia sin nombre de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> clase.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.String,System.Data.DbType,System.String)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> clase que tiene el nombre especificado y el tipo de base de datos y que está enlazada a la cookie HTTP especificada.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="dbType">
+                El tipo de base de datos que representa el parámetro.
+              </param>
+      <param name="cookieName">
+                El nombre de la cookie HTTP que depende el objeto de parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.String,System.String)">
+      <summary>
+              Inicializa una nueva instancia con nombre de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> clase, utilizando la cadena especificada para identificar a qué cookie HTTP para enlazar a.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="cookieName">
+                El nombre de la cookie HTTP que depende el objeto de parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.String,System.TypeCode,System.String)">
+      <summary>
+              Inicializa una nueva instancia con nombre y fuertemente tipada de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> clase, utilizando la cadena especificada para identificar a qué cookie HTTP para enlazar a.
+            </summary>
+      <param name="name">
+                Nombre del parámetro.
+              </param>
+      <param name="type">
+                El tipo que representa el parámetro.
+                 De manera predeterminada, es <see cref="F:System.TypeCode.Object" />.
+              </param>
+      <param name="cookieName">
+                El nombre de la cookie HTTP que depende el objeto de parámetro.
+                 De manera predeterminada, es <see cref="F:System.String.Empty" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.#ctor(System.Web.UI.WebControls.CookieParameter)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> clase con los valores de la instancia especificada por el <paramref name="original" /> parámetro.
+            </summary>
+      <param name="original">
+                A <see cref="T:System.Web.UI.WebControls.CookieParameter" /> desde la cual se inicializa la instancia actual.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CookieParameter.Clone">
+      <summary>
+              Devuelve un duplicado del actual <see cref="T:System.Web.UI.WebControls.CookieParameter" /> instancia.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.WebControls.CookieParameter" /> que es un duplicado exacto del actual.
+            </returns>
+    </member>
+    <member name=�0\� � �"M:System.Web.UI.WebControls.CookieParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)">
+      <summary>
+              Actualiza y devuelve el valor de la <see cref="T:System.Web.UI.WebControls.CookieParameter" /> objeto.
+            </summary>
+      <param name="context">
+                Actual <see cref="T:System.Web.HttpContext" /> de la solicitud.
+              </param>
+      <param name="control">
+                Un <see cref="T:System.Web.UI.Control" /> que está asociado a la página de formularios Web Forms donde el <see cref="T:System.Web.UI.WebControls.CookieParameter" /> se utiliza.
+              </param>
+      <returns>
+              Objeto que representa el valor actualizado y actual del parámetro.
+               Si el contexto o la solicitud es <see langword="null" />, el <see cref="M:System.Web.UI.WebControls.CookieParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" /> método devuelve null.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserErrorEventArgs.#ctor(System.Web.Security.MembershipCreateStatus)">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CreateUserErrorEventArgs" />.
+            </summary>
+      <param name="s">
+                Un <see cref="T:System.Web.Security.MembershipCreateStatus" /> objeto que describe el resultado de una <see cref="Overload:System.Web.Security.Membership.CreateUser" /> intento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.CreateChildControls">
+      <summary>
+              Llamado por el marco de la página ASP.NET para notificar a este control para que se creen los controles secundarios que contiene en preparación para devolverlos o procesarlos.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.GetDesignModeState">
+      <summary>
+              Obtiene los datos de tiempo de diseño para un control.
+            </summary>
+      <returns>
+              Ninguna
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.LoadViewState(System.Object)">
+      <summary>
+              Restaura la información de estado de vista desde una solicitud de página anterior guardada por el método SaveViewState.
+            </summary>
+      <param name="savedState">
+                Objeto que representa el estado del control que se va a restaurar.
+              </param>
+      <exception cref="T:System.ArgumentException">
+                  <paramref name="savedState" /> no es un <see cref="P:System.Web.UI.Control.ViewState" /> válido.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnBubbleEvent(System.Object,System.EventArgs)">
+      <summary>
+              Determina si el evento del control de servidor se pasa a la jerarquía de control de servidor de la interfaz de usuario (UI) de la página.
+            </summary>
+      <param name="source">
+                 Ninguna
+              </param>
+      <param name="e">
+                 Ninguna
+              </param>
+      <returns>
+              Valor Boolean.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnContinueButtonClick(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" /> evento cuando el usuario hace clic en el continuar botón en el paso de creación de cuentas de usuario final.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatedUser(System.EventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.CreatedUser" /> evento después de que el proveedor de pertenencia cree la cuenta de usuario.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnCreateUserError(System.Web.UI.WebControls.CreateUserErrorEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.CreateUserError" /> eventos cuando hay un problema al crear la cuenta de usuario especificada.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.CreateUserErrorEventArgs" /> con los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatingUser(System.Web.UI.WebControls.LoginCancelEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.CreatingUser" /> evento antes de llamar al proveedor de pertenencia para crear la nueva cuenta de usuario.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnNextButtonClick(System.Web.UI.WebControls.WizardNavigationEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.Wizard.NextButtonClick" />.
+            </summary>
+      <param name="e">
+                <see cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnPreRender(System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.Control.PreRender" />.
+            </summary>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+      <exception cref="T:System.Web.HttpException">
+                  No se puede encontrar el proveedor de pertenencia para la página.
+                   Para obtener más información, consulta <see cref="P:System.Web.Security.Membership.Providers" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnSendingMail(System.Web.UI.WebControls.MailMessageEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.SendingMail" /> evento antes de que se envía un mensaje de correo electrónico a un usuario nuevo.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)">
+      <summary>
+              Genera el <see cref="E:System.Web.UI.WebControls.CreateUserWizard.SendMailError" /> evento cuando no se puede enviar correo electrónico al nuevo usuario.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.SaveViewState">
+      <summary>
+              Guarda cualquier estado que se modificó después que el <see cref="M:System.Web.UI.WebControls.Style.TrackViewState" /> se invocó el método.
+            </summary>
+      <returns>
+              Objeto que contiene el estado de vista actual del control; en caso contrario, <see langword="null" /> si no hay ningún estado de vista asociado al control.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.SetDesignModeState(System.Collections.IDictionary)">
+      <summary>
+              Establece los datos en tiempo de diseño para un control.
+            </summary>
+      <param name="data">
+                <see cref="T:System.Collections.IDictionary" /> que contiene los datos en tiempo de diseño del control.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizard.TrackViewState">
+      <summary>
+              Marca el punto de partida para comenzar el seguimiento de cambios en el control como parte del estado de vista del control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreateUserWizardStep.#ctor">
+      <summary>
+              Crea una nueva instancia de la <see cref="T:System.Web.UI.WebControls.CreateUserWizardStep" /> control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CreatingModelDataSourceEventArgs.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CreatingModelDataSourceEventArgs" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CustomValidator.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.CustomValidator" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CustomValidator.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega las propiedades de la <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control en el flujo de salida para representar en el cliente.
+            </summary>
+      <param name="writer">
+                <see cref="T:System.Web.UI.HtmlTextWriter" /> que contiene el flujo de salida que se representará en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CustomValidator.ControlPropertiesValid">
+      <summary>
+              Comprueba las propiedades del control para valores válidos.
+            </summary>
+      <returns>
+              <see langword="true" /> si las propiedades del control son válidas; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CustomValidator.EvaluateIsValid">
+      <summary>
+              Reemplaza el método <see cref="M:System.Web.UI.MobileControls.BaseValidator.EvaluateIsValid" />.
+            </summary>
+      <returns>
+              <see langword="true" /> si el valor del control de entrada es válido; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.CustomValidator.OnServerValidate(System.String)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> para el control <see cref="T:System.Web.UI.WebControls.CustomValidator" />.
+            </summary>
+      <param name="value">
+                Valor que se va a validar.
+              </param>
+      <returns>
+              <see langword="true" /> si el valor especificado por el parámetro <paramref name="value" /> pasa la validación; en caso contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.#ctor">
+      <summary>
+              Inicializa la <see cref="T:System.Web.UI.WebControls.DataBoundControl" /> clase para su uso por una instancia de la clase heredada.
+               A este constructor solo lo puede llamar una clase heredada.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.CreateDataSourceSelectArguments">
+      <summary>
+              Crea un valor predeterminado <see cref="T:System.Web.UI.DataSourceSelectArguments" /> objeto utilizado por el control enlazado a datos si no se especifica ningún argumento.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.DataSourceSelectArguments" /> inicializado en <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.GetData">
+      <summary>
+              Recupera un <see cref="T:System.Web.UI.DataSourceView" /> que el control enlazado a datos se utiliza para realizar operaciones de datos de objeto.
+            </summary>
+      <returns>
+              El <see cref="T:System.Web.UI.DataSourceView" /> que el control enlazado a datos se utiliza para realizar operaciones de datos.
+               Si el <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" /> establece la propiedad, un determinado, denominado <see cref="T:System.Web.UI.DataSourceView" /> devuelto; de lo contrario, el valor predeterminado <see cref="T:System.Web.UI.DataSourceView" /> se devuelve.
+            </returns>
+      <exception cref="T:System.InvalidOperationException">
+                  Tanto el <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> y <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> se establecen propiedades.
+                
+                  o bien
+                
+                  El <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" /> se establece la propiedad, pero un <see cref="T:System.Web.UI.DataSourceView" /> objeto por ese nombre no existe.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.GetDataSource">
+      <summary>
+              Recupera el <see cref="T:System.Web.UI.IDataSource" /> interfaz que está asociado el control enlazado a datos, si existe.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.IDataSource" /> que representa el origen de datos identificado por <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />.
+            </returns>
+      <exception cref="T:System.Web.HttpException">
+                  El control identificado por la <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" /> propiedad no existe en el contenedor actual.
+                
+                  o bien
+                
+                  El control identificado por la <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" /> propiedad no implementa la <see cref="T:System.Web.UI.IDataSource" /> interfaz.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.LoadViewState(System.Object)">
+      <summary>
+              Restaura la información de estado de vista de una solicitud de página anterior guardada por el <see cref="M:System.Web.UI.WebControls.DataBoundControl.SaveViewState" /> (método).
+            </summary>
+      <param name="savedState">
+                Objeto que representa el estado de vista para restaurar.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.MarkAsDataBound">
+      <summary>
+              Establece el estado del control en estado de vista como correctamente enlazado a datos.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.OnCreatingModelDataSource(System.Web.UI.WebControls.CreatingModelDataSourceEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataBoundControl.CreatingModelDataSource" />.
+            </summary>
+      <param name="e">
+                Un objeto que proporciona acceso a la <see cref="T:System.Web.UI.WebControls.ModelDataSource" /> objeto que se va a crear.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.OnDataPropertyChanged">
+      <summary>
+              Vuelve a enlazar el control enlazado a datos a sus datos después de que uno de la base de datos de origen de cambios de propiedades de identificación.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.OnDataSourceViewChanged(System.Object,System.EventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />.
+            </summary>
+      <param name="sender">
+                El origen del evento, el <see cref="T:System.Web.UI.DataSourceView" />.
+              </param>
+      <param name="e">
+                <see cref="T:System.EventArgs" /> que contiene datos de eventos.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.OnLoad(System.EventArgs)">
+      <summary>
+              Controla el <see cref="E:System.Web.UI.Control.Load" /> eventos.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.EventArgs" /> objeto que contiene datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)">
+      <summary>
+              Establece el estado inicializado del control enlazado a datos antes de cargar el control.
+            </summary>
+      <param name="sender">
+                <see cref="T:System.Web.UI.Page" /> que provocó el evento.
+              </param>
+      <param name="e">
+                Objeto <see cref="T:System.EventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.PerformDataBinding(System.Collections.IEnumerable)">
+      <summary>
+              Cuando se invalida en una clase derivada, enlaza los datos del origen de datos al control.
+            </summary>
+      <param name="data">
+                El <see cref="T:System.Collections.IEnumerable" /> lista de datos devueltos desde un <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" /> llamada al método.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect">
+      <summary>
+              Recupera los datos del origen de datos asociado.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.SaveViewState">
+      <summary>
+              Guarda los cambios de estado de vista que se han producido desde la hora en que se devolvió la página al servidor.
+            </summary>
+      <returns>
+              Estado de vista actual del control.
+               Si no hay ningún estado de vista asociado al control, este método devuelve <see langword="null" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.TrackViewState">
+      <summary>
+              Hace que los cambios de estado de vista en el control que se va a realizar un seguimiento para que puedan almacenarse en el control <see cref="T:System.Web.UI.StateBag" /> objeto.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataBoundControl.ValidateDataSource(System.Object)">
+      <summary>
+              Comprueba que el objeto al que se enlaza un control enlazado a datos es compatible con.
+            </summary>
+      <param name="dataSource">
+                Un objeto establecido en el <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> propiedad.
+              </param>
+      <exception cref="T:System.InvalidOperationException">
+                  El objeto pasado por la <paramref name="dataSource" /> parámetro no es <see langword="null" /> o un tipo reconocido.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.CloneField">
+      <summary>
+              Crea una copia duplicada de actual <see cref="T:System.Web.UI.WebControls.DataControlField" />-objeto derivado.
+            </summary>
+      <returns>
+              Una copia duplicada de actual <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.CopyProperties(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Copia las propiedades del objeto <see cref="T:System.Web.UI.WebControls.DataControlField" />-objeto derivado especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="newField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a copiar las propiedades del objeto <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.CreateField">
+      <summary>
+              Cuando se invalida en una clase derivada, crea una cadena vacía <see cref="T:System.Web.UI.WebControls.DataControlField" />-objeto derivado.
+            </summary>
+      <returns>
+              Una cadena vacía <see cref="T:System.Web.UI.WebControls.DataControlField" />-objeto derivado.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.ExtractValuesFromCell(System.Collections.Specialized.IOrderedDictionary,System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlRowState,System.Boolean)">
+      <summary>
+              Extrae el valor del campo de control de datos de la celda de la tabla actual y agrega el valor especificado <see cref="T:System.Collections.IDictionary" /> colección.
+            </summary>
+      <param name="dictionary">
+                Interfaz <see cref="T:System.Collections.Specialized.IOrderedDictionary" />.
+              </param>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que contiene el texto o los controles de la <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+              </param>
+      <param name="rowState">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlRowState" />.
+              </param>
+      <param name="includeReadOnly">
+                <see langword="true" /> para indicar que se incluyen los valores de los campos de solo lectura en el <paramref name="dictionary" /> colección; en caso contrario, <see langword="false" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)">
+      <summary>
+              Realiza la inicialización de la instancia básica para un campo de control de datos.
+            </summary>
+      <param name="sortingEnabled">
+                Un valor que indica si el control admite la ordenación de columnas de datos.
+              </param>
+      <param name="control">
+                El control de datos que posee el <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+              </param>
+      <returns>
+              Siempre devuelve <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)">
+      <summary>
+              Agrega texto o controles a la colección de controles de una celda.
+            </summary>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> que contiene el texto o los controles de la <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+              </param>
+      <param name="cellType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.DataControlCellType" />.
+              </param>
+      <param name="rowState">
+                Uno de los <see cref="T:System.Web.UI.WebControls.DataControlRowState" /> valores que especifica el estado de la fila que contiene el <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />.
+              </param>
+      <param name="rowIndex">
+                El índice de la fila que la <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> se encuentra en.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.LoadViewState(System.Object)">
+      <summary>
+              Restaura la vista de origen de datos guardó previamente.
+            </summary>
+      <param name="savedState">
+                Un objeto que representa el <see cref="T:System.Web.UI.WebControls.DataControlField" /> estado de restauración.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.OnFieldChanged">
+      <summary>
+              Genera el evento <see langword="FieldChanged" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.SaveViewState">
+      <summary>
+              Guarda los cambios realizados en el <see cref="T:System.Web.UI.WebControls.DataControlField" /> vista estado desde el momento en que se devolvió la página al servidor.
+            </summary>
+      <returns>
+              El objeto que contiene los cambios a la <see cref="T:System.Web.UI.WebControls.DataControlField" /> el estado de vista.
+               Si no hay ningún estado de vista asociado al objeto, este método devuelve <see langword="null" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.System#Web#UI#IStateManager#LoadViewState(System.Object)">
+      <summary>
+              Restaura el estado de vista guardado previamente del campo de control de datos.
+            </summary>
+      <param name="state">
+                <see cref="T:System.Object" /> que contiene los valores del estado de vista guardados del control.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.System#Web#UI#IStateManager#SaveViewState">
+      <summary>
+              Guarda los cambios realizados en el <see cref="T:System.Web.UI.WebControls.DataControlField" /> vista estado desde el momento en que se devolvió la página al servidor.
+            </summary>
+      <returns>
+              <see cref="T:System.Object" /> que contiene los valores del estado de vista guardados del control.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.System#Web#UI#IStateManager#TrackViewState">
+      <summary>
+              Hace que la <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto para realizar el seguimiento de cambios a su estado de vista para que puedan almacenarse en el control <see cref="P:System.Web.UI.WebControls.DataControlField.ViewState" /> propiedad y conserven en distintas solicitudes de la misma página.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.ToString">
+      <summary>
+              Devuelve una cadena que representa esta <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <returns>
+              Cadena que representa esta <see cref="T:System.Web.UI.WebControls.DataControlField" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.TrackViewState">
+      <summary>
+              Hace que la <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto para realizar el seguimiento de cambios a su estado de vista para que puedan almacenarse en el control <see cref="P:System.Web.UI.WebControls.DataControlField.ViewState" /> propiedad y conserven en distintas solicitudes de la misma página.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlField.ValidateSupportsCallback">
+      <summary>
+              Cuando se invalida en una clase derivada, indica que los controles contenidos en un campo admite devoluciones de llamada.
+            </summary>
+      <exception cref="T:System.NotSupportedException">
+                  Se llama al método en una instancia predeterminada de la <see cref="T:System.Web.UI.WebControls.DataControlField" /> clase.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCell.#ctor(System.Web.UI.HtmlTextWriterTag,System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> clase, estableciendo especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto como contenedor de la celda.
+            </summary>
+      <param name="tagKey">
+                Un <see cref="T:System.Web.UI.HtmlTextWriterTag" /> que especifica la etiqueta HTML que se representan por la celda.
+                 La etiqueta predeterminada utilizada por la <see cref="T:System.Web.UI.WebControls.TableCell" /> clase es <see cref="F:System.Web.UI.HtmlTextWriterTag.Td" />.
+              </param>
+      <param name="containingField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que contiene la celda actual.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCell.#ctor(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" /> clase, estableciendo especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto como contenedor de la celda.
+            </summary>
+      <param name="containingField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que contiene la celda actual.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.Add(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Anexa el texto especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto al final de la colección.
+            </summary>
+      <param name="field">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> para anexar a la colección.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.CloneFields">
+      <summary>
+              Crea una copia de la colección actual.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> que contiene una copia de cada campo de control de datos en la colección actual.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.Contains(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Determina si el <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección contiene un determinado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto.
+            </summary>
+      <param name="field">
+                <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a buscar en <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />.
+              </param>
+      <returns>
+              <see langword="true" /> Si el <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> contiene los valores especificados campo; en caso-�� � � contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.CopyTo(System.Web.UI.WebControls.DataControlField[],System.Int32)">
+      <summary>
+              Copia todo el <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección compatibles unidimensionales <see cref="T:System.Array" />, empezando en el índice especificado de la matriz de destino.
+            </summary>
+      <param name="array">
+                <see cref="T:System.Array" /> unidimensional que constituye el destino de los elementos copiados de <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />.
+                 La matriz <see cref="T:System.Array" /> debe tener una indización de base cero.
+              </param>
+      <param name="index">
+                Índice de base cero en la <paramref name="array" /> donde comienza la copia.
+              </param>
+      <exception cref="T:System.ArgumentNullException">
+                  El valor de <paramref name="array" /> es <see langword="null" />.
+                </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+                  <paramref name="index" /> es menor que cero.
+                </exception>
+      <exception cref="T:System.ArgumentException">
+                  <paramref name="array" /> es multidimensional.
+                
+                  O bien
+                
+                  El número de campos del origen de <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección es mayor que el espacio disponible desde <paramref name="index" /> hasta el final de la matriz de destino.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.IndexOf(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Determina el índice de un determinado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto de la colección.
+            </summary>
+      <param name="field">
+                <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a buscar en la colección.
+              </param>
+      <returns>
+              El índice de la <paramref name="field" /> parámetro, si se encuentra en la colección; en caso contrario, -1.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.Insert(System.Int32,System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Inserta el objeto <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto en el <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección en el índice especificado.
+            </summary>
+      <param name="index">
+                Índice de base cero en el que el <see cref="T:System.Web.UI.WebControls.DataControlField" /> se inserta.
+              </param>
+      <param name="field">
+                <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a insertar.
+              </param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+                  <paramref name="index" /> es menor que 0.
+                
+                  o bien
+                
+                  <paramref name="index" /> es mayor que <see cref="P:System.Web.UI.StateManagedCollection.Count" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.Remove(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Quita <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto desde el <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección.
+            </summary>
+      <param name="field">
+                <see cref="T:System.Web.UI.WebControls.DataControlField" /> que se va a quitar de <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldCollection.RemoveAt(System.Int32)">
+      <summary>
+              Quita la <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto en el índice especificado de la <see cref="T:System.Web.UI.WebControls.DataControlFieldCollection" /> colección.
+            </summary>
+      <param name="index">
+                El índice de la <see cref="T:System.Web.UI.WebControls.DataControlField" /> para quitar.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldHeaderCell.#ctor(System.Web.UI.WebControls.DataControlField)">
+      <summary>
+              Inicializa una nueva instancia de la <see cref="T:System.Web.UI.WebControls.DataControlFieldHeaderCell" /> clase, estableciendo especificado <see cref="T:System.Web.UI.WebControls.DataControlField" /> objeto como contenedor de la celda.
+            </summary>
+      <param name="containingField">
+                El <see cref="T:System.Web.UI.WebControls.DataControlField" /> que contiene la celda actual.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataControlFieldHeaderCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+      <summary>
+              Agrega información sobre la celda de tabla a la lista de atributos para representar.
+            </summary>
+      <param name="writer">
+                Un <see cref="T:System.Web.UI.HtmlTextWriter" /> que representa el flujo de salida que representa el contenido HTML en el cliente.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.CreateColumnSet(System.Web.UI.WebControls.PagedDataSource,System.Boolean)">
+      <summary>
+              Crea el conjunto de columnas que se usarán para generar la jerarquía de controles.
+               Cuando <see cref="P:System.Web.UI.WebControls.DataGrid.AutoGenerateColumns" /> es true, las columnas se crean para que coincida con el origen de datos y se anexan al conjunto de columnas definidas en el <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" /> colección.
+            </summary>
+      <param name="dataSource">
+                El origen de datos que se utiliza para crear la jerarquía de controles 
+              </param>
+      <param name="useDataSource">
+                Si se utiliza el origen de datos para generar columnas automáticamente o utilizar el estado guardado.
+              </param>
+      <returns>
+              Un <see cref="T:System.Collections.ArrayList" /> que contiene el conjunto efectivo de columnas en el orden correcto.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.CreateControlHierarchy(System.Boolean)">
+      <summary>
+              Crea la jerarquía de controles que se usa para representar el <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+            </summary>
+      <param name="useDataSource">
+                Si se utiliza el origen de datos para generar columnas automáticamente o utilizar el estado guardado.
+              </param>
+      <exception cref="T:System.Web.HttpException">
+                  <paramref name="useDataSource" /> es <see langword="true" />, el valor de <see cref="P:System.Web.UI.WebControls.DataGrid.VirtualItemCount" /> no está establecida, y el origen de datos seleccionado no implementa la <see cref="T:System.Collections.ICollection" /> interfaz.
+                
+                  o bien
+                
+                  <paramref name="useDataSource" /> es <see langword="true" /> y el origen de datos no es válido <see cref="P:System.Web.UI.WebControls.PagedDataSource.CurrentPageIndex" /> propiedad.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.CreateControlStyle">
+      <summary>
+              Crea el nuevo estilo del control.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Web.UI.WebControls.Style" /> representa el nuevo estilo.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.CreateItem(System.Int32,System.Int32,System.Web.UI.WebControls.ListItemType)">
+      <summary>
+              Crea un objeto <see cref="T:System.Web.UI.WebControls.DataGridItem" />.
+            </summary>
+      <param name="itemIndex">
+                El índice de la <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objeto.
+              </param>
+      <param name="dataSourceIndex">
+                El índice del elemento de datos del origen de datos.
+              </param>
+      <param name="itemType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+      <returns>
+              Objeto <see cref="T:System.Web.UI.WebControls.DataGridItem" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.InitializeItem(System.Web.UI.WebControls.DataGridItem,System.Web.UI.WebControls.DataGridColumn[])">
+      <summary>
+              Inicializa especificado <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objeto.
+            </summary>
+      <param name="item">
+                <see cref="T:System.Web.UI.WebControls.DataGridItem" /> que se va a inicializar.
+              </param>
+      <param name="columns">
+                Una matriz de <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> objetos que contiene las columnas en este <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.InitializePager(System.Web.UI.WebControls.DataGridItem,System.Int32,System.Web.UI.WebControls.PagedDataSource)">
+      <summary>
+              Crea un <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objeto que contiene la interfaz de usuario de paginación.
+            </summary>
+      <param name="item">
+                El <see cref="T:System.Web.UI.WebControls.DataGridItem" /> que contiene el elemento de paginación.
+              </param>
+      <param name="columnSpan">
+                El número de columnas que abarcan el localizador.
+              </param>
+      <param name="pagedDataSource">
+                Un <see cref="T:System.Web.UI.WebControls.PagedDataSource" /> que contiene las propiedades del elemento de paginación.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.LoadViewState(System.Object)">
+      <summary>
+              Carga el estado guardado de la <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+            </summary>
+      <param name="savedState">
+                Un estado guardado de la <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnBubbleEvent(System.Object,System.EventArgs)">
+      <summary>
+              Pasa el evento provocado por un control del contenedor hasta la jerarquía de controles de servidor de interfaz de usuario de la página.
+            </summary>
+      <param name="source">
+                Origen del evento.
+              </param>
+      <param name="e">
+                <see cref="T:System.EventArgs" /> que contiene datos de eventos.
+              </param>
+      <returns>
+              <see langword="true" /> para indicar que este método está pasando un evento provocado por un control del contenedor hasta la jerarquía de controles de servidor de interfaz de usuario de la página; de lo contrario, <see langword="false" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnCancelCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnDeleteCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnEditCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnItemCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnItemCreated(System.Web.UI.WebControls.DataGridItemEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.ItemCreated" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnItemDataBound(System.Web.UI.WebControls.DataGridItemEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.ItemDataBound" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridItemEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnPageIndexChanged(System.Web.UI.WebControls.DataGridPageChangedEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnSortCommand(System.Web.UI.WebControls.DataGridSortCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.SortCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridSortCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.OnUpdateCommand(System.Web.UI.WebControls.DataGridCommandEventArgs)">
+      <summary>
+              Genera el evento <see cref="E:System.Web.UI.WebControls.DataGrid.UpdateCommand" />.
+               Esto permite incluir un control personalizado para el evento.
+            </summary>
+      <param name="e">
+                Un <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> que contiene los datos del evento.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.PrepareControlHierarchy">
+      <summary>
+              Establece la jerarquía de control para este <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.SaveViewState">
+      <summary>
+              Guarda el estado actual de la <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+            </summary>
+      <returns>
+              El estado guardado de la <see cref="T:System.Web.UI.WebControls.DataGrid" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGrid.TrackViewState">
+      <summary>
+              Marca el punto de partida para comenzar el seguimiento y guardar cambios en el control como parte del estado de vista del control.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.#ctor">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.DataGridColumn" />.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.Initialize">
+      <summary>
+              Proporciona la implementación base para restablecer una columna derivada de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> clase a su estado inicial.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+      <summary>
+              Proporciona la implementación base para restablecer la celda especificada de una columna derivada de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> clase a su estado inicial.
+            </summary>
+      <param name="cell">
+                Un <see cref="T:System.Web.UI.WebControls.TableCell" /> que representa la celda para restablecer.
+              </param>
+      <param name="columnIndex">
+                El número de columna donde se encuentra la celda.
+              </param>
+      <param name="itemType">
+                Uno de los valores de <see cref="T:System.Web.UI.WebControls.ListItemType" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.LoadViewState(System.Object)">
+      <summary>
+              Carga el estado de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> objeto.
+            </summary>
+      <param name="savedState">
+                Un <see cref="T:System.Object" /> que contiene el estado guardado de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.OnColumnChanged">
+      <summary>
+              Llamadas del <see cref="M:System.Web.UI.Design.WebControls.DataGridDesigner.OnColumnsChanged" /> (método).
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.SaveViewState">
+      <summary>
+              Guarda el estado actual de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> objeto.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Object" /> que contiene el estado guardado de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.System#Web#UI#IStateManager#LoadViewState(System.Object)">
+      <summary>
+              Carga el estado guardado anteriormente.
+            </summary>
+      <param name="state">
+                Un <see cref="T:System.Object" /> que representa el <see cref="T:System.Web.UI.WebControls.DataGridColumn" /> objeto que se va a restaurar.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.System#Web#UI#IStateManager#SaveViewState">
+      <summary>
+              Devuelve un objeto que contiene los cambios de estado.
+            </summary>
+      <returns>
+              <see cref="T:System.Object" /> que contiene los cambios de estado de la vista.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.System#Web#UI#IStateManager#TrackViewState">
+      <summary>
+              Inicia el seguimiento de cambios de estado.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.ToString">
+      <summary>
+              Devuelve la representación de cadena de la columna.
+            </summary>
+      <returns>
+              Devuelve <see cref="F:System.String.Empty" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumn.TrackViewState">
+      <summary>
+              Hace el seguimiento de cambios de estado de vista para el control de servidor para que puedan almacenarse en el control de servidor <see cref="T:System.Web.UI.StateBag" /> objeto.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.#ctor(System.Web.UI.WebControls.DataGrid,System.Collections.ArrayList)">
+      <summary>
+              Inicializa una nueva instancia de la clase <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+            </summary>
+      <param name="owner">
+                El <see cref="T:System.Web.UI.WebControls.DataGrid" /> control que corresponde a esta colección.
+              </param>
+      <param name="columns">
+                Un <see cref="T:System.Collections.ArrayList" /> que almacena la colección de columnas.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.Add(System.Web.UI.WebControls.DataGridColumn)">
+      <summary>
+              Anexa el texto especificado <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objeto de columna derivado al final de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección.
+            </summary>
+      <param name="column">
+                El <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-derivadas objeto column para anexar a la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.AddAt(System.Int32,System.Web.UI.WebControls.DataGridColumn)">
+      <summary>
+              Inserta un <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-columna objeto derivado de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> la colección en el índice especificado.
+            </summary>
+      <param name="index">
+                La ubicación de índice en el <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> en el que se va a insertar el <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-columna derivada.
+              </param>
+      <param name="column">
+                El <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-derivados de la columna que se va a insertar en el <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+              </param>
+      <exception cref="T:System.ArgumentNullException">
+                  El valor de <paramref name="column" /> es <see langword="null" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.Clear">
+      <summary>
+              Todos los quita <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objetos column derivados de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección.
+            </summary>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.CopyTo(System.Array,System.Int32)">
+      <summary>
+              Copia los elementos de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección especificado <see cref="T:System.Array" />, empezando en el índice especificado en el <see cref="T:System.Array" />.
+            </summary>
+      <param name="array">
+                Basado en cero <see cref="T:System.Array" /> que recibe los elementos copiados de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+              </param>
+      <param name="index">
+                La primera posición de la manera especificada <see cref="T:System.Array" /> que recibe el contenido copiado.
+              </param>
+      <exception cref="T:System.ArgumentNullException">
+                  El valor de <paramref name="array" /> es <see langword="null" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.GetEnumerator">
+      <summary>
+              Devuelve un <see cref="T:System.Collections.IEnumerator" /> interfaz que contiene todos los <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objetos de columna derivados el <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección.
+            </summary>
+      <returns>
+              Un <see cref="T:System.Collections.IEnumerator" /> interfaz que contiene todos los <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objetos de columna derivados del <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.IndexOf(System.Web.UI.WebControls.DataGridColumn)">
+      <summary>
+              Devuelve el índice de <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objeto column derivado de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección.
+            </summary>
+      <param name="column">
+                El <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-derivados de la columna que se va a buscar en la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+              </param>
+      <returns>
+              La posición de índice del elemento <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-column derivado del <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+               El valor predeterminado es <see langword="-1" />, lo que indica que el especificado <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-no se encuentra el objeto derivado.
+            </returns>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.Remove(System.Web.UI.WebControls.DataGridColumn)">
+      <summary>
+              Quita <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objeto column derivado de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> colección.
+            </summary>
+      <param name="column">
+                El <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-derivados de la columna que se va a quitar de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />.
+              </param>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.RemoveAt(System.Int32)">
+      <summary>
+              Quita un <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-objeto column derivado de la <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> la colección en el índice especificado.
+            </summary>
+      <param name="index">
+                El índice de la <see cref="T:System.Web.UI.WebControls.DataGridColumn" />-column derivado del <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" /> para quitar.
+              </param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+                  <paramref name="index" /> es menor que <see langword="0" /> o mayor que <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.Count" />.
+                </exception>
+    </member>
+    <member name="M:System.Web.UI.WebControls.DataGridColumnCollection.System#Web#UI#IStateManager#LoadViewState(System.Object)">
+      <summary>
+              Carga el estado guardado anteriormente.
+            </summary>
+      <param name="savedState">
+                <see cref="T:System.Object" /> que contiene los valores del estado de vista guardados del control.
+          

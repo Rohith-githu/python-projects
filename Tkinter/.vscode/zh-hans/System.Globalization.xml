@@ -1,0 +1,1158 @@
+group:"navigation",order:98,when:t.TimelineFollowActiveEditorContext})),this._register(P.MenuRegistry.appendMenuItem(P.MenuId.TimelineTitle,{command:{id:"timeline.toggleFollowActiveEditor",title:{value:i.localize(13,null),original:"Unpin the Current Timeline"},icon:{id:"codicon/pinned"},category:{value:i.localize(14,null),original:"Timeline"}},group:"navigation",order:98,when:t.TimelineFollowActiveEditorContext.toNegated()})),this._register(n.onDidChangeProviders(()=>this.updateTimelineSourceFilters())),this.updateTimelineSourceFilters()}getItemActions(e){return this.getActions(P.MenuId.TimelineItemContext,{key:"timelineItem",value:e.contextValue}).primary}getItemContextActions(e){return this.getActions(P.MenuId.TimelineItemContext,{
+key:"timelineItem",value:e.contextValue}).secondary}getActions(e,t){const i=this.contextKeyService.createScoped();i.createKey("view",this.pane.id),i.createKey(t.key,t.value);const n=this.menuService.createMenu(e,i),o={primary:[],secondary:[]};return N.createAndFillInContextMenuActions(n,{shouldForwardArgs:!0},o,this.contextMenuService,e=>/^inline/.test(e)),n.dispose(),i.dispose(),o}updateTimelineSourceFilters(){var e;this.sourceDisposables.clear();const t=new Set(null!==(e=this.configurationService.getValue("timeline.excludeSources"))&&void 0!==e?e:[]);for(const e of this.timelineService.getSources())this.sourceDisposables.add(P.registerAction2(class extends P.Action2{constructor(){super({id:`timeline.toggleExcludeSource:${e.id}`,title:{value:i.localize(15,null,e.label),original:`Include: ${e.label}`},category:{value:i.localize(16,null),original:"Timeline"},menu:{id:P.MenuId.TimelineTitle,group:"2_sources"},
+toggled:w.ContextKeyExpr.regex("config.timeline.excludeSources",new RegExp(`\\b${f.escapeRegExpCharacters(e.id)}\\b`)).negate()})}run(i,...n){t.has(e.id)?t.delete(e.id):t.add(e.id),i.get(E.IConfigurationService).updateValue("timeline.excludeSources",[...t.keys()])}}))}};return e=o([a(1,x.ITimelineService),a(2,E.IConfigurationService),a(3,w.IContextKeyService),a(4,P.IMenuService),a(5,y.IContextMenuService)],e)})()})),define(e[2126],t([0,1,1398,88,30,15,46,398,378,1717,2125,56,9,21,31,102,190]),(function(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.TimelinePaneDescriptor=void 0;class v{constructor(){this.id=l.TimelinePaneId,this.name=d.TimelinePane.TITLE,this.containerIcon="codicon-history",this.ctorDescriptor=new n.SyncDescriptor(d.TimelinePane),this.order=2,this.weight=30,this.collapsed=!0,this.canToggleVisibility=!0,this.hideByDefault=!1,this.canMoveView=!0,this.focusCommand={id:"timeline.focus"}}}var S;t.TimelinePaneDescriptor=v,
+s.Registry.as(h.Extensions.Configuration).registerConfiguration({id:"timeline",order:1001,title:i.localize(0,null),type:"object",properties:{"timeline.excludeSources":{type:"array",description:i.localize(1,null),default:null},"timeline.pageSize":{type:"number",markdownDescription:i.localize(2,null),default:null},"timeline.pageOnScroll":{type:"boolean",description:i.localize(3,null),default:!1}}}),s.Registry.as(r.Extensions.ViewsRegistry).registerViews([new v],a.VIEW_CONTAINER),function(e){e.ID="files.openTimeline",e.LABEL=i.localize(4,null),e.handler=function(){return(e,t)=>{return e.get(l.ITimelineService).setUri(t)}}}(S||(S={})),p.CommandsRegistry.registerCommand(S.ID,S.handler()),g.MenuRegistry.appendMenuItem(g.MenuId.ExplorerContext,{group:"4_timeline",order:1,command:{id:S.ID,title:S.LABEL,icon:{id:"codicon/history"}},when:u.ContextKeyExpr.and(m.ExplorerFolderContext.toNegated(),f.ResourceContextKey.HasResource)}),o.registerSingleton(l.ITimelineService,c.TimelineService,!0)})),
+define(e[2127],t([0,1,15,46,1408,88,711,5,150,21,9,8,19,12,216,17,79,44]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f,v,S,b){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.UserDataSyncViewContribution=void 0;let _=(()=>{let e=class{constructor(e,t,i){this.instantiationService=e,this.contextKeyService=t,this.userDataSyncService=i;const n=this.registerSyncViewContainer();this.registerBackupView(n,!0),this.registerBackupView(n,!1)}registerSyncViewContainer(){return i.Registry.as(n.Extensions.ViewContainersRegistry).registerViewContainer({id:"workbench.view.sync",name:s.localize(0,null),ctorDescriptor:new r.SyncDescriptor(S.ViewPaneContainer,["workbench.view.sync",{mergeViewWithContainerWhenSingleView:!0}]),icon:b.Codicon.sync.classNames,hideIfEmpty:!0},n.ViewContainerLocation.Sidebar)}registerBackupView(e,t){
+const o=`workbench.views.sync.${t?"remote":"local"}BackupView`,a=t?s.localize(1,null):s.localize(2,null),c=new u.RawContextKey(`showUserDataSync${t?"Remote":"Local"}BackupView`,!1),g=c.bindTo(this.contextKeyService),p=this.instantiationService.createInstance(l.TreeView,o,a);p.showCollapseAllAction=!0,p.showRefreshAction=!0;const m=p.onDidChangeVisibility(e=>{e&&!p.dataProvider&&(m.dispose(),p.dataProvider=new C(t,this.userDataSyncService))});i.Registry.as(n.Extensions.ViewsRegistry).registerViews([{id:o,name:a,ctorDescriptor:new r.SyncDescriptor(l.TreeViewPane),when:u.ContextKeyExpr.and(d.CONTEXT_SYNC_ENABLEMENT,c),canToggleVisibility:!0,canMoveView:!0,treeView:p,collapsed:!1,order:100}],e),h.registerAction2(class extends h.Action2{constructor(){super({id:`workbench.actions.showSync${t?"Remote":"Local"}BackupView`,title:t?{value:s.localize(3,null),original:"Show Remote Backup"}:{value:s.localize(4,null),original:"Show Local Backup"},category:{value:s.localize(5,null),original:"Preferences Sync"},menu:{
+id:h.MenuId.CommandPalette,when:d.CONTEXT_SYNC_ENABLEMENT}})}async run(e){const t=e.get(n.IViewDescriptorService),i=e.get(n.IViewsService);g.set(!0);const s=t.getViewContainerByViewId(o);if(s){const e=t.getViewContainerModel(s);if(e.activeViewDescriptors.some(e=>e.id===o))i.openView(o,!0);else{const t=e.onDidChangeActiveViewDescriptors(e=>{e.added.some(e=>e.id===o)&&(t.dispose(),i.openView(o,!0))})}}}}),this.registerActions(o)}registerActions(e){h.registerAction2(class extends h.Action2{constructor(){super({id:"workbench.actions.sync.resolveResource",title:s.localize(6,null),menu:{id:h.MenuId.ViewItemContext,when:u.ContextKeyExpr.and(u.ContextKeyEqualsExpr.create("view",e),u.ContextKeyExpr.regex("viewItem",/sync-resource-.*/i))}})}async run(e,t){const i=e.get(p.IEditorService);await i.openEditor({resource:g.URI.parse(t.$treeItemHandle)})}}),h.registerAction2(class extends h.Action2{constructor(){super({id:"workbench.actions.sync.commpareWithLocal",title:s.localize(7,null)})}async run(e,t){
+const i=e.get(p.IEditorService),{resource:n,comparableResource:o}=JSON.parse(t.$treeItemHandle);o?await i.openEditor({leftResource:g.URI.parse(n),rightResource:g.URI.parse(o),options:{preserveFocus:!0,revealIfVisible:!0}}):await i.openEditor({resource:g.URI.parse(n)})}})}};return e=o([a(0,c.IInstantiationService),a(1,u.IContextKeyService),a(2,d.IUserDataSyncService)],e)})();t.UserDataSyncViewContribution=_;class C{constructor(e,t){this.remote=e,this.userDataSyncService=t}async getChildren(e){if(!e)return d.ALL_SYNC_RESOURCES.map(e=>({handle:e,collapsibleState:n.TreeItemCollapsibleState.Collapsed,label:{label:v.uppercaseFirstLetter(e)},themeIcon:m.FolderThemeIcon}));const t=d.ALL_SYNC_RESOURCES.filter(t=>t===e.handle)[0];if(t){return(this.remote?await this.userDataSyncService.getRemoteSyncResourceHandles(t):await this.userDataSyncService.getLocalSyncResourceHandles(t)).map(({uri:e,created:i})=>({handle:e.toString(),collapsibleState:n.TreeItemCollapsibleState.Collapsed,label:{label:y(new Date(i))},
+description:f.fromNow(i,!0),resourceUri:e,resource:t,resourceHandle:{uri:e,created:i},contextValue:`sync-resource-${t}`}))}if(e.resourceHandle){return(await this.userDataSyncService.getAssociatedResources(e.resource,e.resourceHandle)).map(({resource:t,comparableResource:i})=>{const o=JSON.stringify({resource:t.toString(),comparableResource:null==i?void 0:i.toString()});return{handle:o,collapsibleState:n.TreeItemCollapsibleState.None,resourceUri:t,command:{id:"workbench.actions.sync.commpareWithLocal",title:"",arguments:[{$treeViewId:"",$treeItemHandle:o}]},contextValue:`sync-associatedResource-${e.resource}`}})}return[]}}function y(e){return e.toLocaleDateString()+" "+v.pad(e.getHours(),2)+":"+v.pad(e.getMinutes(),2)+":"+v.pad(e.getSeconds(),2)}})),define(e[2128],t([0,1,57,15,2030,2127]),(function(e,t,i,n,o,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const r=n.Registry.as(i.Extensions.Workbench);r.registerWorkbenchContribution(o.UserDataSyncWorkbenchContribution,2),
+r.registerWorkbenchContribution(s.UserDataSyncViewContribution,2)})),define(e[2129],t([0,1,4,38,11,35,1410,15,56,32,57,77,10,337,288,464,63,168,247,7,305,55,31,14,316,889]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w,E,I,x){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.WatermarkContribution=void 0;const k=C.$,D={text:l.localize(0,null),id:v.ShowAllCommandsAction.ID},T={text:l.localize(1,null),id:"workbench.action.quickOpen"},R={text:l.localize(2,null),id:f.OpenFileAction.ID,mac:!1},A={text:l.localize(3,null),id:f.OpenFolderAction.ID,mac:!1},M={text:l.localize(4,null),id:f.OpenFileFolderAction.ID,mac:!0},L={text:l.localize(5,null),id:"workbench.action.openRecent"},O={text:l.localize(6,null),id:m.GlobalNewUntitledFileAction.ID},N=n.assign({mac:!0},O),P={text:l.localize(7,null),id:"workbench.action.terminal.toggleTerminal"},F={text:l.localize(8,null),id:_.FindInFilesActionId},B={text:l.localize(9,null),id:b.StartAction.ID},V=[D,R,A,M,L,N],W=[D,T,F,B,P];let z=(()=>{
+let e=class extends i.Disposable{constructor(e,t,n,o,s,r){super(),this.lifecycleService=e,this.layoutService=t,this.keybindingService=n,this.contextService=o,this.configurationService=s,this.editorGroupsService=r,this.watermarkDisposable=this._register(new i.DisposableStore),this.workbenchState=o.getWorkbenchState(),this.enabled=this.configurationService.getValue("workbench.tips.enabled"),this.registerListeners(),this.enabled&&this.create()}registerListeners(){this.lifecycleService.onShutdown(this.dispose,this),this._register(this.configurationService.onDidChangeConfiguration(e=>{if(e.affectsConfiguration("workbench.tips.enabled")){const e=this.configurationService.getValue("workbench.tips.enabled");e!==this.enabled&&(this.enabled=e,this.enabled?this.create():this.destroy())}})),this._register(this.contextService.onDidChangeWorkbenchState(e=>{const t=this.workbenchState;this.workbenchState=this.contextService.getWorkbenchState(),this.enabled&&this.workbenchState!==t&&this.recreate()}))}create(){
+const e=I.assertIsDefined(this.layoutService.getContainer("workbench.parts.editor"));e.classList.add("has-watermark"),this.watermark=k(".watermark");const t=C.append(this.watermark,k(".watermark-box")),i=1!==this.workbenchState?W:V.filter(e=>!("mac"in e)||e.mac===s.isMacintosh).filter(e=>!!E.CommandsRegistry.getCommand(e.id)),n=()=>{C.clearNode(t),i.map(e=>{const i=C.append(t,k("dl"));C.append(i,k("dt")).textContent=e.text;const n=C.append(i,k("dd")),o=new y.KeybindingLabel(n,s.OS,{renderUnboundKeybindings:!0});o.set(this.keybindingService.lookupKeybinding(e.id)),n.innerHTML=o.element.outerHTML})};n(),C.prepend(e.firstElementChild,this.watermark),this.watermarkDisposable.add(this.keybindingService.onDidUpdateKeybindings(n)),this.watermarkDisposable.add(this.editorGroupsService.onDidLayout(t=>this.handleEditorPartSize(e,t))),this.handleEditorPartSize(e,this.editorGroupsService.contentDimension)}handleEditorPartSize(e,t){t.height<=478?C.addClass(e,"max-height-478px"):C.removeClass(e,"max-height-478px")}
+destroy(){if(this.watermark){this.watermark.remove();const e=this.layoutService.getContainer("workbench.parts.editor");e&&e.classList.remove("has-watermark"),this.watermarkDisposable.clear()}}recreate(){this.destroy(),this.create()}};return e=o([a(0,g.ILifecycleService),a(1,S.IWorkbenchLayoutService),a(2,r.IKeybindingService),a(3,h.IWorkspaceContextService),a(4,p.IConfigurationService),a(5,w.IEditorGroupsService)],e)})();t.WatermarkContribution=z,c.Registry.as(u.Extensions.Workbench).registerWorkbenchContribution(z,3),c.Registry.as(d.Extensions.Configuration).registerConfiguration(Object.assign(Object.assign({},x.workbenchConfigurationNodeBase),{properties:{"workbench.tips.enabled":{type:"boolean",default:!0,description:l.localize(10,null)}}}))})),define(e[491],t([0,1,7,6,4,11,29,25,12,154,708,286,55,19,69]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.WebviewEditor=void 0;let v=(()=>{let e=class e extends h.BaseEditor{constructor(t,i,o,r,a,l){
+super(e.ID,t,i,o),this._editorService=r,this._editorGroupsService=a,this._hostService=l,this._webviewVisibleDisposables=this._register(new s.DisposableStore),this._onFocusWindowHandler=this._register(new s.MutableDisposable),this._onDidFocusWebview=this._register(new n.Emitter)}get onDidFocus(){return this._onDidFocusWebview.event}get webview(){return this.input instanceof g.WebviewInput?this.input.webview:void 0}createEditor(e){const t=document.createElement("div");this._element=t,e.appendChild(t)}dispose(){this._element&&(this._element.remove(),this._element=void 0),super.dispose()}layout(e){this._dimension=e,this.webview&&this.synchronizeWebviewContainerDimensions(this.webview,e)}focus(){var e;super.focus(),this._onFocusWindowHandler.value||r.isWeb||(this._onFocusWindowHandler.value=this._hostService.onDidChangeFocus(e=>{e&&this._editorService.activeEditorPane===this&&this.focus()})),null===(e=this.webview)||void 0===e||e.focus()}setEditorVisible(e,t){
+this.input instanceof g.WebviewInput&&this.webview&&(e?this.claimWebview(this.input):this.webview.release(this)),super.setEditorVisible(e,t)}clearInput(){this.webview&&(this.webview.release(this),this._webviewVisibleDisposables.clear()),super.clearInput()}async setInput(e,t,i){if(e.matches(this.input))return;const n=e instanceof g.WebviewInput&&e.webview===this.webview;this.webview&&!n&&this.webview.release(this),await super.setInput(e,t,i),await e.resolve(),i.isCancellationRequested||e instanceof g.WebviewInput&&(this.group&&e.updateGroup(this.group.id),n||this.claimWebview(e),this._dimension&&this.layout(this._dimension))}claimWebview(e){e.webview.claim(this),this._element&&this._element.setAttribute("aria-flowto",e.webview.container.id),this._webviewVisibleDisposables.clear(),this._editorGroupsService instanceof u.EditorPart&&this._webviewVisibleDisposables.add(this._editorGroupsService.createEditorDropTarget(e.webview.container,{groupContainsPredicate:e=>{var t
+;return(null===(t=this.group)||void 0===t?void 0:t.id)===e.group.id}})),this._webviewVisibleDisposables.add(i.addDisposableListener(window,i.EventType.DRAG_START,()=>{var e;null===(e=this.webview)||void 0===e||e.windowDidDragStart()}));const t=()=>{var e;null===(e=this.webview)||void 0===e||e.windowDidDragEnd()};this._webviewVisibleDisposables.add(i.addDisposableListener(window,i.EventType.DRAG_END,t)),this._webviewVisibleDisposables.add(i.addDisposableListener(window,i.EventType.MOUSE_MOVE,e=>{0===e.buttons&&t()})),this.synchronizeWebviewContainerDimensions(e.webview),this._webviewVisibleDisposables.add(this.trackFocus(e.webview))}synchronizeWebviewContainerDimensions(e,t){this._element&&e.layoutWebviewOverElement(this._element.parentElement,t)}trackFocus(e){const t=new s.DisposableStore,n=i.trackFocus(e.container);return t.add(n),t.add(n.onDidFocus(()=>this._onDidFocusWebview.fire())),t.add(e.onDidFocus(()=>this._onDidFocusWebview.fire())),t}};return e.ID="WebviewEditor",
+e=o([a(0,c.ITelemetryService),a(1,d.IThemeService),a(2,l.IStorageService),a(3,m.IEditorService),a(4,p.IEditorGroupsService),a(5,f.IHostService)],e)})();t.WebviewEditor=v})),define(e[2130],t([0,1,88,30,15,146,57,47,1957,243,491,332,1953,1952]),(function(e,t,i,n,o,s,r,a,l,c,d,h,u){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),n.registerSingleton(c.ICustomEditorService,u.CustomEditorService),o.Registry.as(r.Extensions.Workbench).registerWorkbenchContribution(u.CustomEditorContribution,1),o.Registry.as(s.Extensions.Editors).registerEditor(s.EditorDescriptor.create(d.WebviewEditor,d.WebviewEditor.ID,"Webview Editor"),[new i.SyncDescriptor(h.CustomEditorInput)]),o.Registry.as(a.Extensions.EditorInputFactories).registerEditorInputFactory(l.CustomEditorInputFactory.ID,l.CustomEditorInputFactory),o.Registry.as(a.Extensions.EditorInputFactories).registerCustomEditorInputFactory(l.CustomEditorInputFactory)})),
+define(e[2131],t([0,1,1412,21,9,88,30,15,146,61,47,151,682,680,491,286,252]),(function(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),a.Registry.as(l.Extensions.Editors).registerEditor(l.EditorDescriptor.create(p.WebviewEditor,p.WebviewEditor.ID,i.localize(0,null)),[new s.SyncDescriptor(m.WebviewInput)]),a.Registry.as(d.Extensions.EditorInputFactories).registerEditorInputFactory(u.WebviewEditorInputFactory.ID,u.WebviewEditorInputFactory),r.registerSingleton(f.IWebviewWorkbenchService,f.WebviewEditorService,!0);const v=o.ContextKeyExpr.and(o.ContextKeyExpr.equals("activeEditor",p.WebviewEditor.ID),o.ContextKeyExpr.not("editorFocus"));n.registerAction2(class extends g.ShowWebViewEditorFindWidgetAction{constructor(){super(v)}}),n.registerAction2(class extends g.HideWebViewEditorFindCommand{constructor(){super(v)}}),n.registerAction2(class extends g.WebViewEditorFindNextCommand{constructor(){super(v)}}),
+n.registerAction2(class extends g.WebViewEditorFindPreviousCommand{constructor(){super(v)}}),n.registerAction2(class extends g.SelectAllWebviewEditorCommand{constructor(){super(v)}}),a.Registry.as(c.Extensions.WorkbenchActions).registerWorkbenchAction(n.SyncActionDescriptor.from(g.ReloadWebviewAction),"Reload Webviews",h.webviewDeveloperCategory)})),define(e[2132],t([0,1,11,21,9,30,15,61,151,491,683,1959]),(function(e,t,i,n,o,s,r,a,l,c,d,h){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),s.registerSingleton(l.IWebviewService,h.ElectronWebviewService,!0),r.Registry.as(a.Extensions.WorkbenchActions).registerWorkbenchAction(n.SyncActionDescriptor.from(d.OpenWebviewDeveloperToolsAction),d.OpenWebviewDeveloperToolsAction.ALIAS,l.webviewDeveloperCategory),function(e){const t=o.ContextKeyExpr.and(o.ContextKeyExpr.equals("activeEditor",e),o.ContextKeyExpr.not("editorFocus"));i.isMacintosh&&(n.registerAction2(class extends d.CopyWebviewEditorCommand{constructor(){super(t)}}),
+n.registerAction2(class extends d.PasteWebviewEditorCommand{constructor(){super(t)}}),n.registerAction2(class extends d.CutWebviewEditorCommand{constructor(){super(t)}}),n.registerAction2(class extends d.UndoWebviewEditorCommand{constructor(){super(t)}}),n.registerAction2(class extends d.RedoWebviewEditorCommand{constructor(){super(t)}}))}(c.WebviewEditor.ID)})),define(e[2133],t([0,1,1427,8,23,38,7,49,27,47,19,25,179,482,138,83,31,468,139,229,21,9,95,16,4,77,98,467,11,105,24,35,37,118,32,13,10,20,5,477,50,271,29,115,564,14,41,33,97,34,94,218,63,69,137,106,6,188]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w,E,I,x,k,D,T,R,A,M,L,O,N,P,F,B,V,W,z,K,U,H,G,$,j,q,Y,X,Q,Z,J,ee,te,ie,ne,oe,se){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.NativeWindow=void 0;let re=(()=>{let t=class extends x.Disposable{constructor(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w){super(),this.editorService=e,this.configurationService=t,this.titleService=i,this.themeService=n,this.notificationService=o,
+this.commandService=s,this.keybindingService=r,this.telemetryService=a,this.workspaceEditingService=l,this.fileService=c,this.menuService=d,this.lifecycleService=h,this.integrityService=u,this.environmentService=g,this.accessibilityService=p,this.contextService=m,this.instantiationService=f,this.openerService=v,this.electronService=S,this.tunnelService=b,this.layoutService=_,this.workingCopyService=C,this.filesConfigurationService=y,this.storageService=w,this.touchBarDisposables=this._register(new x.DisposableStore),this.customTitleContextMenuDisposable=this._register(new x.DisposableStore),this.addFoldersScheduler=this._register(new I.RunOnceScheduler(()=>this.doAddFolders(),100)),this.pendingFoldersToAdd=[],this.closeEmptyWindowScheduler=this._register(new I.RunOnceScheduler(()=>this.onAllEditorsClosed(),50)),this.isDocumentedEdited=!1,this.registerListeners(),this.create()}registerListeners(){var e;this._register(this.editorService.onDidActiveEditorChange(()=>this.updateTouchbarMenu())),
+[l.EventType.DRAG_OVER,l.EventType.DROP].forEach(e=>{window.document.body.addEventListener(e,e=>{l.EventHelper.stop(e)})}),_.ipcRenderer.on("vscode:runAction",async(e,t)=>{const i=t.args||[];if("touchbar"===t.from){const e=this.editorService.activeEditor;if(e){const t=h.toResource(e,{supportSideBySide:h.SideBySideEditor.MASTER});t&&i.push(t)}}else i.push({from:t.from});try{await this.commandService.executeCommand(t.id,...i),this.telemetryService.publicLog2("commandExecuted",{id:t.id,from:t.from})}catch(e){this.notificationService.error(e)}}),_.ipcRenderer.on("vscode:runKeybinding",(e,t)=>{document.activeElement&&this.keybindingService.dispatchByUserSettingsLabel(t.userSettingsLabel,document.activeElement)}),_.ipcRenderer.on("vscode:reportError",(e,t)=>{t&&s.onUnexpectedError(JSON.parse(t))}),_.ipcRenderer.on("vscode:openFiles",(e,t)=>this.onOpenFiles(t)),_.ipcRenderer.on("vscode:addFolders",(e,t)=>this.onAddFoldersRequest(t)),_.ipcRenderer.on("vscode:showInfoMessage",(e,t)=>{this.notificationService.info(t)
+}),_.ipcRenderer.on("vscode:displayChanged",e=>{se.clearAllFontInfos()}),_.ipcRenderer.on("vscode:enterFullScreen",async()=>{await this.lifecycleService.when(2),v.setFullscreen(!0)}),_.ipcRenderer.on("vscode:leaveFullScreen",async()=>{await this.lifecycleService.when(2),v.setFullscreen(!1)}),_.ipcRenderer.on("vscode:enterHighContrast",async()=>{const e=this.configurationService.getValue("window");(null==e?void 0:e.autoDetectHighContrast)&&(await this.lifecycleService.when(2),this.themeService.setColorTheme(f.VS_HC_THEME,void 0))}),_.ipcRenderer.on("vscode:leaveHighContrast",async()=>{const e=this.configurationService.getValue("window");(null==e?void 0:e.autoDetectHighContrast)&&(await this.lifecycleService.when(2),this.themeService.restoreColorTheme())}),_.ipcRenderer.on("vscode:keyboardLayoutChanged",()=>{b.KeyboardMapperFactory.INSTANCE._onKeyboardLayoutChanged()}),_.ipcRenderer.on("vscode:accessibilitySupportChanged",(e,t)=>{this.accessibilityService.setAccessibilitySupport(t?2:1)}),
+this.updateWindowZoomLevel(),this._register(this.configurationService.onDidChangeConfiguration(e=>{e.affectsConfiguration("window.zoomLevel")?this.updateWindowZoomLevel():(e.affectsConfiguration("keyboard.touchbar.enabled")||e.affectsConfiguration("keyboard.touchbar.ignored"))&&this.updateTouchbarMenu()})),this._register(this.editorService.onDidVisibleEditorsChange(()=>this.onDidVisibleEditorsChange()));const t=this.environmentService.configuration.filesToWait;if(t){const e=t.waitMarkerFileUri,i=F.coalesce(t.paths.map(e=>e.fileUri));this._register(this.trackClosedWaitFiles(e,i))}if(R.isMacintosh&&this._register(this.editorService.onDidActiveEditorChange(()=>{const e=h.toResource(this.editorService.activeEditor,{supportSideBySide:h.SideBySideEditor.MASTER,filterByScheme:Y.Schemas.file});this.updateRepresentedFilename(null==e?void 0:e.fsPath),this.provideCustomTitleContextMenu(null==e?void 0:e.fsPath)})),R.isMacintosh&&"custom"===p.getTitleBarStyle(this.configurationService,this.environmentService)){
+const e=j.assertIsDefined(this.layoutService.getContainer("workbench.parts.titlebar"));this._register(l.addDisposableListener(e,l.EventType.DBLCLICK,e=>{l.EventHelper.stop(e),this.electronService.handleTitleDoubleClick()}))}this._register(this.workingCopyService.onDidChangeDirty(e=>{const t=e.isDirty();(!t||2&e.capabilities||1!==this.filesConfigurationService.getAutoSaveMode())&&this.updateDocumentEdited(t)})),this.updateDocumentEdited(),this._register(oe.Event.any(oe.Event.map(oe.Event.filter(this.electronService.onWindowMaximize,e=>e===this.environmentService.configuration.windowId),()=>!0),oe.Event.map(oe.Event.filter(this.electronService.onWindowUnmaximize,e=>e===this.environmentService.configuration.windowId),()=>!1))(e=>this.onDidChangeMaximized(e))),this.onDidChangeMaximized(null!==(e=this.environmentService.configuration.maximized)&&void 0!==e&&e)}updateDocumentEdited(e=this.workingCopyService.hasDirty){(!this.isDocumentedEdited&&e||this.isDocumentedEdited&&!e)&&(this.isDocumentedEdited=e,
+this.electronService.setDocumentEdited(e))}onDidChangeMaximized(e){this.layoutService.updateWindowMaximizedState(e)}onDidVisibleEditorsChange(){if(0===this.editorService.visibleEditorPanes.length&&1===this.contextService.getWorkbenchState()&&!this.environmentService.isExtensionDevelopment){(this.configurationService.getValue("window.closeWhenEmpty")||this.environmentService.args.wait)&&this.closeEmptyWindowScheduler.schedule()}}onAllEditorsClosed(){0===this.editorService.visibleEditorPanes.length&&this.electronService.closeWindow()}updateWindowZoomLevel(){const e=this.configurationService.getValue();let t=0;if(e.window&&"number"==typeof e.window.zoomLevel){if(t=e.window.zoomLevel,this.previousConfiguredZoomLevel===t)return;this.previousConfiguredZoomLevel=t}_.webFrame.getZoomLevel()!==t&&(_.webFrame.setZoomLevel(t),v.setZoomFactor(_.webFrame.getZoomFactor()),v.setZoomLevel(_.webFrame.getZoomLevel(),!1))}updateRepresentedFilename(e){this.electronService.setRepresentedFilename(e||"")}
+provideCustomTitleContextMenu(e){if(this.customTitleContextMenuDisposable.clear(),!e||"custom"!==p.getTitleBarStyle(this.configurationService,this.environmentService))return;const t=e.split(Q.posix.sep);for(let e=t.length;e>0;e--){const i=e===t.length;let n=e;i||n++;const o=t.slice(0,n).join(Q.posix.sep);let s;s=i?Z.getBaseLabel(o):Z.getBaseLabel(Q.dirname(o));const r=`workbench.action.revealPathInFinder${e}`;this.customTitleContextMenuDisposable.add(S.CommandsRegistry.registerCommand(r,()=>this.electronService.showItemInFolder(o))),this.customTitleContextMenuDisposable.add(y.MenuRegistry.appendMenuItem(y.MenuId.TitleBarContext,{command:{id:r,title:s||Q.posix.sep},order:-e}))}}create(){(R.isMacintosh||"native"===p.getTitleBarStyle(this.configurationService,this.environmentService))&&this._register(this.instantiationService.createInstance(ae)),this.setupOpenHandlers(),this.lifecycleService.when(2).then(()=>_.ipcRenderer.send("vscode:workbenchReady",this.environmentService.configuration.windowId)),
+this.integrityService.isPure().then(e=>this.titleService.updateProperties({isPure:e.isPure})),this.lifecycleService.when(3).then(async()=>{let t;t=R.isWindows?(await new Promise((t,i)=>{e(["native-is-elevated"],t,i)}))():R.isRootUser(),this.titleService.updateProperties({isAdmin:t}),t&&!R.isWindows&&this.notificationService.warn(i.localize(0,null,A.default.nameShort))}),this.updateTouchbarMenu(),!this.environmentService.disableCrashReporter&&A.default.crashReporter&&A.default.appCenter&&this.configurationService.getValue("telemetry.enableCrashReporter")&&this.setupCrashReporter(A.default.crashReporter.companyName,A.default.crashReporter.productName,A.default.appCenter)}setupOpenHandlers(){window.open=function(){throw new Error("Prevented call to window.open(). Use IOpenerService instead!")},this.openerService.setExternalOpener({openExternal:async e=>{if(!await this.electronService.openExternal(e)){const t=n.URI.parse(e);t.scheme===Y.Schemas.file&&await this.electronService.showItemInFolder(t.fsPath)}return!0}
+}),this.openerService.registerExternalUriResolver({resolveExternalUri:async(e,t)=>{if(null==t?void 0:t.allowTunneling){const t=J.extractLocalHostUriMetaDataForPortMapping(e);if(t){const i=await this.tunnelService.openTunnel(void 0,t.port);if(i)return{resolved:e.with({authority:`127.0.0.1:${i.tunnelLocalPort}`}),dispose:()=>i.dispose()}}}}})}updateTouchbarMenu(){if(!R.isMacintosh)return;this.touchBarDisposables.clear(),this.touchBarMenu=void 0;const e=this.touchBarDisposables.add(new I.RunOnceScheduler(()=>this.doUpdateTouchbarMenu(e),300));e.schedule()}doUpdateTouchbarMenu(e){this.touchBarMenu||(this.touchBarMenu=this.editorService.invokeWithinEditorContext(e=>this.menuService.createMenu(y.MenuId.TouchBarContext,e.get(w.IContextKeyService))),this.touchBarDisposables.add(this.touchBarMenu),this.touchBarDisposables.add(this.touchBarMenu.onDidChange(()=>e.schedule())))
+;const t=[],i=!1===this.configurationService.getValue("keyboard.touchbar.enabled"),n=this.configurationService.getValue("keyboard.touchbar.ignored")||[];this.touchBarDisposables.add(E.createAndFillInActionBarActions(this.touchBarMenu,void 0,t));const o=[];let s=[];if(!i){for(const e of t)if(e instanceof y.MenuItemAction){if(n.indexOf(e.item.id)>=0)continue;s.push(e.item)}else e instanceof c.Separator&&(s.length&&o.push(s),s=[]);s.length&&o.push(s)}r.equals(this.lastInstalledTouchedBar,o)||(this.lastInstalledTouchedBar=o,this.electronService.updateTouchBar(o))}async setupCrashReporter(e,t,i){if(!i)return;const n=R.isWindows?i["ia32"===process.arch?"win32-ia32":"win32-x64"]:R.isLinux?i["linux-x64"]:i.darwin,o=await this.telemetryService.getTelemetryInfo(),s=this.storageService.get(g.crashReporterIdStorageKey,0),a={companyName:e,productName:t,submitURL:n.concat("&uid=",s,"&iid=",s,"&sid=",o.sessionId),extra:{vscode_version:A.default.version,vscode_commit:A.default.commit||""}}
+;await this.electronService.startCrashReporter(a),_.crashReporter.start(r.deepClone(a))}onAddFoldersRequest(e){this.pendingFoldersToAdd.push(...e.foldersToAdd.map(e=>n.URI.revive(e))),this.addFoldersScheduler.isScheduled()||this.addFoldersScheduler.schedule()}doAddFolders(){const e=[];this.pendingFoldersToAdd.forEach(t=>{e.push({uri:t})}),this.pendingFoldersToAdd=[],this.workspaceEditingService.addFolders(e)}async onOpenFiles(e){const t=[],i=!(!e.filesToDiff||2!==e.filesToDiff.length);if(!i&&e.filesToOpenOrCreate&&t.push(...await h.pathsToEditors(e.filesToOpenOrCreate,this.fileService)),i&&e.filesToDiff&&t.push(...await h.pathsToEditors(e.filesToDiff,this.fileService)),t.length&&this.openResources(t,i),e.filesToWait&&t.length){const t=n.URI.revive(e.filesToWait.waitMarkerFileUri),i=F.coalesce(e.filesToWait.paths.map(e=>n.URI.revive(e.fileUri)));this.trackClosedWaitFiles(t,i)}}trackClosedWaitFiles(e,t){let i=t.slice(0);const n=this.editorService.onDidCloseEditor(async o=>{const s=h.toResource(o.editor,{
+supportSideBySide:h.SideBySideEditor.DETAILS}),r=h.toResource(o.editor,{supportSideBySide:h.SideBySideEditor.MASTER});if(0===(i=i.filter(e=>!V.isEqual(e,r)&&!V.isEqual(e,s))).length){const i=t.filter(e=>this.workingCopyService.isDirty(e));i.length>0&&await Promise.all(i.map(async e=>await this.joinResourceSaved(e))),n.dispose(),await this.fileService.del(e)}});return n}joinResourceSaved(e){return new Promise(t=>{if(!this.workingCopyService.isDirty(e))return t();const i=this.workingCopyService.onDidChangeDirty(n=>{!n.isDirty()&&V.isEqual(e,n.resource)&&(i.dispose(),t())})})}async openResources(e,t){return await this.lifecycleService.when(2),t&&2===e.length&&e[0].resource&&e[1].resource?this.editorService.openEditor({leftResource:e[0].resource,rightResource:e[1].resource,options:{pinned:!0}}):1===e.length?this.editorService.openEditor(e[0]):this.editorService.openEditors(e)}}
+;return t=o([a(0,u.IEditorService),a(1,B.IConfigurationService),a(2,m.ITitleService),a(3,f.IWorkbenchThemeService),a(4,M.INotificationService),a(5,S.ICommandService),a(6,L.IKeybindingService),a(7,g.ITelemetryService),a(8,C.IWorkspaceEditingService),a(9,d.IFileService),a(10,y.IMenuService),a(11,k.ILifecycleService),a(12,T.IIntegrityService),a(13,O.IWorkbenchEnvironmentService),a(14,N.IAccessibilityService),a(15,P.IWorkspaceContextService),a(16,W.IInstantiationService),a(17,q.IOpenerService),a(18,X.IElectronService),a(19,J.ITunnelService),a(20,ee.IWorkbenchLayoutService),a(21,ie.IWorkingCopyService),a(22,ne.IFilesConfigurationService),a(23,H.IStorageService)],t)})();t.NativeWindow=re;let ae=(()=>{let e=class extends z.MenubarControl{constructor(e,t,n,o,s,r,a,l,c,d,h,u,g,p){super(e,t,n,o,s,r,a,l,c,d,h,u,p),this.environmentService=h,this.menubarService=g,R.isMacintosh&&(this.menus.Preferences=this._register(this.menuService.createMenu(y.MenuId.MenubarPreferencesMenu,this.contextKeyService)),
+this.topLevelTitles.Preferences=i.localize(1,null));for(const e of Object.keys(this.topLevelTitles)){const t=this.menus[e];t&&this._register(t.onDidChange(()=>this.updateMenubar()))}(async()=>{this.recentlyOpened=await this.workspacesService.getRecentlyOpened(),this.doUpdateMenubar(!0)})(),this.registerListeners()}doUpdateMenubar(e){if(!this.hostService.hasFocus)return;const t={menus:{},keybindings:{}};this.getMenubarMenus(t)&&this.menubarService.updateMenubar(this.environmentService.configuration.windowId,t)}getMenubarMenus(e){if(!e)return!1;e.keybindings=this.getAdditionalKeybindings();for(const t of Object.keys(this.topLevelTitles)){const i=this.menus[t];if(i){const n={items:[]};if(this.populateMenuItems(i,n,e.keybindings),0===n.items.length)return!1;e.menus[t]=n}}return!0}populateMenuItems(e,t,i){let n=e.getActions();for(let e of n){const[,n]=e;n.forEach(e=>{if(e instanceof y.SubmenuItemAction){const n={items:[]};if(!this.menus[e.item.submenu.id]){
+const t=this.menus[e.item.submenu.id]=this.menuService.createMenu(e.item.submenu,this.contextKeyService);this._register(t.onDidChange(()=>this.updateMenubar()))}const o=this.menuService.createMenu(e.item.submenu,this.contextKeyService);this.populateMenuItems(o,n,i);let s={id:e.id,label:e.label,submenu:n};t.items.push(s),o.dispose()}else{if("workbench.action.openRecent"===e.id){const e=this.getOpenRecentActions().map(this.transformOpenRecentAction);t.items.push(...e)}let n={id:e.id,label:e.label};e.checked&&(n.checked=!0),e.enabled||(n.enabled=!1),n.label=this.calculateActionLabel(n),i[e.id]=this.getMenubarKeybinding(e.id),t.items.push(n)}}),t.items.push({id:"vscode.menubar.separator"})}t.items.length>0&&t.items.pop()}transformOpenRecentAction(e){return e instanceof c.Separator?{id:"vscode.menubar.separator"}:{id:e.id,uri:e.uri,enabled:e.enabled,label:e.label}}getAdditionalKeybindings(){const e={};if(R.isMacintosh){const t=this.getMenubarKeybinding("workbench.action.quit");t&&(e["workbench.action.quit"]=t)}
+return e}getMenubarKeybinding(e){const t=this.keybindingService.lookupKeybinding(e);if(!t)return;const i=t.getElectronAccelerator();if(i)return{label:i,userSettingsLabel:j.withNullAsUndefined(t.getUserSettingsLabel())};const n=t.getLabel();return n?{label:n,isNative:!1,userSettingsLabel:j.withNullAsUndefined(t.getUserSettingsLabel())}:void 0}};return e=o([a(0,y.IMenuService),a(1,D.IWorkspacesService),a(2,w.IContextKeyService),a(3,L.IKeybindingService),a(4,B.IConfigurationService),a(5,K.ILabelService),a(6,U.IUpdateService),a(7,H.IStorageService),a(8,M.INotificationService),a(9,G.IPreferencesService),a(10,O.IWorkbenchEnvironmentService),a(11,N.IAccessibilityService),a(12,$.IMenubarService),a(13,te.IHostService)],e)})()})),
+define(e[2134],t([0,1,195,2145,139,187,2073,2133,83,7,23,8,1983,1764,37,149,468,98,42,1632,430,33,125,1579,32,10,29,4,1523,174,1548,177,664,119,1527,27,1529,1881,1734,431,1555,361,2009,20,68,105,1553,1552]),(function(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w,E,I,x,k,D,T,R,A,M,L,O,N,P,F,B,V,W,z,K,U,H,G,$,j){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.main=void 0;class q extends k.Disposable{constructor(e){super(),this.configuration=e,this.environmentService=new g.NativeWorkbenchEnvironmentService(this.configuration,this.configuration.execPath),this.init()}init(){n.gracefulify(i),this.reviveUris(),s.importEntries(this.environmentService.configuration.perfEntries),l.setZoomFactor(o.webFrame.getZoomFactor()),l.setZoomLevel(o.webFrame.getZoomLevel(),!0),l.setFullscreen(!!this.environmentService.configuration.fullscreen),f.KeyboardMapperFactory.INSTANCE._onKeyboardLayoutChanged()}reviveUris(){
+this.environmentService.configuration.folderUri&&(this.environmentService.configuration.folderUri=h.URI.revive(this.environmentService.configuration.folderUri)),this.environmentService.configuration.workspace&&(this.environmentService.configuration.workspace=v.reviveWorkspaceIdentifier(this.environmentService.configuration.workspace));const e=this.environmentService.configuration.filesToWait;[null==e?void 0:e.paths,this.environmentService.configuration.filesToOpenOrCreate,this.environmentService.configuration.filesToDiff].forEach(e=>{Array.isArray(e)&&e.forEach(e=>{e.fileUri&&(e.fileUri=h.URI.revive(e.fileUri))})}),e&&(e.waitMarkerFileUri=h.URI.revive(e.waitMarkerFileUri))}async open(){const e=await this.initServices();await c.domContentLoaded(),s.mark("willStartWorkbench");const t=new r.Workbench(document.body,e.serviceCollection,e.logService);this.registerListeners(t,e.storageService);const i=t.startup();this._register(i.createInstance(a.NativeWindow)),
+this.environmentService.configuration.driver&&i.invokeFunction(async e=>this._register(await D.registerWindowDriver(e,this.configuration.windowId))),e.logService.trace("workbench configuration",JSON.stringify(this.environmentService.configuration))}registerListeners(e,t){this._register(c.addDisposableListener(window,c.EventType.RESIZE,t=>this.onWindowResize(t,!0,e))),this._register(e.onShutdown(()=>this.dispose())),this._register(e.onWillShutdown(e=>e.join(t.close())))}onWindowResize(e,t,i){if(e.target===window){if(window.document&&window.document.body&&0===window.document.body.clientWidth)return void(t&&c.scheduleAtNextAnimationFrame(()=>this.onWindowResize(e,!1,i)));i.layout()}}async initServices(){const e=new m.ServiceCollection,t=this._register(new T.MainProcessService(this.configuration.windowId));e.set(T.IMainProcessService,t),e.set(p.IWorkbenchEnvironmentService,this.environmentService),e.set(H.IProductService,Object.assign({_serviceBrand:void 0},G.default))
+;const i=this._register(this.createLogService(t,this.environmentService));e.set(S.ILogService,i);const n=new R.RemoteAuthorityResolverService;e.set(A.IRemoteAuthorityResolverService,n);const o=new W.SignService;e.set(z.ISignService,o);const s=this._register(new M.RemoteAgentService(this.environmentService,n,o,i));e.set(L.IRemoteAgentService,s);const r=this._register(new O.FileService(i));e.set(N.IFileService,r);const a=this._register(new P.DiskFileSystemProvider(i));if(r.registerProvider(C.Schemas.file,a),r.registerProvider(C.Schemas.userData,new K.FileUserDataProvider(this.environmentService.appSettingsHome,this.environmentService.backupHome,a,this.environmentService)),s.getConnection()){const e=this._register(new F.RemoteFileSystemProvider(s));r.registerProvider(C.Schemas.vscodeRemote,e)}const l=this._register(new $.NativeResourceIdentityService);e.set(j.IResourceIdentityService,l)
+;const c=await this.resolveWorkspaceInitializationPayload(l),d=await Promise.all([this.createWorkspaceService(c,r,s,i).then(t=>(e.set(E.IWorkspaceContextService,t),e.set(I.IConfigurationService,t),t)),this.createStorageService(c,i,t).then(t=>(e.set(x.IStorageService,t),t))]);return{serviceCollection:e,logService:i,storageService:d[1]}}async resolveWorkspaceInitializationPayload(e){if(this.environmentService.configuration.workspace)return this.environmentService.configuration.workspace;let t;if(this.environmentService.configuration.folderUri&&(t=await this.resolveSingleFolderWorkspaceInitializationPayload(this.environmentService.configuration.folderUri,e)),!t){let e;if(this.environmentService.configuration.backupWorkspaceResource)e=U.basename(this.environmentService.configuration.backupWorkspaceResource);else{if(!this.environmentService.isExtensionDevelopment)throw new Error("Unexpected window configuration without backupPath");e="ext-dev"}t={id:e}}return t}
+async resolveSingleFolderWorkspaceInitializationPayload(e,t){try{const i=e.scheme===C.Schemas.file?h.URI.file(y.sanitizeFilePath(e.fsPath,process.env.VSCODE_CWD||process.cwd())):e;return{id:await t.resolveResourceIdentity(e),folder:i}}catch(e){d.onUnexpectedError(e)}}async createWorkspaceService(e,t,i,n){const o=new u.WorkspaceService({remoteAuthority:this.environmentService.configuration.remoteAuthority,configurationCache:new B.ConfigurationCache(this.environmentService)},this.environmentService,t,i);try{return await o.initialize(e),o}catch(e){return d.onUnexpectedError(e),n.error(e),o}}async createStorageService(e,t,i){const n=new w.GlobalStorageDatabaseChannelClient(i.getChannel("storage")),o=new b.NativeStorageService(n,t,this.environmentService);try{return await o.initialize(e),o}catch(e){return d.onUnexpectedError(e),t.error(e),o}}createLogService(e,t){const i=new _.LoggerChannelClient(e.getChannel("logger")),n=[]
+;return t.isExtensionDevelopment&&t.extensionTestsLocationURI?n.push(new S.ConsoleLogInMainService(i,this.environmentService.configuration.logLevel)):n.push(new S.ConsoleLogService(this.environmentService.configuration.logLevel),new V.SpdLogService(`renderer${this.configuration.windowId}`,t.logsPath,this.environmentService.configuration.logLevel)),new _.FollowerLogService(i,new S.MultiplexLogService(n))}}t.main=function(e){return new q(e).open()}})),define(e[2135],t([0,1,46,9,29,52,15,4,79,88,30,6,96,25,93,5,2035]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f,v,S){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ViewDescriptorService=void 0;let b=(()=>{let e=class e extends c.Disposable{constructor(t,n,o,s,r,a){super(),this.instantiationService=t,this.contextKeyService=n,this.storageService=o,this.extensionService=s,this.telemetryService=r,this._onDidChangeContainer=this._register(new g.Emitter),this.onDidChangeContainer=this._onDidChangeContainer.event,
+this._onDidChangeLocation=this._register(new g.Emitter),this.onDidChangeLocation=this._onDidChangeLocation.event,this._onDidChangeContainerLocation=this._register(new g.Emitter),this.onDidChangeContainerLocation=this._onDidChangeContainerLocation.event,a.registerStorageKey({key:e.CACHED_VIEW_POSITIONS,version:1}),this.viewContainerModels=new Map,this.activeViewContextKeys=new Map,this.movableViewContextKeys=new Map,this.defaultViewLocationContextKeys=new Map,this.viewContainersRegistry=l.Registry.as(i.Extensions.ViewContainersRegistry),this.viewsRegistry=l.Registry.as(i.Extensions.ViewsRegistry),this.cachedViewInfo=this.getCachedViewPositions(),this.cachedViewContainerInfo=this.getCachedViewContainerLocations(),this.getViewContainers().forEach(e=>this.onDidRegisterViewContainer(e)),this.tryGenerateContainers(),this._register(this.viewsRegistry.onViewsRegistered(({views:e,viewContainer:t})=>this.onDidRegisterViews(e,t))),
+this._register(this.viewsRegistry.onViewsDeregistered(({views:e,viewContainer:t})=>this.onDidDeregisterViews(e,t))),this._register(this.viewsRegistry.onDidChangeContainer(({views:e,from:t,to:i})=>this.moveViews(e,t,i))),this._register(this.viewContainersRegistry.onDidRegister(({viewContainer:e})=>this.onDidRegisterViewContainer(e))),this._register(this.viewContainersRegistry.onDidDeregister(({viewContainer:e})=>this.onDidDeregisterViewContainer(e))),this._register(c.toDisposable(()=>{this.viewContainerModels.forEach(({disposable:e})=>e.dispose()),this.viewContainerModels.clear()})),this._register(this.storageService.onDidChangeStorage(e=>{this.onDidStorageChange(e)})),this._register(this.extensionService.onDidRegisterExtensions(()=>this.onDidRegisterExtensions()))}get cachedViewPositionsValue(){return this._cachedViewPositionsValue||(this._cachedViewPositionsValue=this.getStoredCachedViewPositionsValue()),this._cachedViewPositionsValue}set cachedViewPositionsValue(e){
+this.cachedViewPositionsValue!==e&&(this._cachedViewPositionsValue=e,this.setStoredCachedViewPositionsValue(e))}get cachedViewContainerLocationsValue(){return this._cachedViewContainerLocationsValue||(this._cachedViewContainerLocationsValue=this.getStoredCachedViewContainerLocationsValue()),this._cachedViewContainerLocationsValue}set cachedViewContainerLocationsValue(e){this._cachedViewContainerLocationsValue!==e&&(this._cachedViewContainerLocationsValue=e,this.setStoredCachedViewContainerLocationsValue(e))}registerGroupedViews(e){for(const t of e.keys()){const i=this.viewContainersRegistry.get(t),n=e.get(t);if(i&&this.viewContainerModels.has(i))this.addViews(i,n.views);else if(n.cachedContainerInfo&&this.shouldGenerateContainer(n.cachedContainerInfo)){const e=n.cachedContainerInfo;this.viewContainersRegistry.get(t)||this.registerGeneratedViewContainer(e.location,t)}}}deregisterGroupedViews(e){for(const t of e.keys()){const i=this.viewContainersRegistry.get(t)
+;i&&this.viewContainerModels.has(i)&&this.removeViews(i,e.get(t).views)}}tryGenerateContainers(e){for(const[t,i]of this.cachedViewInfo.entries()){const n=i.containerId;if(!this.viewContainersRegistry.get(n))if(this.shouldGenerateContainer(i))this.registerGeneratedViewContainer(i.location,n);else if(e){const e=this.viewsRegistry.getViewContainer(t),n=this.getViewDescriptorById(t);if(e&&n){this.addViews(e,[n]);const t=this.getViewContainerLocation(e);i.location&&i.location!==t&&this._onDidChangeLocation.fire({views:[n],from:i.location,to:t})}}}e&&this.saveViewPositionsToCache()}onDidRegisterExtensions(){this.tryGenerateContainers(!0)}onDidRegisterViews(e,t){const i=this.regroupViews(t.id,e);this.registerGroupedViews(i),e.forEach(e=>this.getOrCreateMovableViewContextKey(e).set(!!e.canMoveView))}shouldGenerateContainer(t){return t.containerId.startsWith(e.COMMON_CONTAINER_ID_PREFIX)&&void 0!==t.location}onDidDeregisterViews(e,t){const i=this.regroupViews(t.id,e);this.deregisterGroupedViews(i),
+e.forEach(e=>this.getOrCreateMovableViewContextKey(e).set(!1))}regroupViews(e,t){const i=new Map;return t.forEach(t=>{const n=this.cachedViewInfo.get(t.id),o=(null==n?void 0:n.containerId)||e,s=i.get(o)||{cachedContainerInfo:n,views:[]};s.views.push(t),i.set(o,s)}),i}getViewDescriptorById(e){return this.viewsRegistry.getView(e)}getViewLocationById(e){var t;const i=this.cachedViewInfo.get(e);if(i&&i.location)return i.location;const n=(null==i?void 0:i.containerId)?null!==(t=this.viewContainersRegistry.get(i.containerId))&&void 0!==t?t:null:this.viewsRegistry.getViewContainer(e);return n?this.getViewContainerLocation(n):null}getViewContainerByViewId(e){var t,i;const n=null===(t=this.cachedViewInfo.get(e))||void 0===t?void 0:t.containerId;return n?null!==(i=this.viewContainersRegistry.get(n))&&void 0!==i?i:null:this.viewsRegistry.getViewContainer(e)}getViewContainerLocation(e){const t=this.cachedViewContainerInfo.get(e.id);return void 0!==t?t:this.getDefaultViewContainerLocation(e)}
+getDefaultViewContainerLocation(e){return this.viewContainersRegistry.getViewContainerLocation(e)}getDefaultContainerById(e){var t;return null!==(t=this.viewsRegistry.getViewContainer(e))&&void 0!==t?t:null}getViewContainerModel(e){return this.getOrRegisterViewContainerModel(e)}getViewContainerById(e){return this.viewContainersRegistry.get(e)||null}getViewContainersByLocation(e){return this.getViewContainers().filter(t=>this.getViewContainerLocation(t)===e)}getViewContainers(){return this.viewContainersRegistry.all}moveViewContainerToLocation(e,t){const i=this.getViewContainerLocation(e),n=t;if(i!==n){this.getDefaultViewContainerLocation(e)===n?this.cachedViewContainerInfo.delete(e.id):this.cachedViewContainerInfo.set(e.id,n),this._onDidChangeContainerLocation.fire({viewContainer:e,from:i,to:n});const t=this.getViewsByContainer(e);this._onDidChangeLocation.fire({views:t,from:i,to:n}),this.saveViewContainerLocationsToCache()}}moveViewToLocation(e,t){let i=this.registerGeneratedViewContainer(t)
+;this.moveViewsToContainer([e],i)}moveViewsToContainer(e,t){if(!e.length)return;const i=this.getViewContainerByViewId(e[0].id),n=t;i&&n&&i!==n&&this.moveViews(e,i,n)}moveViews(t,n,o,s){this.removeViews(n,t),this.addViews(o,t);const r=this.getViewContainerLocation(n),a=this.getViewContainerLocation(o);if(r!==a&&this._onDidChangeLocation.fire({views:t,from:r,to:a}),this._onDidChangeContainer.fire({views:t,from:n,to:o}),!s){this.saveViewPositionsToCache();const s=t=>t.id.startsWith(e.COMMON_CONTAINER_ID_PREFIX)?"custom":t.extensionId?"extension":t.id,l=t.length,c=s(n),d=s(o),h=r===i.ViewContainerLocation.Panel?"panel":"sidebar",u=a===i.ViewContainerLocation.Panel?"panel":"sidebar";this.telemetryService.publicLog2("viewDescriptorService.moveViews",{viewCount:l,fromContainer:c,toContainer:d,fromLocation:h,toLocation:u})}}registerGeneratedViewContainer(e,t){const n=t||this.generateContainerId(e);return this.viewContainersRegistry.registerViewContainer({id:n,
+ctorDescriptor:new h.SyncDescriptor(d.ViewPaneContainer,[n,{mergeViewWithContainerWhenSingleView:!0,donotShowContainerTitleWhenMergedWithContainer:!0}]),name:"Custom Views",icon:e===i.ViewContainerLocation.Sidebar?"codicon-window":void 0,storageId:`${n}.state`,hideIfEmpty:!0},e)}getCachedViewPositions(){const e=new Map(JSON.parse(this.cachedViewPositionsValue));for(const[t,i]of e.entries())i||e.delete(t);return e}getCachedViewContainerLocations(){return new Map(JSON.parse(this.cachedViewContainerLocationsValue))}onDidStorageChange(t){if(t.key===e.CACHED_VIEW_POSITIONS&&0===t.scope&&this.cachedViewPositionsValue!==this.getStoredCachedViewPositionsValue()){this._cachedViewPositionsValue=this.getStoredCachedViewPositionsValue();const e=this.getCachedViewPositions();for(let t of e.keys()){if(!this.getViewDescriptorById(t))continue;const i=this.getViewContainerByViewId(t),n=e.get(t);this.viewContainersRegistry.get(n.containerId)||this.registerGeneratedViewContainer(n.location,n.containerId)
+;const o=this.viewContainersRegistry.get(n.containerId);if(i&&o&&o!==i){const e=this.getViewDescriptorById(t);e&&this.moveViews([e],i,o)}}this.getViewContainers().forEach(t=>{this.getViewContainerModel(t).allViewDescriptors.forEach(t=>{if(!e.has(t.id)){const e=this.getViewContainerByViewId(t.id),i=this.getDefaultContainerById(t.id);e&&i&&e!==i&&this.moveViews([t],e,i),this.cachedViewInfo.delete(t.id)}})}),this.cachedViewInfo=this.getCachedViewPositions()}if(t.key===e.CACHED_VIEW_CONTAINER_LOCATIONS&&0===t.scope&&this.cachedViewContainerLocationsValue!==this.getStoredCachedViewContainerLocationsValue()){this._cachedViewContainerLocationsValue=this.getStoredCachedViewContainerLocationsValue();const e=this.getCachedViewContainerLocations();for(const[t,i]of e.entries()){const e=this.getViewContainerById(t);e&&i!==this.getViewContainerLocation(e)&&this.moveViewContainerToLocation(e,i)}this.getViewContainers().forEach(t=>{if(!e.has(t.id)){
+const e=this.getViewContainerLocation(t),i=this.getDefaultViewContainerLocation(t);e!==i&&this.moveViewContainerToLocation(t,i)}}),this.cachedViewContainerInfo=this.getCachedViewContainerLocations()}}generateContainerId(t){return`${e.COMMON_CONTAINER_ID_PREFIX}.${t===i.ViewContainerLocation.Panel?"panel":"sidebar"}.${f.generateUuid()}`}getStoredCachedViewPositionsValue(){return this.storageService.get(e.CACHED_VIEW_POSITIONS,0,"[]")}setStoredCachedViewPositionsValue(t){this.storageService.store(e.CACHED_VIEW_POSITIONS,t,0)}getStoredCachedViewContainerLocationsValue(){return this.storageService.get(e.CACHED_VIEW_CONTAINER_LOCATIONS,0,"[]")}setStoredCachedViewContainerLocationsValue(t){this.storageService.store(e.CACHED_VIEW_CONTAINER_LOCATIONS,t,0)}saveViewPositionsToCache(){this.getViewContainers().forEach(e=>{this.getViewContainerModel(e).allViewDescriptors.forEach(t=>{const i=this.getViewContainerLocation(e);this.cachedViewInfo.set(t.id,{containerId:e.id,location:i})})})
+;for(const[e,t]of this.cachedViewInfo){const i=this.getDefaultContainerById(e);(null==i?void 0:i.id)===t.containerId&&this.cachedViewInfo.delete(e)}this.cachedViewPositionsValue=JSON.stringify([...this.cachedViewInfo])}saveViewContainerLocationsToCache(){for(const[e,t]of this.cachedViewContainerInfo){const i=this.getViewContainerById(e);i&&t===this.getDefaultViewContainerLocation(i)&&this.cachedViewContainerInfo.delete(e)}this.cachedViewContainerLocationsValue=JSON.stringify([...this.cachedViewContainerInfo])}getViewsByContainer(e){const t=this.viewsRegistry.getViews(e).filter(t=>{var i;return((null===(i=this.cachedViewInfo.get(t.id))||void 0===i?void 0:i.containerId)||e.id)===e.id});for(const[i,n]of this.cachedViewInfo.entries()){if(!n||n.containerId!==e.id)continue;if(this.viewsRegistry.getViewContainer(i)===e)continue;const o=this.getViewDescriptorById(i);o&&t.push(o)}return t}onDidRegisterViewContainer(e){this.getOrRegisterViewContainerModel(e)}getOrRegisterViewContainerModel(e){var t
+;let i=null===(t=this.viewContainerModels.get(e))||void 0===t?void 0:t.viewContainerModel;if(!i){const t=new c.DisposableStore;i=t.add(this.instantiationService.createInstance(S.ViewContainerModel,e)),this.onDidChangeActiveViews({added:i.activeViewDescriptors,removed:[]}),i.onDidChangeActiveViewDescriptors(e=>this.onDidChangeActiveViews(e),this,t),this.viewContainerModels.set(e,{viewContainerModel:i,disposable:t});const n=this.getViewsByContainer(e);n.length&&(this.addViews(e,n),n.forEach(e=>this.getOrCreateMovableViewContextKey(e).set(!!e.canMoveView)))}return i}onDidDeregisterViewContainer(e){const t=this.viewContainerModels.get(e);t&&(t.disposable.dispose(),this.viewContainerModels.delete(e))}onDidChangeActiveViews({added:e,removed:t}){e.forEach(e=>this.getOrCreateActiveViewContextKey(e).set(!0)),t.forEach(e=>this.getOrCreateActiveViewContextKey(e).set(!1))}addViews(e,t){const i=this.getViewContainerLocation(e);t.forEach(t=>{this.cachedViewInfo.set(t.id,{containerId:e.id,location:i}),
+this.getOrCreateDefaultViewLocationContextKey(t).set(this.getDefaultContainerById(t.id)===e)}),this.getViewContainerModel(e).add(t)}removeViews(e,t){t.forEach(e=>this.getOrCreateDefaultViewLocationContextKey(e).set(!1)),this.getViewContainerModel(e).remove(t)}getOrCreateActiveViewContextKey(e){const t=`${e.id}.active`;let i=this.activeViewContextKeys.get(t);return i||(i=new n.RawContextKey(t,!1).bindTo(this.contextKeyService),this.activeViewContextKeys.set(t,i)),i}getOrCreateMovableViewContextKey(e){const t=`${e.id}.canMove`;let i=this.movableViewContextKeys.get(t);return i||(i=new n.RawContextKey(t,!1).bindTo(this.contextKeyService),this.movableViewContextKeys.set(t,i)),i}getOrCreateDefaultViewLocationContextKey(e){const t=`${e.id}.defaultViewLocation`;let i=this.defaultViewLocationContextKeys.get(t);return i||(i=new n.RawContextKey(t,!1).bindTo(this.contextKeyService),this.defaultViewLocationContextKeys.set(t,i)),i}};return e.CACHED_VIEW_POSITIONS="views.cachedViewPositions",
+e.CACHED_VIEW_CONTAINER_LOCATIONS="views.cachedViewContainerLocations",e.COMMON_CONTAINER_ID_PREFIX="workbench.views.service",e=o([a(0,v.IInstantiationService),a(1,n.IContextKeyService),a(2,s.IStorageService),a(3,r.IExtensionService),a(4,m.ITelemetryService),a(5,p.IStorageKeysSyncRegistryService)],e)})();t.ViewDescriptorService=b,u.registerSingleton(i.IViewDescriptorService,b)})),define(e[2136],t([0,1,229,1492,32,224,98,29,52,166,633,31,20,24,27,37,77,67,10,30,50,59,69,2062,97,11,94,685]),(function(e,t,i,n,s,r,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w,E,I,x,k,D,T){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.NativeWorkspaceEditingService=void 0;let R=(()=>{let e=class extends I.AbstractWorkspaceEditingService{constructor(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f,v){super(e,t,n,a,l,c,d,h,u,g,p,v),this.electronService=i,this.storageService=o,this.extensionService=s,this.backupFileService=r,this.environmentService=u,this.dialogService=p,this.lifecycleService=m,this.labelService=f,this.registerListeners()}
+registerListeners(){this.lifecycleService.onBeforeShutdown(e=>{const t=this.saveUntitedBeforeShutdown(e.reason);t&&e.veto(t)})}async saveUntitedBeforeShutdown(e){if(4!==e&&1!==e)return!1;const t=this.getCurrentWorkspaceIdentifier();if(!t||!l.isUntitledWorkspace(t.configPath,this.environmentService))return!1;const i=await this.electronService.getWindowCount();if(1===e&&!k.isMacintosh&&1===i)return!1;let o;!function(e){e[e.SAVE=0]="SAVE",e[e.DONT_SAVE=1]="DONT_SAVE",e[e.CANCEL=2]="CANCEL"}(o||(o={}));const s=[{label:D.mnemonicButtonLabel(n.localize(0,null)),result:o.SAVE},{label:D.mnemonicButtonLabel(n.localize(1,null)),result:o.DONT_SAVE},{label:n.localize(2,null),result:o.CANCEL}],r=n.localize(3,null),a=n.localize(4,null),{choice:c}=await this.dialogService.show(m.Severity.Warning,r,s.map(e=>e.label),{detail:a,cancelId:2});switch(s[c].result){case o.CANCEL:return!0;case o.DONT_SAVE:return this.workspacesService.deleteUntitledWorkspace(t),!1;case o.SAVE:{const e=await this.pickNewWorkspacePath()
+;if(!e||!l.hasWorkspaceFileExtension(e))return!0;try{await this.saveWorkspaceAs(t,e);const i=await this.workspacesService.getWorkspaceIdentifier(e);this.workspacesService.addRecentlyOpened([{label:this.labelService.getWorkspaceLabel(i,{verbose:!0}),workspace:i}]),this.workspacesService.deleteUntitledWorkspace(t)}catch(e){}return!1}}}async isValidTargetWorkspacePath(e){return!(await this.electronService.getWindows()).some(t=>!!t.workspace&&p.isEqual(t.workspace.configPath,e))||(await this.dialogService.show(m.Severity.Info,n.localize(5,null,p.basename(e)),[n.localize(6,null)],{detail:n.localize(7,null)}),!1)}async enterWorkspace(e){const t=await this.doEnterWorkspace(e);t&&(await this.migrateStorage(t.workspace),this.environmentService.configuration.backupPath=t.backupPath,this.environmentService.configuration.backupWorkspaceResource=t.backupPath?u.toBackupWorkspaceResource(t.backupPath,this.environmentService):void 0,
+this.backupFileService instanceof T.BackupFileService&&this.backupFileService.reinitialize()),this.environmentService.configuration.remoteAuthority?this.hostService.reload():this.extensionService.restartExtensionHost()}migrateStorage(e){return this.storageService.migrate(e)}};return e=o([a(0,r.IJSONEditingService),a(1,s.IWorkspaceContextService),a(2,x.IElectronService),a(3,_.IConfigurationService),a(4,c.IStorageService),a(5,d.IExtensionService),a(6,h.IBackupFileService),a(7,m.INotificationService),a(8,g.ICommandService),a(9,f.IFileService),a(10,w.ITextFileService),a(11,l.IWorkspacesService),a(12,v.IWorkbenchEnvironmentService),a(13,b.IFileDialogService),a(14,b.IDialogService),a(15,S.ILifecycleService),a(16,y.ILabelService),a(17,E.IHostService)],e)})();t.NativeWorkspaceEditingService=R,C.registerSingleton(i.IWorkspaceEditingService,R,!0)})),define(e[2137],t([0,1,98,174,30,258,37]),(function(e,t,i,n,s,r,l){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.NativeWorkspacesService=void 0
+;let c=(()=>{let e=class{constructor(e,t){return r.createChannelSender(e.getChannel("workspaces"),{context:t.configuration.windowId})}};return e=o([a(0,n.IMainProcessService),a(1,l.IWorkbenchEnvironmentService)],e)})();t.NativeWorkspacesService=c,s.registerSingleton(i.IWorkspacesService,c,!0)})),
+define(e[2138],t([0,1,30,1578,567,84,1526,39,70,163,561,1599,422,110,1533,1545,9,45,588,101,1542,21,1544,359,1550,1534,41,150,1629,1635,2078,1642,1854,2037,1640,206,1638,2014,699,288,287,1641,644,1779,2071,708,706,709,710,1930,695,1621,655,2058,687,1738,2031,1972,1987,686,2055,704,1973,1878,1849,335,1988,281,1778,2004,1890,1797,1870,653,2010,249,137,207,106,2135,1879,2027,2114,1852,1985,2044,1872,2026,398,721,2106,1932,2075,2121,725,2049,2119,724,2088,2084,712,606,714,716,2110,1868,1760,2131,2130,2101,719,2113,723,1775,2124,727,1839,2050,471,2116,1919,1997,1941,276,658,1696,1947,469,2022,2028,1956,2129,1697,1949,1777,1964,1967,1744,2112,2016,1914,2128,1864,1795,2126]),(function(e,t,i,n,o,s,r,a,l,c,d,h,u,g,p,m,f,v,S,b,_,C,y,w,E,I,x,k,D){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),i.registerSingleton(k.IUserDataSyncEnablementService,D.UserDataSyncEnablementService),i.registerSingleton(s.IGlobalExtensionEnablementService,o.GlobalExtensionEnablementService),
+i.registerSingleton(s.IExtensionGalleryService,n.ExtensionGalleryService,!0),i.registerSingleton(a.IContextViewService,r.ContextViewService,!0),i.registerSingleton(l.IListService,l.ListService,!0),i.registerSingleton(c.IEditorWorkerService,d.EditorWorkerServiceImpl),i.registerSingleton(u.IMarkerDecorationsService,h.MarkerDecorationsService),i.registerSingleton(g.IMarkerService,p.MarkerService,!0),i.registerSingleton(f.IContextKeyService,m.ContextKeyService),i.registerSingleton(v.IModelService,S.ModelServiceImpl,!0),i.registerSingleton(b.ITextResourceConfigurationService,_.TextResourceConfigurationService),i.registerSingleton(C.IMenuService,y.MenuService,!0),i.registerSingleton(w.IDownloadService,E.DownloadService,!0),i.registerSingleton(x.IOpenerService,I.OpenerService,!0)})),
+define(e[2146],t([0,1,30,556,1493,1981,482,2138,1968,2134,2054,1844,2e3,1907,1877,2061,1740,468,1853,1896,1736,1887,1767,664,1916,1971,1799,1762,1898,1969,2008,2137,2136,2011,2013,2012,1729,380,1843,1899,1859,1908,1763,1860,1732,2007,1845,1861,1768,1891,2024,1757,1951,1950,1948,2020,2107,2041,1670,1669,2132,2045,1938,1886,2051,1924,1672,2034,1647,1998,1766,1980,1718,1962,1771]),(function(e,t,i,n,o,s,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),i.registerSingleton(n.ICredentialsService,o.KeytarCredentialsService,!0),i.registerSingleton(r.ITitleService,s.TitlebarPart)}))}).call(this);
+//# sourceMappingURL=https://ticino.blob.core.windows.net/sourcemaps/5763d909d5f12fe19f215cbfdd29a91c0fa9208a/core/vs/workbench/workbench.desktop.main.js.map
+                                                                                                                                             �长度小于或等于 <paramref name="source" /> 的长度，并且 <paramref name="source" /> 以 <paramref name="prefix" /> 开始，则为 true；否则为 false。</returns>
+      <param name="source">要在其中搜索的字符串。</param>
+      <param name="prefix">要与 <paramref name="source" /> 的开头进行比较的字符串。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="prefix" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="prefix" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.IsSuffix(System.String,System.String)">
+      <summary>确定指定的源字符串是否以指定的后缀结尾。</summary>
+      <returns>如果 <paramref name="suffix" /> 的长度小于或等于 <paramref name="source" /> 的长度，并且 <paramref name="source" /> 以 <paramref name="suffix" /> 结尾，则为 true；否则为 false。</returns>
+      <param name="source">要在其中搜索的字符串。</param>
+      <param name="suffix">要与 <paramref name="source" /> 的结尾进行比较的字符串。 </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="suffix" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.IsSuffix(System.String,System.String,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值确定指定的源字符串是否以指定的后缀结尾。</summary>
+      <returns>如果 <paramref name="suffix" /> 的长度小于或等于 <paramref name="source" /> 的长度，并且 <paramref name="source" /> 以 <paramref name="suffix" /> 结尾，则为 true；否则为 false。</returns>
+      <param name="source">要在其中搜索的字符串。</param>
+      <param name="suffix">要与 <paramref name="source" /> 的结尾进行比较的字符串。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="suffix" />。<paramref name="options" /> 可以为其自身使用的枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="suffix" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char)">
+      <summary>搜索指定的字符，并返回整个源字符串内最后一个匹配项的从零开始的索引。</summary>
+      <returns>如果找到，则为 <paramref name="value" /> 在 <paramref name="source" /> 内的最后一个匹配项从零开始的索引；否则为 -1。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的字符，并返回整个源字符串内最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在<paramref name="source" /> 中找到 <paramref name="value" /> 的最后一个匹配项，则为从零开始的索引；否则为 -1。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char,System.Int32,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的字符，并返回源字符串内从字符串开头到指定的索引位置这一部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在 <paramref name="source" /> 中从 <paramref name="source" /> 一直到 <paramref name="startIndex" /> 的开始这部分找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char,System.Int32,System.Int32)">
+      <summary>搜索指定的字符，并返回源字符串内包含指定的元素数、以指定的索引位置结尾的部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>在包含 <paramref name="count" /> 所指定的元素数并以 <paramref name="startIndex" /> 结尾的这部分 <paramref name="source" /> 中，如果找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="count">要搜索的部分中的元素数。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。- 或 - <paramref name="count" /> 小于零。- 或 - <paramref name="startIndex" /> 和 <paramref name="count" /> 指定的不是 <paramref name="source" /> 中的有效部分。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.Char,System.Int32,System.Int32,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的字符，并返回源字符串内包含所指定元素数、以指定的索引位置结尾的部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在 <paramref name="source" /> 中结束于 <paramref name="startIndex" /> 、包含 <paramref name="count" /> 指定的元素数的部分找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="count">要搜索的部分中的元素数。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。- 或 - <paramref name="count" /> 小于零。- 或 - <paramref name="startIndex" /> 和 <paramref name="count" /> 指定的不是 <paramref name="source" /> 中的有效部分。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.String)">
+      <summary>搜索指定的子字符串，并返回整个源字符串内最后一个匹配项的从零开始的索引。</summary>
+      <returns>如果找到，则为 <paramref name="value" /> 在 <paramref name="source" /> 内的最后一个匹配项从零开始的索引；否则为 -1。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="value" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.String,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的子字符串，并返回整个源字符串内最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在<paramref name="source" /> 中找到 <paramref name="value" /> 的最后一个匹配项，则为从零开始的索引；否则为 -1。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符串。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="value" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.String,System.Int32,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的子字符串，并返回源字符串内从字符串开头到指定的索引位置这一部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在 <paramref name="source" /> 中从 <paramref name="source" /> 一直到 <paramref name="startIndex" /> 的开始这部分找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符串。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="value" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.String,System.Int32,System.Int32)">
+      <summary>搜索指定的子字符串，并返回源字符串内包含指定的元素数、以指定的索引位置结尾的部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>在包含 <paramref name="count" /> 所指定的元素数并以 <paramref name="startIndex" /> 结尾的这部分 <paramref name="source" /> 中，如果找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符串。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="count">要搜索的部分中的元素数。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="value" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。- 或 - <paramref name="count" /> 小于零。- 或 - <paramref name="startIndex" /> 和 <paramref name="count" /> 指定的不是 <paramref name="source" /> 中的有效部分。</exception>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.LastIndexOf(System.String,System.String,System.Int32,System.Int32,System.Globalization.CompareOptions)">
+      <summary>使用指定的 <see cref="T:System.Globalization.CompareOptions" /> 值，搜索指定的子字符串，并返回源字符串内包含所指定元素数、以指定的索引位置结尾的部分中最后一个匹配项的从零开始的索引。</summary>
+      <returns>使用指定的比较选项，如果在 <paramref name="source" /> 中结束于 <paramref name="startIndex" /> 、包含 <paramref name="count" /> 指定的元素数的部分找到 <paramref name="value" /> 的最后一个匹配项，则为该项的从零开始的索引；否则为 -1。如果 <paramref name="value" /> 为可忽略字符，则将返回 <paramref name="startIndex" />。</returns>
+      <param name="source">要搜索的字符串。</param>
+      <param name="value">要在 <paramref name="source" /> 中定位的字符串。</param>
+      <param name="startIndex">向后搜索的从零开始的起始索引。</param>
+      <param name="count">要搜索的部分中的元素数。</param>
+      <param name="options">一个值，用于定义应如何比较 <paramref name="source" /> 和 <paramref name="value" />。<paramref name="options" /> 可以为枚举值 <see cref="F:System.Globalization.CompareOptions.Ordinal" />，或为以下一个或多个值的按位组合：<see cref="F:System.Globalization.CompareOptions.IgnoreCase" />、<see cref="F:System.Globalization.CompareOptions.IgnoreSymbols" />、<see cref="F:System.Globalization.CompareOptions.IgnoreNonSpace" />、<see cref="F:System.Globalization.CompareOptions.IgnoreWidth" /> 和 <see cref="F:System.Globalization.CompareOptions.IgnoreKanaType" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="source" /> 为 null。- 或 - <paramref name="value" /> 为 null。 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="startIndex" /> 超出了 <paramref name="source" /> 的有效索引范围。- 或 - <paramref name="count" /> 小于零。- 或 - <paramref name="startIndex" /> 和 <paramref name="count" /> 指定的不是 <paramref name="source" /> 中的有效部分。 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="options" /> 包含无效的 <see cref="T:System.Globalization.CompareOptions" /> 值。</exception>
+    </member>
+    <member name="P:System.Globalization.CompareInfo.Name">
+      <summary>获取用于通过 <see cref="T:System.Globalization.CompareInfo" /> 对象执行排序操作的区域性的名称。</summary>
+      <returns>区域性的名称。</returns>
+    </member>
+    <member name="M:System.Globalization.CompareInfo.ToString">
+      <summary>返回表示当前 <see cref="T:System.Globalization.CompareInfo" /> 对象的字符串。</summary>
+      <returns>表示当前 <see cref="T:System.Globalization.CompareInfo" /> 对象的字符串。</returns>
+    </member>
+    <member name="T:System.Globalization.CompareOptions">
+      <summary>定义要用于 <see cref="T:System.Globalization.CompareInfo" /> 的字符串比较选项。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.IgnoreCase">
+      <summary>指示字符串比较必须忽略大小写。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.IgnoreKanaType">
+      <summary>指示字符串比较必须忽略 Kana 类型。假名类型是指日语平假名和片假名字符，它们表示日语中的语音。平假名用于表示日语自有的短语和字词，而片假名用于表示从其他语言借用的字词，如“computer”或“Internet”。语音既可以用平假名也可以用片假名表示。如果选择该值，则认为一个语音的平假名字符等于同一语音的片假名字符。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.IgnoreNonSpace">
+      <summary>指示字符串比较必须忽略不占空间的组合字符，比如音调符号。Unicode 标准将组合字符定义为与基字符组合起来产生新字符的字符。不占空间的组合字符在呈现时其本身不占用空间位置。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.IgnoreSymbols">
+      <summary>指示字符串比较必须忽略符号，如空白字符、标点符号、货币符号、百分号、数学符号、“&amp;”符等等。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.IgnoreWidth">
+      <summary>指示字符串比较必须忽略字符宽度。例如，日语片假名字符可以写为全角或半角形式。如果选择此值，则认为片假名字符的全角形式等同于半角形式。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.None">
+      <summary>指定字符串比较的默认选项设置。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.Ordinal">
+      <summary>指示必须使用字符串的连续 Unicode UTF-16 编码值进行字符串比较（使用代码单元进行代码单元比较），这样可以提高比较速度，但不能区分区域性。如果 XXXX16 小于 YYYY16，则以“XXXX16”代码单元开头的字符串位于以“YYYY16”代码单元开头的字符串之前。此值必须单独使用，而不能与其他 <see cref="T:System.Globalization.CompareOptions" /> 值组合在一起。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.OrdinalIgnoreCase">
+      <summary>字符串比较必须忽略大小写，然后执行序号比较。此方法相当于先使用固定区域性将字符串转换为大写，然后再对结果执行序号比较。</summary>
+    </member>
+    <member name="F:System.Globalization.CompareOptions.StringSort">
+      <summary>指示字符串比较必须使用字符串排序算法。在字符串排序中，连字符、撇号以及其他非字母数字符号都排在字母数字字符之前。</summary>
+    </member>
+    <member name="T:System.Globalization.CultureInfo">
+      <summary>提供有关特定区域性的信息（对于非托管代码开发，则称为“区域设置”）。这些信息包括区域性的名称、书写系统、使用的日历以及对日期和排序字符串的格式化设置。</summary>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.#ctor(System.String)">
+      <summary>根据由名称指定的区域性初始化 <see cref="T:System.Globalization.CultureInfo" /> 类的新实例。</summary>
+      <param name="name">预定义的 <see cref="T:System.Globalization.CultureInfo" /> 名称、现有 <see cref="T:System.Globalization.CultureInfo" /> 的 <see cref="P:System.Globalization.CultureInfo.Name" /> 或仅 Windows 区域性名称。<paramref name="name" /> 不区分大小写。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="name" /> is null. </exception>
+      <exception cref="T:System.Globalization.CultureNotFoundException">
+        <paramref name="name" /> is not a valid culture name.For more information, see the Notes to Callers section.</exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.Calendar">
+      <summary>获取区域性使用的默认日历。</summary>
+      <returns>表示区域性使用的默认日历的 <see cref="T:System.Globalization.Calendar" />。</returns>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.Clone">
+      <summary>创建当前 <see cref="T:System.Globalization.CultureInfo" /> 的副本。</summary>
+      <returns>当前 <see cref="T:System.Globalization.CultureInfo" /> 的副本。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.CompareInfo">
+      <summary>获取为区域性定义如何比较字符串的 <see cref="T:System.Globalization.CompareInfo" />。</summary>
+      <returns>为区域性定义如何比较字符串的 <see cref="T:System.Globalization.CompareInfo" />。</returns>
+      <PermissionSet>
+        <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode" />
+      </PermissionSet>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.CurrentCulture">
+      <summary>获取表示当前线程使用的区域性的 <see cref="T:System.Globalization.CultureInfo" /> 对象。</summary>
+      <returns>表示当前线程使用的区域性的对象。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is set to null.</exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.CurrentUICulture">
+      <summary>获取或设置 <see cref="T:System.Globalization.CultureInfo" /> 对象，该对象表示资源管理器在运行时查找区域性特定资源时所用的当前用户接口区域性。</summary>
+      <returns>资源管理器用于在运行时查找查找区域性特定资源的区域性。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is set to null.</exception>
+      <exception cref="T:System.ArgumentException">The property is set to a culture name that cannot be used to locate a resource file.Resource filenames can include only letters, numbers, hyphens, or underscores.</exception>
+      <PermissionSet>
+        <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode" />
+      </PermissionSet>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.DateTimeFormat">
+      <summary>获取或设置 <see cref="T:System.Globalization.DateTimeFormatInfo" />，它定义适合区域性的、显示日期和时间的格式。</summary>
+      <returns>一个 <see cref="T:System.Globalization.DateTimeFormatInfo" />，它定义适合区域性的、显示日期和时间的格式。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> property or any of the <see cref="T:System.Globalization.DateTimeFormatInfo" /> properties is set, and the <see cref="T:System.Globalization.CultureInfo" /> is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.DefaultThreadCurrentCulture">
+      <summary>获取或设置当前应用程序域中线程的默认区域性。</summary>
+      <returns>如果当前系统区域性为应用程序域中的默认线程区域性，则为当前应用程序中线程的默认区域性或 null。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture">
+      <summary>获取或设置当前应用程序域中线程的默认 UI 区域性。</summary>
+      <returns>如果当前系统 UI 区域性为当前应用程序域中的默认线程 UI 区域性，则当前应用程序域中线程的默认 UI 区域性或 null。</returns>
+      <exception cref="T:System.ArgumentException">In a set operation, the <see cref="P:System.Globalization.CultureInfo.Name" /> property value is invalid. </exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.DisplayName">
+      <summary>获取完整的本地化区域性名称。</summary>
+      <returns>格式为 languagefull [country/regionfull] 的完整本地化区域性名称，其中 languagefull 是语言的全名，country/regionfull 是国家/地区的全名。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.EnglishName">
+      <summary>获取格式为 languagefull [country/regionfull] 的英语区域性名称。</summary>
+      <returns>格式为 languagefull [country/regionfull] 的英语区域性名称，其中 languagefull 是语言的全名，country/regionfull 是国家/地区的全名。</returns>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.Equals(System.Object)">
+      <summary>确定指定的对象是否与当前 <see cref="T:System.Globalization.CultureInfo" /> 具有相同的区域性。</summary>
+      <returns>如果 <paramref name="value" /> 与当前 <see cref="T:System.Globalization.CultureInfo" /> 具有相同的区域性，则为 true；否则为 false。</returns>
+      <param name="value">将与当前 <see cref="T:System.Globalization.CultureInfo" /> 进行比较的对象。</param>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.GetFormat(System.Type)">
+      <summary>获取一个定义如何格式化指定类型的对象。</summary>
+      <returns>
+        <see cref="P:System.Globalization.CultureInfo.NumberFormat" /> 属性的值，如果 <paramref name="formatType" /> 是 <see cref="T:System.Globalization.NumberFormatInfo" /> 类的 <see cref="T:System.Type" /> 对象，则该属性为包含当前 <see cref="T:System.Globalization.CultureInfo" /> 的默认数字格式信息的 <see cref="T:System.Globalization.NumberFormatInfo" />。- 或 - <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> 属性的值，如果 <paramref name="formatType" /> 是 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 类的 <see cref="T:System.Type" /> 对象，则该属性为包含当前 <see cref="T:System.Globalization.CultureInfo" /> 的默认日期和时间格式信息的 <see cref="T:System.Globalization.DateTimeFormatInfo" />。- 或 - 如果 <paramref name="formatType" /> 是其他任何对象，则为 null。</returns>
+      <param name="formatType">要为其获取格式化对象的 <see cref="T:System.Type" />。此方法仅支持 <see cref="T:System.Globalization.NumberFormatInfo" /> 和 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 两种类型。</param>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.GetHashCode">
+      <summary>用作当前 <see cref="T:System.Globalization.CultureInfo" /> 的哈希函数，适合用在哈希算法和数据结构（如哈希表）中。</summary>
+      <returns>当前 <see cref="T:System.Globalization.CultureInfo" /> 的哈希代码。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.InvariantCulture">
+      <summary>获取不依赖于区域性（固定）的 <see cref="T:System.Globalization.CultureInfo" /> 对象。</summary>
+      <returns>不依赖于区域性（固定）的对象。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.IsNeutralCulture">
+      <summary>获取一个值，该值指示当前 <see cref="T:System.Globalization.CultureInfo" /> 是否表示非特定区域性。</summary>
+      <returns>如果当前 <see cref="T:System.Globalization.CultureInfo" /> 表示非特定区域性，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.IsReadOnly">
+      <summary>获取一个值，该值指示当前 <see cref="T:System.Globalization.CultureInfo" /> 是否为只读。</summary>
+      <returns>如果当前 true 为只读，则为 <see cref="T:System.Globalization.CultureInfo" />；否则为 false。默认值为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.Name">
+      <summary>获取格式为 languagecode2-country/regioncode2 的区域性名称。</summary>
+      <returns>格式为 languagecode2-country/regioncode2 的区域性名称。languagecode2 是派生自 ISO 639-1 的小写双字母代码。country/regioncode2 派生自 ISO 3166，一般包含两个大写字母，或一个 BCP-47 语言标记。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.NativeName">
+      <summary>获取为区域性设置的显示名称，它由语言、国家/地区以及可选脚本组成。</summary>
+      <returns>区域性名称。由语言的全名、国家/地区的全名以及可选脚本组成。有关其格式的讨论，请参见对 <see cref="T:System.Globalization.CultureInfo" /> 类的说明。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.NumberFormat">
+      <summary>获取或设置 <see cref="T:System.Globalization.NumberFormatInfo" />，它定义适合区域性的、显示数字、货币和百分比的格式。</summary>
+      <returns>一个 <see cref="T:System.Globalization.NumberFormatInfo" />，它定义适合区域性的、显示数字、货币和百分比的格式。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The <see cref="P:System.Globalization.CultureInfo.NumberFormat" /> property or any of the <see cref="T:System.Globalization.NumberFormatInfo" /> properties is set, and the <see cref="T:System.Globalization.CultureInfo" /> is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.OptionalCalendars">
+      <summary>获取该区域性可使用的日历的列表。</summary>
+      <returns>类型为 <see cref="T:System.Globalization.Calendar" /> 的数组，表示当前 <see cref="T:System.Globalization.CultureInfo" /> 代表的区域性所使用的日历。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.Parent">
+      <summary>获取表示当前 <see cref="T:System.Globalization.CultureInfo" /> 的父区域性的 <see cref="T:System.Globalization.CultureInfo" />。</summary>
+      <returns>表示当前 <see cref="T:System.Globalization.CultureInfo" /> 的父区域性的 <see cref="T:System.Globalization.CultureInfo" />。</returns>
+      <PermissionSet>
+        <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode" />
+      </PermissionSet>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.ReadOnly(System.Globalization.CultureInfo)">
+      <summary>返回指定的 <see cref="T:System.Globalization.CultureInfo" /> 对象周围的只读包装。</summary>
+      <returns>
+        <paramref name="ci" /> 周围的只读 <see cref="T:System.Globalization.CultureInfo" /> 包装。</returns>
+      <param name="ci">要包装的 <see cref="T:System.Globalization.CultureInfo" /> 对象。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="ci" /> is null. </exception>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.TextInfo">
+      <summary>获取定义与区域性关联的书写体系的 <see cref="T:System.Globalization.TextInfo" />。</summary>
+      <returns>定义与区域性关联的书写体系的 <see cref="T:System.Globalization.TextInfo" />。</returns>
+      <PermissionSet>
+        <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode" />
+      </PermissionSet>
+    </member>
+    <member name="M:System.Globalization.CultureInfo.ToString">
+      <summary>返回一个字符串，该字符串包含当前 <see cref="T:System.Globalization.CultureInfo" /> 的名称，其格式为 languagecode2-country/regioncode2。</summary>
+      <returns>包含当前 <see cref="T:System.Globalization.CultureInfo" /> 名称的字符串。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureInfo.TwoLetterISOLanguageName">
+      <summary>获取当前 <see cref="T:System.Globalization.CultureInfo" /> 的语言的由两个字母构成的 ISO 639-1 代码。</summary>
+      <returns>当前 <see cref="T:System.Globalization.CultureInfo" /> 的语言的由两个字母构成的 ISO 639-1 代码。</returns>
+    </member>
+    <member name="T:System.Globalization.CultureNotFoundException">
+      <summary>当调用的方法尝试构造一个计算机上不可用的区域性时引发的异常。</summary>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor">
+      <summary>初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例，将其消息字符串设置为系统提供的消息。</summary>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor(System.String)">
+      <summary>使用指定的错误消息初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例。</summary>
+      <param name="message">与此异常一起显示的错误消息。</param>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor(System.String,System.Exception)">
+      <summary>使用指定的错误消息和对作为此异常原因的内部异常的引用来初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例。</summary>
+      <param name="message">与此异常一起显示的错误消息。</param>
+      <param name="innerException">导致当前异常的异常。如果 <paramref name="innerException" /> 参数不为空引用，则在处理内部异常的 catch 块中引发当前异常。</param>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor(System.String,System.String)">
+      <summary>使用指定的错误消息和导致此异常的参数的名称来初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例。</summary>
+      <param name="paramName">导致当前异常的参数的名称。</param>
+      <param name="message">与此异常一起显示的错误消息。</param>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor(System.String,System.String,System.Exception)">
+      <summary>使用指定的错误消息、无效的区域性名称和对导致此异常的内部异常的引用来初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例。</summary>
+      <param name="message">与此异常一起显示的错误消息。</param>
+      <param name="invalidCultureName">找不到的区域性名称。</param>
+      <param name="innerException">导致当前异常的异常。如果 <paramref name="innerException" /> 参数不为空引用，则在处理内部异常的 catch 块中引发当前异常。</param>
+    </member>
+    <member name="M:System.Globalization.CultureNotFoundException.#ctor(System.String,System.String,System.String)">
+      <summary>使用指定的错误消息、无效的区域性名称和导致此异常的参数的名称来初始化 <see cref="T:System.Globalization.CultureNotFoundException" /> 类的新实例。</summary>
+      <param name="paramName">导致当前异常的参数的名称。</param>
+      <param name="invalidCultureName">找不到的区域性名称。</param>
+      <param name="message">与此异常一起显示的错误消息。</param>
+    </member>
+    <member name="P:System.Globalization.CultureNotFoundException.InvalidCultureName">
+      <summary>获取找不到的区域性名称。</summary>
+      <returns>无效的区域性名称。</returns>
+    </member>
+    <member name="P:System.Globalization.CultureNotFoundException.Message">
+      <summary>获取解释异常原因的错误消息。</summary>
+      <returns>描述异常的详细信息的文本字符串。</returns>
+    </member>
+    <member name="T:System.Globalization.DateTimeFormatInfo">
+      <summary>提供有关日期和时间值格式的区域性特定信息。</summary>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.#ctor">
+      <summary>初始化不依赖于区域性的（固定的）<see cref="T:System.Globalization.DateTimeFormatInfo" /> 类的新可写实例。</summary>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.AbbreviatedDayNames">
+      <summary>获取或设置 <see cref="T:System.String" /> 类型的一维数组，它包含周中各天的特定于区域性的缩写名称。</summary>
+      <returns>
+        <see cref="T:System.String" /> 类型的一维数组，它包含周中各天的特定于区域性的缩写名称。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 的数组包含“Sun”、“Mon”、“Tue”、“Wed”、“Thu”、“Fri”和“Sat”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.ArgumentException">The property is being set to an array that is multidimensional or that has a length that is not exactly 7. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthGenitiveNames">
+      <summary>获取或设置与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的月份缩写名称的字符串数组。</summary>
+      <returns>月份缩写名称的数组。</returns>
+      <exception cref="T:System.ArgumentException">In a set operation, the array is multidimensional or has a length that is not exactly 13.</exception>
+      <exception cref="T:System.ArgumentNullException">In a set operation, the array or one of the elements of the array is null.</exception>
+      <exception cref="T:System.InvalidOperationException">In a set operation, the current <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only.</exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.AbbreviatedMonthNames">
+      <summary>获取或设置一维字符串数组，它包含各月的特定于区域性的缩写名称。</summary>
+      <returns>一个具有 13 个元素的一维字符串数组，它包含各月的特定于区域性的缩写名称。对于 12 个月的日历，数组的第 13 个元素是一个空字符串。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 的数组包含“Jan”、“Feb”、“Mar”、“Apr”、“May”、“Jun”、“Jul”、“Aug”、“Sep”、“Oct”、“Nov”、“Dec”和“”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.ArgumentException">The property is being set to an array that is multidimensional or that has a length that is not exactly 13. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.AMDesignator">
+      <summary>获取或设置表示处于“上午”（中午前）的各小时的字符串指示符。</summary>
+      <returns>表示属于上午的各小时的字符串指示符。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 默认为“AM”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.Calendar">
+      <summary>获取或设置用于当前区域性的日历。</summary>
+      <returns>用于当前区域性的日历。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 默认为 <see cref="T:System.Globalization.GregorianCalendar" /> 对象。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The property is being set to a <see cref="T:System.Globalization.Calendar" /> object that is not valid for the current culture. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule">
+      <summary>获取或设置一个值，该值指定使用哪个规则确定该年的第一个日历周。</summary>
+      <returns>确定该年的第一个日历周的值。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 的默认值是 <see cref="F:System.Globalization.CalendarWeekRule.FirstDay" />。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">The property is being set to a value that is not a valid <see cref="T:System.Globalization.CalendarWeekRule" /> value. </exception>
+      <exception cref="T:System.InvalidOperationException">In a set operation, the current <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only.</exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.Clone">
+      <summary>创建 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 的浅表副本。</summary>
+      <returns>从原始 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 复制的新 <see cref="T:System.Globalization.DateTimeFormatInfo" />。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.CurrentInfo">
+      <summary>获取基于当前区域性对值进行格式设置的只读的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象。</summary>
+      <returns>一个基于当前线程的 <see cref="T:System.Globalization.CultureInfo" /> 对象的只读的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.DayNames">
+      <summary>获取或设置一维字符串数组，它包含该周中各天的特定于区域性的完整名称。</summary>
+      <returns>一个一维字符串数组，它包含周中各天的特定于区域性的完整名称。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 数组包含“Sunday”、“Monday”、“Tuesday”、“Wednesday”、“Thursday”、“Friday”和“Saturday”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.ArgumentException">The property is being set to an array that is multidimensional or that has a length that is not exactly 7. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek">
+      <summary>获取或设置一周的第一天。</summary>
+      <returns>表示一周的第一天的枚举值。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 默认为 <see cref="F:System.DayOfWeek.Sunday" />。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">The property is being set to a value that is not a valid <see cref="T:System.DayOfWeek" /> value. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.FullDateTimePattern">
+      <summary>为长日期和长时间值获取或设置自定义格式字符串。</summary>
+      <returns>长日期和时间值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedDayName(System.DayOfWeek)">
+      <summary>基于与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的区域性，返回周中指定日期的区域性特定的缩写名称。</summary>
+      <returns>由 <paramref name="dayofweek" /> 表示的周中日期的区域性特定的缩写名称。</returns>
+      <param name="dayofweek">一个 <see cref="T:System.DayOfWeek" /> 值。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="dayofweek" /> is not a valid <see cref="T:System.DayOfWeek" /> value. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedEraName(System.Int32)">
+      <summary>返回包含指定纪元的缩写名称的字符串（如果缩写名称存在）。</summary>
+      <returns>包含指定纪元的缩写名称的字符串（如果缩写名称存在）。- 或 -包含纪元的完整名称的字符串（如果缩写名称不存在）。</returns>
+      <param name="era">表示纪元的整数。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="era" /> does not represent a valid era in the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetAbbreviatedMonthName(System.Int32)">
+      <summary>基于与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的区域性，返回指定月份的区域性特定的缩写名称。</summary>
+      <returns>由 <paramref name="month" /> 表示的月份的区域性特定的缩写名称。</returns>
+      <param name="month">一个从 1 到 13 的整数，表示要检索的月份的名称。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="month" /> is less than 1 or greater than 13. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetDayName(System.DayOfWeek)">
+      <summary>基于与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的区域性，返回周中指定日期的区域性特定的完整名称。</summary>
+      <returns>由 <paramref name="dayofweek" /> 表示的周中日期的区域性特定的完整名称。</returns>
+      <param name="dayofweek">一个 <see cref="T:System.DayOfWeek" /> 值。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="dayofweek" /> is not a valid <see cref="T:System.DayOfWeek" /> value. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetEra(System.String)">
+      <summary>返回表示指定纪元的整数。</summary>
+      <returns>如果 <paramref name="eraName" /> 有效，则为表示纪元的整数；否则为 -1。</returns>
+      <param name="eraName">包含纪元名称的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="eraName" /> is null. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetEraName(System.Int32)">
+      <summary>返回包含指定纪元名称的字符串。</summary>
+      <returns>包含纪元名称的字符串。</returns>
+      <param name="era">表示纪元的整数。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="era" /> does not represent a valid era in the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetFormat(System.Type)">
+      <summary>返回指定类型的对象，它提供日期和时间格式化服务。</summary>
+      <returns>如果 <paramref name="formatType" /> 与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 的类型相同，则为当前对象；否则为 null。</returns>
+      <param name="formatType">所需格式化服务的类型。</param>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetInstance(System.IFormatProvider)">
+      <summary>返回与指定的 <see cref="T:System.IFormatProvider" /> 关联的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象。</summary>
+      <returns>一个与 <see cref="T:System.IFormatProvider" /> 关联的 <see cref="T:System.Globalization.DateTimeFormatInfo" />。</returns>
+      <param name="provider">获取 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象的 <see cref="T:System.IFormatProvider" />。- 或 - 要获取 <see cref="P:System.Globalization.DateTimeFormatInfo.CurrentInfo" /> 的 null。</param>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.GetMonthName(System.Int32)">
+      <summary>基于与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的区域性，返回指定月份的区域性特定的完整名称。</summary>
+      <returns>由 <paramref name="month" /> 表示的月份的区域性特定的完整名称。</returns>
+      <param name="month">一个从 1 到 13 的整数，表示要检索的月份的名称。</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="month" /> is less than 1 or greater than 13. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.InvariantInfo">
+      <summary>获取不依赖于区域性的（固定）默认只读的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象。</summary>
+      <returns>不依赖于区域性的（固定的）默认只读对象。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.IsReadOnly">
+      <summary>获取一个值，该值指示 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象是否为只读。</summary>
+      <returns>如果 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象为只读，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.LongDatePattern">
+      <summary>获取或设置长日期值的自定义格式字符串。</summary>
+      <returns>长日期值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.LongTimePattern">
+      <summary>为长时间值获取或设置自定义格式字符串。</summary>
+      <returns>长时间值的格式模式。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.MonthDayPattern">
+      <summary>获取或设置月份和日期值的自定义格式字符串。</summary>
+      <returns>月份和日期值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.MonthGenitiveNames">
+      <summary>获取或设置与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的月份名称的字符串数组。</summary>
+      <returns>月份名称的字符串数组。</returns>
+      <exception cref="T:System.ArgumentException">In a set operation, the array is multidimensional or has a length that is not exactly 13.</exception>
+      <exception cref="T:System.ArgumentNullException">In a set operation, the array or one of its elements is null.</exception>
+      <exception cref="T:System.InvalidOperationException">In a set operation, the current <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only.</exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.MonthNames">
+      <summary>获取或设置 <see cref="T:System.String" /> 类型的一维数组，它包含月份的特定于区域性的完整名称。</summary>
+      <returns>一个类型 <see cref="T:System.String" /> 的一维数组，它包含月份的特定于区域性的完整名称。在 12 个月的日历中，数组的第 13 个元素是一个空字符串。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 数组包含“January”、“February”、“March”、“April”、“May”、“June”、“July”、“August”、“September”、“October”、“November”、“December”和“”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.ArgumentException">The property is being set to an array that is multidimensional or that has a length that is not exactly 13. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.PMDesignator">
+      <summary>获取或设置表示处于“下午”（中午后）的各小时的字符串指示符。</summary>
+      <returns>表示处于“下午”（中午后）的各小时的字符串指示符。<see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo" /> 默认为“PM”。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="M:System.Globalization.DateTimeFormatInfo.ReadOnly(System.Globalization.DateTimeFormatInfo)">
+      <summary>返回只读的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 包装。</summary>
+      <returns>一个只读的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 包装。</returns>
+      <param name="dtfi">要包装的 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象。。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="dtfi" /> is null. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.RFC1123Pattern">
+      <summary>获取自定义的格式字符串，该字符串用于基于 Internet 工程任务组 (IETF) 征求意见文档 (RFC) 1123 规范的时间值。</summary>
+      <returns>基于 IETF RFC 1123 规范的时间值的自定义格式字符串。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.ShortDatePattern">
+      <summary>获取或设置短日期值的自定义格式字符串。</summary>
+      <returns>短日期值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.ShortestDayNames">
+      <summary>获取或设置与当前 <see cref="T:System.Globalization.DateTimeFormatInfo" /> 对象关联的唯一最短日期缩写名称的字符串数组。</summary>
+      <returns>日期名称的字符串数组。</returns>
+      <exception cref="T:System.ArgumentException">In a set operation, the array does not have exactly seven elements.</exception>
+      <exception cref="T:System.ArgumentNullException">In a set operation, the value array or one of the elements of the value array is null.</exception>
+      <exception cref="T:System.InvalidOperationException">In a set operation, the current <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only.</exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.ShortTimePattern">
+      <summary>获取或设置短时间值的自定义格式字符串。</summary>
+      <returns>短时间值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.SortableDateTimePattern">
+      <summary>获取可排序数据和时间值的自定义格式字符串。</summary>
+      <returns>可排序的日期和时间值的自定义格式字符串。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.UniversalSortableDateTimePattern">
+      <summary>获取通用的可排序数据和时间字符串的自定义格式字符串。</summary>
+      <returns>通用的可排序的日期和时间字符串的自定义格式字符串。</returns>
+    </member>
+    <member name="P:System.Globalization.DateTimeFormatInfo.YearMonthPattern">
+      <summary>获取或设置年份和月份值的自定义格式字符串。</summary>
+      <returns>年份和月份值的自定义格式字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The property is being set to null. </exception>
+      <exception cref="T:System.InvalidOperationException">The property is being set and the <see cref="T:System.Globalization.DateTimeFormatInfo" /> object is read-only. </exception>
+    </member>
+    <member name="T:System.Globalization.NumberFormatInfo">
+      <summary>提供用于对数字值进行格式设置和分析的区域性特定信息。</summary>
+    </member>
+    <member name="M:System.Globalization.NumberFormatInfo.#ctor">
+      <summary>初始化不依赖于区域性的（固定的）<see cref="T:System.Globalization.NumberFormatInfo" /> 类的新可写实例。</summary>
+    </member>
+    <member name="M:System.Globalization.NumberFormatInfo.Clone">
+      <summary>创建 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象的浅表副本。</summary>
+      <returns>从原始 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象复制的新对象。</returns>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyDecimalDigits">
+      <summary>获取或设置在货币值中使用的小数位数。</summary>
+      <returns>要在货币值中使用的小数位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值为 2。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 99 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator">
+      <summary>获取或设置要在货币值中用作小数分隔符的字符串。</summary>
+      <returns>要在货币值中用作小数分隔符的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“.”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+      <exception cref="T:System.ArgumentException">此属性当前设置为空字符串。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator">
+      <summary>获取或设置在货币值中隔开小数点左边的位数组的字符串。</summary>
+      <returns>在货币值中隔开小数点左边的位数组的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“,”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes">
+      <summary>获取或设置货币值中小数点左边每一组的位数。</summary>
+      <returns>货币值中小数点左边每一组的位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是一个一维数组，该数组只包含一个设置为 3 的元素。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.ArgumentException">试图设置该属性，但此数组包含一个小于 0 或大于 9 的项。- 或 - 试图设置该属性，但此数组包含一个设置为 0 的项（最后一项除外）。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern">
+      <summary>获取或设置负货币值的格式模式。</summary>
+      <returns>负货币值的格式模式。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是 0，它表示“($n)”，其中“$”是 <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />，<paramref name="n" /> 是一个数字。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">属性被设置为小于 0 或大于 15 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern">
+      <summary>获取或设置正货币值的格式模式。</summary>
+      <returns>正货币值的格式模式。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是 0，它表示“$n”，其中“$”是 <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />，<paramref name="n" /> 是一个数字。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 3 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrencySymbol">
+      <summary>获取或设置用作货币符号的字符串。</summary>
+      <returns>用作货币符号的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“¤”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.CurrentInfo">
+      <summary>获取基于当前区域性对值进行格式设置的只读的 <see cref="T:System.Globalization.NumberFormatInfo" />。</summary>
+      <returns>基于当前线程的区域性的只读的 <see cref="T:System.Globalization.NumberFormatInfo" />。</returns>
+    </member>
+    <member name="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)">
+      <summary>获取提供数字格式化服务的指定类型的对象。</summary>
+      <returns>如果 <paramref name="formatType" /> 与当前 <see cref="T:System.Globalization.NumberFormatInfo" /> 的类型相同，则为当前 <see cref="T:System.Globalization.NumberFormatInfo" />；否则为 null。</returns>
+      <param name="formatType">所需格式化服务的 <see cref="T:System.Type" />。</param>
+    </member>
+    <member name="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)">
+      <summary>获取与指定 <see cref="T:System.Globalization.NumberFormatInfo" /> 关联的 <see cref="T:System.IFormatProvider" />。</summary>
+      <returns>与指定 <see cref="T:System.Globalization.NumberFormatInfo" /> 关联的 <see cref="T:System.IFormatProvider" />。</returns>
+      <param name="formatProvider">用于获取 <see cref="T:System.Globalization.NumberFormatInfo" /> 的 <see cref="T:System.IFormatProvider" />。- 或 - 要获取 <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" /> 的 null。</param>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.InvariantInfo">
+      <summary>获取不依赖于区域性的（固定）只读的 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象。</summary>
+      <returns>不依赖于区域性的（固定的）默认只读对象。</returns>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.IsReadOnly">
+      <summary>获取一个值，该值指示 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是否为只读。</summary>
+      <returns>如果 true 是只读的，则为 <see cref="T:System.Globalization.NumberFormatInfo" />；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NaNSymbol">
+      <summary>获取或设置表示 IEEE NaN（非数字）值的字符串。</summary>
+      <returns>表示 IEEE NaN（非数字）值的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“NaN”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol">
+      <summary>获取或设置表示负无穷大的字符串。</summary>
+      <returns>表示负无穷大的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“Infinity”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NegativeSign">
+      <summary>获取或设置表示关联数字是负值的字符串。</summary>
+      <returns>表示关联数字是负值的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“-”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NumberDecimalDigits">
+      <summary>获取或设置在数值中使用的小数位数。</summary>
+      <returns>在数值中使用的小数位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值为 2。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 99 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator">
+      <summary>获取或设置在数值中用作小数分隔符的字符串。</summary>
+      <returns>在数值中用作小数分隔符的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“.”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+      <exception cref="T:System.ArgumentException">此属性当前设置为空字符串。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator">
+      <summary>获取或设置在数值中隔开小数点左边的位数组的字符串。</summary>
+      <returns>在数值中隔开小数点左边的位数组的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“,”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NumberGroupSizes">
+      <summary>获取或设置数值中小数点左边每一组的位数。</summary>
+      <returns>数值中小数点左边每一组的位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是一个一维数组，该数组只包含一个设置为 3 的元素。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.ArgumentException">试图设置该属性，但此数组包含一个小于 0 或大于 9 的项。- 或 - 试图设置该属性，但此数组包含一个设置为 0 的项（最后一项除外）。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.NumberNegativePattern">
+      <summary>获取或设置负数值的格式模式。</summary>
+      <returns>负数值的格式模式。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 4 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentDecimalDigits">
+      <summary>获取或设置在百分比值中使用的小数位数。</summary>
+      <returns>要在百分比值中使用的小数位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值为 2。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 99 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentDecimalSeparator">
+      <summary>获取或设置在百分比值中用作小数点分隔符的字符串。</summary>
+      <returns>在百分比值中用作小数分隔符的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“.”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+      <exception cref="T:System.ArgumentException">此属性当前设置为空字符串。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentGroupSeparator">
+      <summary>获取或设置在百分比值中隔离小数点左边数字组的字符串。</summary>
+      <returns>在百分比值中隔开小数点左边的位数组的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“,”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentGroupSizes">
+      <summary>获取或设置在百分比值中小数点左边每一组的位数。</summary>
+      <returns>百分比值中小数点左边的每一组的位数。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是一个一维数组，该数组只包含一个设置为 3 的元素。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.ArgumentException">试图设置该属性，但此数组包含一个小于 0 或大于 9 的项。- 或 - 试图设置该属性，但此数组包含一个设置为 0 的项（最后一项除外）。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentNegativePattern">
+      <summary>获取或设置负百分比值的格式模式。</summary>
+      <returns>负百分比值的格式模式。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是 0，它表示“-n %”，其中“%”是 <see cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />，<paramref name="n" /> 是一个数字。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">属性被设置为小于 0 或大于 11 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentPositivePattern">
+      <summary>获取或设置正百分比值的格式模式。</summary>
+      <returns>正百分比值的格式模式。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 的默认值是 0，它表示“n %”，其中“%”是 <see cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />，<paramref name="n" /> 是一个数字。</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">该属性被设置为小于 0 或大于 3 的值。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PercentSymbol">
+      <summary>获取或设置用作百分比符号的字符串。</summary>
+      <returns>用作百分比符号的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“%”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PerMilleSymbol">
+      <summary>获取或设置用作千分比符号的字符串。</summary>
+      <returns>用作千分比符号的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“‰”，它是 Unicode 字符 U+2030。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol">
+      <summary>获取或设置表示正无穷大的字符串。</summary>
+      <returns>表示正无穷大的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“Infinity”。</returns>
+      <exception cref="T:System.ArgumentNullException">该属性被设置为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="P:System.Globalization.NumberFormatInfo.PositiveSign">
+      <summary>获取或设置指示关联数字是正值的字符串。</summary>
+      <returns>指示关联数字是正值的字符串。<see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" /> 默认为“+”。</returns>
+      <exception cref="T:System.ArgumentNullException">在设置操作中，要分配的值为 null。</exception>
+      <exception cref="T:System.InvalidOperationException">正在设置该属性，但 <see cref="T:System.Globalization.NumberFormatInfo" /> 对象是只读的。</exception>
+    </member>
+    <member name="M:System.Globalization.NumberFormatInfo.ReadOnly(System.Globalization.NumberFormatInfo)">
+      <summary>返回只读的 <see cref="T:System.Globalization.NumberFormatInfo" /> 包装。</summary>
+      <returns>
+        <paramref name="nfi" /> 周围的只读 <see cref="T:System.Globalization.NumberFormatInfo" /> 包装。</returns>
+      <param name="nfi">要包装的 <see cref="T:System.Globalization.NumberFormatInfo" />。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="nfi" /> 为 null。</exception>
+    </member>
+    <member name="T:System.Globalization.RegionInfo">
+      <summary>包含国家/地区的相关信息。</summary>
+    </member>
+    <member name="M:System.Globalization.RegionInfo.#ctor(System.String)">
+      <summary>基于按名称指定的国家/地区或特定区域性初始化 <see cref="T:System.Globalization.RegionInfo" /> 类的新实例。</summary>
+      <param name="name">包含 ISO 3166 中为国家/地区定义的由两个字母组成的代码的字符串。- 或 -包含特定区域性、自定义区域性或仅适用于 Windows 的区域性的区域性名称的字符串。如果区域性名称未采用 RFC 4646 格式，应用程序应指定整个区域性名称，而不是仅指定国家/地区。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="name" /> is null.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="name" /> is not a valid country/region name or specific culture name.</exception>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.CurrencySymbol">
+      <summary>获取与国家/地区关联的货币符号。</summary>
+      <returns>与国家/地区关联的货币符号。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.CurrentRegion">
+      <summary>获取表示当前线程所使用的国家/地区的 <see cref="T:System.Globalization.RegionInfo" />。</summary>
+      <returns>表示当前线程所使用的国家/地区的 <see cref="T:System.Globalization.RegionInfo" />。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.DisplayName">
+      <summary>获取以 .NET Framework 本地化版本语言表示的国家/地区的全名。</summary>
+      <returns>以 .NET Framework 本地化版本语言表示的国家/地区的全名。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.EnglishName">
+      <summary>获取以英文表示的国家/地区的全名。</summary>
+      <returns>以英文表示的国家/地区的全名。</returns>
+    </member>
+    <member name="M:System.Globalization.RegionInfo.Equals(System.Object)">
+      <summary>确定指定对象与当前 <see cref="T:System.Globalization.RegionInfo" /> 对象是否为同一实例。</summary>
+      <returns>如果 <paramref name="value" /> 参数是一个 <see cref="T:System.Globalization.RegionInfo" /> 对象并且其 <see cref="P:System.Globalization.RegionInfo.Name" /> 属性与当前 <see cref="T:System.Globalization.RegionInfo" /> 对象的 <see cref="P:System.Globalization.RegionInfo.Name" /> 属性相同，则为 true；否则为 false。</returns>
+      <param name="value">将与当前 <see cref="T:System.Globalization.RegionInfo" /> 进行比较的对象。 </param>
+    </member>
+    <member name="M:System.Globalization.RegionInfo.GetHashCode">
+      <summary>用作当前 <see cref="T:System.Globalization.RegionInfo" /> 的哈希函数，适合用在哈希算法和数据结构（如哈希表）中。</summary>
+      <returns>当前 <see cref="T:System.Globalization.RegionInfo" /> 的哈希代码。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.IsMetric">
+      <summary>获取一个值，该值指示该国家/地区是否使用公制进行度量。</summary>
+      <returns>如果该国家/地区使用公制进行度量，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.ISOCurrencySymbol">
+      <summary>获取与国家/地区关联的由三个字符组成的 ISO 4217 货币符号。</summary>
+      <returns>与国家/地区关联的由三个字符组成的 ISO 4217 货币符号。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.Name">
+      <summary>获取当前 <see cref="T:System.Globalization.RegionInfo" /> 对象的名称或 ISO 3166 双字母国家/地区代码。</summary>
+      <returns>
+        <see cref="M:System.Globalization.RegionInfo.#ctor(System.String)" /> 构造函数的 <paramref name="name" /> 参数指定的值。返回值为大写。- 或 -在 ISO 3166 中定义的且由 <see cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" /> 构造函数的 <paramref name="culture" /> 参数指定的国家/地区的双字母代码。返回值为大写。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.NativeName">
+      <summary>获取一个国家/地区的名称，它使用该国家/地区的本地语言格式表示。</summary>
+      <returns>该国家/地区的本地名称，它使用与 ISO 3166 国家/地区代码关联的语言格式表示。</returns>
+    </member>
+    <member name="M:System.Globalization.RegionInfo.ToString">
+      <summary>返回一个字符串，它包含为当前 <see cref="T:System.Globalization.RegionInfo" /> 指定的区域性名称或 ISO 3166 双字母国家/地区代码。</summary>
+      <returns>一个字符串，它包含为当前 <see cref="T:System.Globalization.RegionInfo" /> 定义的区域性名称或 ISO 3166 双字母国家/地区代码。</returns>
+    </member>
+    <member name="P:System.Globalization.RegionInfo.TwoLetterISORegionName">
+      <summary>获取在 ISO 3166 中定义的由两个字母组成的国家/地区代码。</summary>
+      <returns>在 ISO 3166 中定义的由两个字母组成的国家/地区代码。</returns>
+    </member>
+    <member name="T:System.Globalization.StringInfo">
+      <summary>提供功能将字符串拆分为文本元素并循环访问这些文本元素。</summary>
+    </member>
+    <member name="M:System.Globalization.StringInfo.#ctor">
+      <summary>初始化 <see cref="T:System.Globalization.StringInfo" /> 类的新实例。</summary>
+    </member>
+    <member name="M:System.Globalization.StringInfo.#ctor(System.String)">
+      <summary>将 <see cref="T:System.Globalization.StringInfo" /> 类的新实例初始化为指定的字符串。</summary>
+      <param name="value">用于初始化此 <see cref="T:System.Globalization.StringInfo" /> 对象的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="value" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.StringInfo.Equals(System.Object)">
+      <summary>指示当前 <see cref="T:System.Globalization.StringInfo" /> 对象是否与指定的对象相等。</summary>
+      <returns>如果 <paramref name="value" /> 参数是 <see cref="T:System.Globalization.StringInfo" /> 对象并且其 <see cref="P:System.Globalization.StringInfo.String" /> 属性等同于此 <see cref="T:System.Globalization.StringInfo" /> 对象的 <see cref="P:System.Globalization.StringInfo.String" /> 属性，则为 true；否则，为 false。</returns>
+      <param name="value">一个对象。</param>
+    </member>
+    <member name="M:System.Globalization.StringInfo.GetHashCode">
+      <summary>计算当前 <see cref="T:System.Globalization.StringInfo" /> 对象的值的哈希代码。</summary>
+      <returns>基于此 <see cref="T:System.Globalization.StringInfo" /> 对象的字符串值的 32 位有符号整数哈希代码。</returns>
+    </member>
+    <member name="M:System.Globalization.StringInfo.GetNextTextElement(System.String)">
+      <summary>获取指定字符串中的第一个文本元素。</summary>
+      <returns>包含指定字符串中的第一个文本元素的字符串。</returns>
+      <param name="str">要从其获取文本元素的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.StringInfo.GetNextTextElement(System.String,System.Int32)">
+      <summary>获取指定字符串中指定索引处的文本元素。</summary>
+      <returns>包含指定字符串中指定索引处的文本元素的字符串。</returns>
+      <param name="str">要从其获取文本元素的字符串。</param>
+      <param name="index">文本元素开始位置的从零开始的索引。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> 为 null。</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 超出了 <paramref name="str" /> 的有效索引范围。</exception>
+    </member>
+    <member name="M:System.Globalization.StringInfo.GetTextElementEnumerator(System.String)">
+      <summary>返回一个循环访问整个字符串的文本元素的枚举数。</summary>
+      <returns>整个字符串的 <see cref="T:System.Globalization.TextElementEnumerator" />。</returns>
+      <param name="str">要循环访问的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> 为 null。</exception>
+    </member>
+    <member name="M:System.Globalization.StringInfo.GetTextElementEnumerator(System.String,System.Int32)">
+      <summary>返回一个枚举数，它循环访问字符串的文本元素并从指定索引处开始。</summary>
+      <returns>在 <paramref name="index" /> 处开始的字符串的 <see cref="T:System.Globalization.TextElementEnumerator" />。</returns>
+      <param name="str">要循环访问的字符串。</param>
+      <param name="index">开始迭代处的从零开始的索引。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> 为 null。</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 超出了 <paramref name="str" /> 的有效索引范围。</exception>
+    </member>
+    <member name="P:System.Globalization.StringInfo.LengthInTextElements">
+      <summary>获取当前 <see cref="T:System.Globalization.StringInfo" /> 对象中的文本元素的数目。</summary>
+      <returns>此 <see cref="T:System.Globalization.StringInfo" /> 对象中的基本字符、代理项对和组合字符序列的数目。</returns>
+    </member>
+    <member name="M:System.Globalization.StringInfo.ParseCombiningCharacters(System.String)">
+      <summary>返回指定字符串中每个基字符、高代理项或控制字符的索引。</summary>
+      <returns>一个整数数组，它包含指定字符串中每个基字符、高代理项或控制字符的索引（从零开始）。</returns>
+      <param name="str">要搜索的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> 为 null。</exception>
+    </member>
+    <member name="P:System.Globalization.StringInfo.String">
+      <summary>获取或设置当前 <see cref="T:System.Globalization.StringInfo" /> 对象的值。</summary>
+      <returns>作为当前 <see cref="T:System.Globalization.StringInfo" /> 对象的值的字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">设置操作中的值为 null。</exception>
+    </member>
+    <member name="T:System.Globalization.TextElementEnumerator">
+      <summary>枚举字符串的文本元素。</summary>
+    </member>
+    <member name="P:System.Globalization.TextElementEnumerator.Current">
+      <summary>获取字符串中的当前文本元素。</summary>
+      <returns>包含字符串中当前文本元素的对象。</returns>
+      <exception cref="T:System.InvalidOperationException">枚举数位于字符串的第一个文本元素之前或最后一个文本元素之后。</exception>
+    </member>
+    <member name="P:System.Globalization.TextElementEnumerator.ElementIndex">
+      <summary>获取枚举数当前置于其上的文本元素的索引。</summary>
+      <returns>枚举数当前置于其上的文本元素的索引。</returns>
+      <exception cref="T:System.InvalidOperationException">枚举数位于字符串的第一个文本元素之前或最后一个文本元素之后。</exception>
+    </member>
+    <member name="M:System.Globalization.TextElementEnumerator.GetTextElement">
+      <summary>获取字符串中的当前文本元素。</summary>
+      <returns>一个包含所读取的字符串中当前文本元素的新字符串。</returns>
+      <exception cref="T:System.InvalidOperationException">枚举数位于字符串的第一个文本元素之前或最后一个文本元素之后。</exception>
+    </member>
+    <member name="M:System.Globalization.TextElementEnumerator.MoveNext">
+      <summary>将枚举数前移到字符串的下一个文本元素。</summary>
+      <returns>如果枚举数成功前移到下一个文本元素，则为 true；如果枚举数已超过字符串的结尾，则为 false。</returns>
+    </member>
+    <member name="M:System.Globalization.TextElementEnumerator.Reset">
+      <summary>将枚举数设置为其初始位置，该位置位于字符串中第一个文本元素之前。</summary>
+    </member>
+    <member name="T:System.Globalization.TextInfo">
+      <summary>定义特定于书写系统的文本属性和行为（如大小写）。</summary>
+    </member>
+    <member name="P:System.Globalization.TextInfo.CultureName">
+      <summary>获取与当前 <see cref="T:System.Globalization.TextInfo" /> 对象关联的区域性的名称。</summary>
+      <returns>区域性的名称。</returns>
+    </member>
+    <member name="M:System.Globalization.TextInfo.Equals(System.Object)">
+      <summary>确定指定的对象是否与当前 <see cref="T:System.Globalization.TextInfo" /> 对象表示同一书写体系。</summary>
+      <returns>如果 <paramref name="obj" /> 与当前 <see cref="T:System.Globalization.TextInfo" /> 表示同一书写系统，则为 true；否则为 false。</returns>
+      <param name="obj">将与当前 <see cref="T:System.Globalization.TextInfo" /> 进行比较的对象。 </param>
+    </member>
+    <member name="M:System.Globalization.TextInfo.GetHashCode">
+      <summary>用作当前 <see cref="T:System.Globalization.TextInfo" /> 的哈希函数，适合用在哈希算法和数据结构（如哈希表）中。</summary>
+      <returns>当前 <see cref="T:System.Globalization.TextInfo" /> 的哈希代码。</returns>
+    </member>
+    <member name="P:System.Globalization.TextInfo.IsReadOnly">
+      <summary>获取一个值，该值指示当前 <see cref="T:System.Globalization.TextInfo" /> 对象是否为只读。</summary>
+      <returns>如果当前 <see cref="T:System.Globalization.TextInfo" /> 对象为只读，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.TextInfo.IsRightToLeft">
+      <summary>获取一个值，该值指示当前 <see cref="T:System.Globalization.TextInfo" /> 对象是否表示文本从右到左书写的书写系统。</summary>
+      <returns>如果文本从右到左书写，则为 true；否则为 false。</returns>
+    </member>
+    <member name="P:System.Globalization.TextInfo.ListSeparator">
+      <summary>获取或设置在列表中分隔项的字符串。</summary>
+      <returns>在列表中分隔项的字符串。</returns>
+      <exception cref="T:System.ArgumentNullException">The value in a set operation is null.</exception>
+      <exception cref="T:System.InvalidOperationException">In a set operation, the current <see cref="T:System.Globalization.TextInfo" /> object is read-only.</exception>
+    </member>
+    <member name="M:System.Globalization.TextInfo.ToLower(System.Char)">
+      <summary>将指定的字符转换为小写。</summary>
+      <returns>转换为小写的指定字符。</returns>
+      <param name="c">要转换为小写的字符。</param>
+    </member>
+    <member name="M:System.Globalization.TextInfo.ToLower(System.String)">
+      <summary>将指定的字符串转换为小写。</summary>
+      <returns>转换为小写的指定字符串。</returns>
+      <param name="str">要转换为小写的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> is null. </exception>
+    </member>
+    <member name="M:System.Globalization.TextInfo.ToString">
+      <summary>返回表示当前 <see cref="T:System.Globalization.TextInfo" /> 的字符串。</summary>
+      <returns>表示当前 <see cref="T:System.Globalization.TextInfo" /> 的字符串。</returns>
+    </member>
+    <member name="M:System.Globalization.TextInfo.ToUpper(System.Char)">
+      <summary>将指定的字符转换为大写。</summary>
+      <returns>转换为大写的指定字符。</returns>
+      <param name="c">要转换为大写的字符。</param>
+    </member>
+    <member name="M:System.Globalization.TextInfo.ToUpper(System.String)">
+      <summary>将指定的字符串转换为大写。</summary>
+      <returns>转换为大写的指定字符串。</returns>
+      <param name="str">要转换为大写的字符串。</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="str" /> is null. </exception>
+    </member>
+    <member name="T:System.Globalization.UnicodeCategory">
+      <summary>定义字符的 Unicode 类别。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.ClosePunctuation">
+      <summary>成对的标点符号（例如括号、方括号和大括号）的结束字符。由 Unicode 代码“Pe”（标点，结束）表示。值为 21。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.ConnectorPunctuation">
+      <summary>连接两个字符的连接符标点字符。由 Unicode 代码“Pc”（标点，连接符）表示。值为 18。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.Control">
+      <summary>控制代码字符，其 Unicode 值是 U+007F，或者位于 U+0000 到 U+001F 或 U+0080 到 U+009F 范围内。由 Unicode 代码“Cc”（其他，控制）表示。值为 14。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.CurrencySymbol">
+      <summary>货币符号字符。由 Unicode 代码“Sc”（符号，货币）表示。值为 26。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.DashPunctuation">
+      <summary>短划线或连字符字符。由 Unicode 代码“Pd”（标点，短划线）表示。值为 19。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.DecimalDigitNumber">
+      <summary>十进制数字字符，即范围 0 到 9 内的字符。由 Unicode 代码“Nd”（数字，十进制数字）表示。值为 8。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.EnclosingMark">
+      <summary>封闭符号字符，它将基字符前面的所有字符（包括基字符）括起来。由 Unicode 代码“Me”（符号，封闭）表示。值为 7。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.FinalQuotePunctuation">
+      <summary>右引号或后引号字符。由 Unicode 代码“Pf”（标点，后引号）表示。值为 23。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.Format">
+      <summary>格式字符，它影响文本布局或文本处理操作，但是它通常不会呈现。由 Unicode 代码“Cf”（其他，格式）表示。值为 15。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.InitialQuotePunctuation">
+      <summary>左引号或前引号字符。由 Unicode 代码“Pi”（标点，前引号）表示。值为 22。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.LetterNumber">
+      <summary>由字母表示的数字，而不是十进制数字，例如，罗马数字 5 由字母“V”表示。此指示符由 Unicode 代码“Nl”（数字，字母）表示。值为 9。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.LineSeparator">
+      <summary>用于分隔文本各行的字符。由 Unicode 代码“Zl”（分隔符，行）表示。值为 12。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.LowercaseLetter">
+      <summary>小写字母。由 Unicode 代码“Ll”（字母，小写）表示。值为 1。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.MathSymbol">
+      <summary>数学符号字符，例如“+”或“=”。由 Unicode 代码“Sm”（符号，数学）表示。值为 25。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.ModifierLetter">
+      <summary>修饰符字母字符，它是独立式的间距字符，指示前面字母的修改。由 Unicode 代码“Lm”（字母，修饰符）表示。值为 3。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.ModifierSymbol">
+      <summary>修饰符符号字符，它指示环绕字符的修改。例如，分数斜线号指示其左侧的数字为分子，右侧的数字为分母。此指示符由 Unicode 代码“Sk”（符号，修饰符）表示。值为 27。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.NonSpacingMark">
+      <summary>指示基字符的修改的非间距字符。由 Unicode 代码“Mn”（符号，非间距）表示。值为 5。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OpenPunctuation">
+      <summary>成对的标点符号（例如括号、方括号和大括号）的开始字符。由 Unicode 代码“Ps”（标点，开始）表示。值为 20。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OtherLetter">
+      <summary>不属于大写字母、小写字母、词首字母大写或修饰符字母的字母。由 Unicode 代码“Lo”（字母，其他）表示。值为 4。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OtherNotAssigned">
+      <summary>未指派给任何 Unicode 类别的字符。由 Unicode 代码“Cn”（其他，未分配）表示。值为 29。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OtherNumber">
+      <summary>既不是十进制数字也不是字母数字的数字，例如分数 1/2。此指示符由 Unicode 代码“No”（数字，其他）表示。值为 10。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OtherPunctuation">
+      <summary>不属于连接符、短划线、开始标点、结束标点、前引号或后引号的标点字符。由 Unicode 代码“Po”（标点，其他）表示。值为 24。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.OtherSymbol">
+      <summary>不属于数学符号、货币符号或修饰符符号的符号字符。由 Unicode 代码“So”（符号，其他）表示。值为 28。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.ParagraphSeparator">
+      <summary>用于分隔段落的字符。由 Unicode 代码“Zp”（分隔符，段落）表示。值为 13。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.PrivateUse">
+      <summary>专用字符，其 Unicode 值在范围 U+E000 到 U+F8FF 内。由 Unicode 代码“Co”（其他，专用）表示。值为 17。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.SpaceSeparator">
+      <summary>没有标志符号但不属于控制或格式字符的空白字符。由 Unicode 代码“Zs”（分隔符，空白）表示。值为 11。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.SpacingCombiningMark">
+      <summary>间距字符，它指示基字符的修改并影响基字符的标志符号的宽度。由 Unicode 代码“Mc”（符号，间距组合）表示。值为 6。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.Surrogate">
+      <summary>高代理项或低代理项字符。代理项代码值在范围 U+D800 到 U+DFFF 内。由 Unicode 代码“Cs”（其他，代理项）表示。值为 16。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.TitlecaseLetter">
+      <summary>词首字母大写的字母。由 Unicode 代码“Lt”（字母，词首字母大写）表示。值为 2。</summary>
+    </member>
+    <member name="F:System.Globalization.UnicodeCategory.UppercaseLetter">
+      <summary>大写字母。由 Unicode 代码“Lu”（字母，大写）表示。值为 0。</summary>
+    </member>
+  </members>
+</doc>
